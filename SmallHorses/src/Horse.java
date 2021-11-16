@@ -19,13 +19,13 @@ public class Horse {
             chev.setPosition(17);
         }
         else if(chev.teamHorse.team == Team.teamColor.Red){
-            chev.setPosition(28);
+            chev.setPosition(27);
         }
         else if(chev.teamHorse.team == Team.teamColor.Green){
-            chev.setPosition(39);
+            chev.setPosition(37);
         }
         else if(chev.teamHorse.team == Team.teamColor.Yellow){
-            chev.setPosition(50);
+            chev.setPosition(47);
         }
     }
 
