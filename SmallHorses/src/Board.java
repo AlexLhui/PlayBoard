@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Board {
 
     public final int nbCase = 72;
@@ -14,9 +16,36 @@ public class Board {
      * Squares 70 to 72 : Final arrival for yellow team
      */
 
+    private static Random numberGenerator = new Random();
+
+    public <T> T randomElement(T[] elements){ // Permet d'obtenir un élément au hasard dans un enum ou tableau
+        return elements[numberGenerator.nextInt(elements.length)];
+    }
+
     public void initBoard(int numberOfTeam){
+        Team.teamColor[] tabCol = Team.teamColor.values();
+        Team[] team = new Team[numberOfTeam-1];
         for(int i = 0; i<numberOfTeam; i++){
-            System.out.println("abdc");
-        }
+            Team.teamColor randColor = randomElement(tabCol);
+            if(i==1){
+                while(randColor == team[i-1].team){
+                    randColor = randomElement(tabCol);
+                }
+            }
+            if(i==2){
+                while((randColor == team[i-1].team) || (randColor == team[i-2].team)){
+                    randColor = randomElement(tabCol);
+                }
+            }
+            if(i==3){
+                while((randColor == team[i-1].team) || (randColor == team[i-2].team) || (randColor == team[i-3].team)){
+                    randColor = randomElement(tabCol);
+                }
+            }
+            team[i] = new Team(randColor);
+            team[i].setNumberOfTeam(numberOfTeam);
+        } // Code du dessus attribue des couleurs au hasard aux joueurs
+        //Manque initialisation des chevaux de team
+
     }
 }

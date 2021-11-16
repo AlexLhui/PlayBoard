@@ -9,6 +9,9 @@ public class Horse {
     public int getNumberHorse(){
         return this.numberHorse;
     }
+    public int getPosition(){
+        return this.position;
+    }
 
     public void setPosition(int pos){
         position = pos;
@@ -28,7 +31,7 @@ public class Horse {
             chev.setPosition(47);
         }
     }
-    public void beingEaten(Horse chev){
+    public void beenEaten(Horse chev){
         if(chev.teamHorse.team == Team.teamColor.Blue){
             chev.setPosition(chev.getNumberHorse());
         }
