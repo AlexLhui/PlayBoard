@@ -14,4 +14,9 @@ public class Board {
      * Squares 70 to 72 : Final arrival for yellow team
      */
 
+    public void initBoard(int numberOfTeam){
+        for(int i = 0; i<numberOfTeam; i++){
+            System.out.println("abdc");
+        }
+    }
 }
