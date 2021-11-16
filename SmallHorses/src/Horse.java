@@ -3,7 +3,7 @@ public class Horse {
     private enum Etat{STABLE, CIRCUIT, ARRIVED}
     Etat situation;
     private int position;
-    private int numberHorse;
+    private int numberHorse; //From 1 to 4
     Team teamHorse;
 
     public int getNumberHorse(){
@@ -26,6 +26,20 @@ public class Horse {
         }
         else if(chev.teamHorse.team == Team.teamColor.Yellow){
             chev.setPosition(47);
+        }
+    }
+    public void beingEaten(Horse chev){
+        if(chev.teamHorse.team == Team.teamColor.Blue){
+            chev.setPosition(chev.getNumberHorse());
+        }
+        else if(chev.teamHorse.team == Team.teamColor.Red){
+            chev.setPosition(chev.getNumberHorse()+4);
+        }
+        else if(chev.teamHorse.team == Team.teamColor.Green){
+            chev.setPosition(chev.getNumberHorse()+8);
+        }
+        else if(chev.teamHorse.team == Team.teamColor.Yellow){
+            chev.setPosition(chev.getNumberHorse()+12);
         }
     }
 
