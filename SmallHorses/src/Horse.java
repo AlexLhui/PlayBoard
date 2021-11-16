@@ -1,14 +1,38 @@
 public class Horse {
 
-    enum Etat{Stable, Circuit, Arrived}
+    private enum Etat{STABLE, CIRCUIT, ARRIVED}
     Etat situation;
-    public int position;
-    Team eqcheval;
+    private int position;
+    private int numberHorse;
+    Team teamHorse;
+
+    public int getNumberHorse(){
+        return this.numberHorse;
+    }
+
+    public void setPosition(int pos){
+        position = pos;
+    }
+
+    public void initPosition(Horse chev){
+        if(chev.teamHorse.team == Team.teamColor.Blue){
+            chev.setPosition(17);
+        }
+        else if(chev.teamHorse.team == Team.teamColor.Red){
+            chev.setPosition(28);
+        }
+        else if(chev.teamHorse.team == Team.teamColor.Green){
+            chev.setPosition(39);
+        }
+        else if(chev.teamHorse.team == Team.teamColor.Yellow){
+            chev.setPosition(50);
+        }
+    }
 
     public Horse(int position, Etat situation, Team eqcheval){
         this.position = position;
         this.situation = situation;
-        this.eqcheval = eqcheval;
+        this.teamHorse = eqcheval;
     }
 
 }
