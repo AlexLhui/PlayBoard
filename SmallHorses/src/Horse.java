@@ -12,6 +12,7 @@ public class Horse {
     public int getPosition(){
         return this.position;
     }
+    public void setNumberHorse(int numbHorse){numberHorse = numbHorse;}
 
     public void setPosition(int pos){
         position = pos;

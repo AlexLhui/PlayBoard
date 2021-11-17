@@ -16,11 +16,16 @@ public class Team {
         numberOfTeam = nb;
     }
 
+    public Horse getHorse1(){ return horse1;}
+    public Horse getHorse2(){ return horse2;}
+    public Horse getHorse3(){ return horse3;}
+    public Horse getHorse4(){ return horse4;}
+
     public void addTeam() {
         setNumberOfTeam(getNumberOfTeam()+1);
     }
 
-    public Team (teamColor color) { //Ajouter position 1 2 3 4 en argument
+    public Team (teamColor color) {
         this.team = color;
         addTeam();
     }

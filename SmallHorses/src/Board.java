@@ -45,7 +45,49 @@ public class Board {
             team[i] = new Team(randColor);
             team[i].setNumberOfTeam(numberOfTeam);
         } // Code du dessus attribue des couleurs au hasard aux joueurs
-        //Manque initialisation des chevaux de team
+        for(int j = 0; j<numberOfTeam; j++){
+            if(team[j].team == Team.teamColor.Blue){
+                team[j].getHorse1().setPosition(1);
+                team[j].getHorse1().setNumberHorse(1);
+                team[j].getHorse2().setPosition(2);
+                team[j].getHorse2().setNumberHorse(2);
+                team[j].getHorse3().setPosition(3);
+                team[j].getHorse3().setNumberHorse(3);
+                team[j].getHorse4().setPosition(4);
+                team[j].getHorse4().setNumberHorse(4);
+            }
+            else if(team[j].team == Team.teamColor.Red){
+                team[j].getHorse1().setPosition(5);
+                team[j].getHorse1().setNumberHorse(1);
+                team[j].getHorse2().setPosition(6);
+                team[j].getHorse2().setNumberHorse(2);
+                team[j].getHorse3().setPosition(7);
+                team[j].getHorse3().setNumberHorse(3);
+                team[j].getHorse4().setPosition(8);
+                team[j].getHorse4().setNumberHorse(4);
+            }
+            else if(team[j].team == Team.teamColor.Green){
+                team[j].getHorse1().setPosition(9);
+                team[j].getHorse1().setNumberHorse(1);
+                team[j].getHorse2().setPosition(10);
+                team[j].getHorse2().setNumberHorse(2);
+                team[j].getHorse3().setPosition(11);
+                team[j].getHorse3().setNumberHorse(3);
+                team[j].getHorse4().setPosition(12);
+                team[j].getHorse4().setNumberHorse(4);
+            }
+            else if(team[j].team == Team.teamColor.Yellow){
+                team[j].getHorse1().setPosition(13);
+                team[j].getHorse1().setNumberHorse(1);
+                team[j].getHorse2().setPosition(14);
+                team[j].getHorse2().setNumberHorse(2);
+                team[j].getHorse3().setPosition(15);
+                team[j].getHorse3().setNumberHorse(3);
+                team[j].getHorse4().setPosition(16);
+                team[j].getHorse4().setNumberHorse(4);
+            }
+        }
+        //Code du dessus attribue les positions initiales aux chevaux et leur numéro de série
 
     }
 }
