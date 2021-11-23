@@ -17,8 +17,9 @@ public class Main extends Application{
         primaryStage.setTitle("Petits chevaux");
         Group root = new Group();
         Pane pane = new Pane(root);
-        Scene theScene = new Scene(pane, 600, 600,true);
-        primaryStage.setScene(theScene);
+        //Scene theScene = new Scene(pane, 600, 600,true);
+        Board board = new Board(pane,600,600,true,"SmallHorsesBoardJavaFx.png");
+        primaryStage.setScene(board);
         primaryStage.show();
 
       /*  Image horseSheet = new Image("Little_blue_horse.png");
@@ -28,7 +29,6 @@ public class Main extends Application{
         horse.setY(100);
         pane.getChildren().add(horse); */
 
-        Board board = new Board("SmallHorsesBoardJavaFx.png");
         board.initBoard(2);
 
     }
