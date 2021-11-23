@@ -1,12 +1,13 @@
+import javafx.scene.paint.Color;
+
 public class Team {
 
     private int numberOfTeam = 0;
-    enum teamColor{Yellow, Blue, Green, Red} //Blue case 17 Red case 28 Green case 39 Yellow case 50
-    public teamColor team;
     private Horse horse1;
     private Horse horse2;
     private Horse horse3;
     private Horse horse4;
+    Color color;
 
     public int getNumberOfTeam() {
         return numberOfTeam;
@@ -25,9 +26,13 @@ public class Team {
         setNumberOfTeam(getNumberOfTeam()+1);
     }
 
-    public Team (teamColor color) {
-        this.team = color;
+    public Team (Color color, Horse horse1, Horse horse2, Horse horse3, Horse horse4) {
+        this.color = color;
         addTeam();
+        this.horse1 = horse1;
+        this.horse2 = horse2;
+        this.horse3 = horse3;
+        this.horse4 = horse4;
     }
 
 }

@@ -13,7 +13,7 @@ import static javafx.application.Application.launch;
 
 public class Main extends Application{
 
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage){
         primaryStage.setTitle("Petits chevaux");
         Group root = new Group();
         Pane pane = new Pane(root);
@@ -27,6 +27,9 @@ public class Main extends Application{
         horse.setX(100);
         horse.setY(100);
         pane.getChildren().add(horse); */
+
+        Board board = new Board("SmallHorsesBoardJavaFx.png");
+        board.initBoard(2);
 
     }
 

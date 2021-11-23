@@ -1,17 +1,19 @@
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+
 
 public class Horse {
 
-    private enum Etat{STABLE, CIRCUIT, ARRIVED}
+    public enum Etat{STABLE, CIRCUIT, ARRIVED}
     Etat situation;
     private int position;
     private int numberHorse; //From 1 to 4
-    Team teamHorse;
     private ImageView image;
-    int sizeX;
-    int sizeY;
+    public final int sizeX = 44;
+    public final int sizeY = 44;
+    Color color;
 
     public int getNumberHorse(){
         return this.numberHorse;
@@ -28,49 +30,54 @@ public class Horse {
         position = pos;
     }
 
-
+    public void setImage(String filename){
+        this.image = new ImageView(new Image(filename));
+        this.image.setViewport(new Rectangle2D(0, 0, sizeX, sizeY));
+    }
+    public void setColor(Color couleur){
+        color = couleur;
+    }
 
     public void initPosition(Horse chev){
-        if(chev.teamHorse.team == Team.teamColor.Blue){
+        if(chev.color == Color.BLUE){
             chev.setPosition(17);
             chev.getImage().setX(245);
             chev.getImage().setY(528);
         }
-        else if(chev.teamHorse.team == Team.teamColor.Red){
+        else if(chev.color == Color.RED){
             chev.setPosition(27);
             chev.getImage().setX(49);
             chev.getImage().setY(234);
         }
-        else if(chev.teamHorse.team == Team.teamColor.Green){
+        else if(chev.color == Color.GREEN){
             chev.setPosition(37);
             chev.getImage().setX(343);
             chev.getImage().setY(38);
         }
-        else if(chev.teamHorse.team == Team.teamColor.Yellow){
+        else if(chev.color == Color.YELLOW){
             chev.setPosition(47);
             chev.getImage().setX(539);
             chev.getImage().setY(332);
         }
     }
     public void beenEaten(Horse chev){
-        if(chev.teamHorse.team == Team.teamColor.Blue){
+        if(chev.color == Color.BLUE){
             chev.setPosition(chev.getNumberHorse());
         }
-        else if(chev.teamHorse.team == Team.teamColor.Red){
+        else if(chev.color == Color.RED){
             chev.setPosition(chev.getNumberHorse()+4);
         }
-        else if(chev.teamHorse.team == Team.teamColor.Green){
+        else if(chev.color == Color.GREEN){
             chev.setPosition(chev.getNumberHorse()+8);
         }
-        else if(chev.teamHorse.team == Team.teamColor.Yellow){
+        else if(chev.color == Color.YELLOW){
             chev.setPosition(chev.getNumberHorse()+12);
         }
     }
 
-    public Horse(int position, Etat situation, Team eqcheval, String filename){
+    public Horse(int position, Etat situation, String filename){
         this.position = position;
         this.situation = situation;
-        this.teamHorse = eqcheval;
         this.image = new ImageView(new Image(filename));
         this.image.setViewport(new Rectangle2D(0, 0, sizeX, sizeY));
     }
