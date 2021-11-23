@@ -33,23 +33,23 @@ public class Horse {
     public void initPosition(Horse chev){
         if(chev.teamHorse.team == Team.teamColor.Blue){
             chev.setPosition(17);
-            chev.getImage().setX(245);
-            chev.getImage().setY(528);
+            chev.getImage().setX(229);
+            chev.getImage().setY(523);
         }
         else if(chev.teamHorse.team == Team.teamColor.Red){
             chev.setPosition(27);
-            chev.getImage().setX(49);
-            chev.getImage().setY(234);
+            chev.getImage().setX(33);
+            chev.getImage().setY(229);
         }
         else if(chev.teamHorse.team == Team.teamColor.Green){
             chev.setPosition(37);
-            chev.getImage().setX(343);
-            chev.getImage().setY(38);
+            chev.getImage().setX(327);
+            chev.getImage().setY(33);
         }
         else if(chev.teamHorse.team == Team.teamColor.Yellow){
             chev.setPosition(47);
-            chev.getImage().setX(539);
-            chev.getImage().setY(332);
+            chev.getImage().setX(523);
+            chev.getImage().setY(327);
         }
     }
     public void beenEaten(Horse chev){
