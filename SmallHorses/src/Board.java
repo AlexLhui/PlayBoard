@@ -1,8 +1,11 @@
+import javafx.scene.image.ImageView;
+
 import java.util.Random;
 
 public class Board {
 
     public final int nbCase = 72;
+    private ImageView image;
 
     /*
      * Squares 1 to 4 : Blue stable
@@ -49,45 +52,80 @@ public class Board {
             if(team[j].team == Team.teamColor.Blue){
                 team[j].getHorse1().setPosition(1);
                 team[j].getHorse1().setNumberHorse(1);
+                team[j].getHorse1().getImage().setX(46);
+                team[j].getHorse1().getImage().setY(525);
                 team[j].getHorse2().setPosition(2);
                 team[j].getHorse2().setNumberHorse(2);
+                team[j].getHorse2().getImage().setX(95);
+                team[j].getHorse2().getImage().setY(525);
                 team[j].getHorse3().setPosition(3);
                 team[j].getHorse3().setNumberHorse(3);
+                team[j].getHorse3().getImage().setX(95);
+                team[j].getHorse3().getImage().setY(476);
                 team[j].getHorse4().setPosition(4);
                 team[j].getHorse4().setNumberHorse(4);
+                team[j].getHorse4().getImage().setX(46);
+                team[j].getHorse4().getImage().setY(476);
             }
             else if(team[j].team == Team.teamColor.Red){
                 team[j].getHorse1().setPosition(5);
                 team[j].getHorse1().setNumberHorse(1);
+                team[j].getHorse1().getImage().setX(46);
+                team[j].getHorse1().getImage().setY(84);
                 team[j].getHorse2().setPosition(6);
                 team[j].getHorse2().setNumberHorse(2);
+                team[j].getHorse2().getImage().setX(95);
+                team[j].getHorse2().getImage().setY(84);
                 team[j].getHorse3().setPosition(7);
                 team[j].getHorse3().setNumberHorse(3);
+                team[j].getHorse3().getImage().setX(95);
+                team[j].getHorse3().getImage().setY(35);
                 team[j].getHorse4().setPosition(8);
                 team[j].getHorse4().setNumberHorse(4);
+                team[j].getHorse4().getImage().setX(46);
+                team[j].getHorse4().getImage().setY(35);
             }
             else if(team[j].team == Team.teamColor.Green){
                 team[j].getHorse1().setPosition(9);
                 team[j].getHorse1().setNumberHorse(1);
+                team[j].getHorse1().getImage().setX(487);
+                team[j].getHorse1().getImage().setY(84);
                 team[j].getHorse2().setPosition(10);
                 team[j].getHorse2().setNumberHorse(2);
+                team[j].getHorse2().getImage().setX(536);
+                team[j].getHorse2().getImage().setY(84);
                 team[j].getHorse3().setPosition(11);
                 team[j].getHorse3().setNumberHorse(3);
+                team[j].getHorse3().getImage().setX(536);
+                team[j].getHorse3().getImage().setY(35);
                 team[j].getHorse4().setPosition(12);
                 team[j].getHorse4().setNumberHorse(4);
+                team[j].getHorse4().getImage().setX(487);
+                team[j].getHorse4().getImage().setY(35);
             }
             else if(team[j].team == Team.teamColor.Yellow){
                 team[j].getHorse1().setPosition(13);
                 team[j].getHorse1().setNumberHorse(1);
+                team[j].getHorse1().getImage().setX(487);
+                team[j].getHorse1().getImage().setY(525);
                 team[j].getHorse2().setPosition(14);
                 team[j].getHorse2().setNumberHorse(2);
+                team[j].getHorse2().getImage().setX(536);
+                team[j].getHorse2().getImage().setY(525);
                 team[j].getHorse3().setPosition(15);
                 team[j].getHorse3().setNumberHorse(3);
+                team[j].getHorse3().getImage().setX(536);
+                team[j].getHorse3().getImage().setY(476);
                 team[j].getHorse4().setPosition(16);
                 team[j].getHorse4().setNumberHorse(4);
+                team[j].getHorse4().getImage().setX(487);
+                team[j].getHorse4().getImage().setY(476);
             }
         }
         //Code du dessus attribue les positions initiales aux chevaux et leur numéro de série
+    }
+
+    public void update(int tour){
 
     }
 }

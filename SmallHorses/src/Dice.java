@@ -1,8 +1,12 @@
+import javafx.scene.image.ImageView;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Dice {
 
     private int lastResult;
+    private ImageView image;
+
 
     public int getLastResult() {
         return lastResult;
