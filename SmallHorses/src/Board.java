@@ -1,12 +1,14 @@
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Board {
+public class Board extends Scene {
 
     public final int nbCase = 72;
     private ImageView image;
@@ -25,9 +27,12 @@ public class Board {
      * Squares 70 to 72 : Final arrival for yellow team
      */
 
-    public Board(String filename){
-        this.image = new ImageView(new Image(filename));
-        this.image.setViewport(new Rectangle2D(0, 0, 600, 600));
+    public Board(Pane pane, double v, double v1, boolean b, String filename){
+        super(pane, v, v1, b);
+        Image boardSheet = new Image(filename);
+        ImageView board = new ImageView(boardSheet);
+        board.setViewport(new Rectangle2D(0,0,600,600));
+        pane.getChildren().add(board);
     }
 
     private static Random numberGenerator = new Random();
