@@ -13,6 +13,7 @@ public class Horse {
     private ImageView image;
     public final int sizeX = 44;
     public final int sizeY = 44;
+    public static int offset = 44;
     Color color;
 
     public int getNumberHorse(){
@@ -30,10 +31,6 @@ public class Horse {
         position = pos;
     }
 
-    public void setImage(String filename){
-        this.image = new ImageView(new Image(filename));
-        this.image.setViewport(new Rectangle2D(0, 0, sizeX, sizeY));
-    }
     public void setColor(Color couleur){
         color = couleur;
     }
@@ -75,11 +72,11 @@ public class Horse {
         }
     }
 
-    public Horse(int position, Etat situation, String filename){
+    public Horse(int position, Etat situation, String filename, int N){
         this.position = position;
         this.situation = situation;
         this.image = new ImageView(new Image(filename));
-        this.image.setViewport(new Rectangle2D(0, 0, sizeX, sizeY));
+        this.image.setViewport(new Rectangle2D(N*offset, 0, sizeX, sizeY));
     }
 
 }
