@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -15,6 +16,9 @@ public class Board extends Scene {
     ArrayList<Color> couleur;
     ArrayList<Team> team;
     ArrayList<Color> teamList;
+    private boolean gameFinished = false;
+
+    Dice dice = new Dice();
 
     /*
      * Squares 1 to 4 : Blue stable
@@ -27,6 +31,10 @@ public class Board extends Scene {
      * Squares 65 to 68 : Final arrival for green team
      * Squares 70 to 72 : Final arrival for yellow team
      */
+
+    public boolean isGameFinished() {
+        return gameFinished;
+    }
 
     public Board(Pane pane, double v, double v1, boolean b, String filename, int numberOfTeam){
         super(pane, v, v1, b);
@@ -254,6 +262,8 @@ public class Board extends Scene {
 
 
     public void update(int tour){
+        int playerTurn = tour%team.get(0).getNumberOfTeam(); //To get the number of team
+        int res = dice.throwDice();
 
     }
 }

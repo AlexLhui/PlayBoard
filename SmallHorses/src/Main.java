@@ -22,6 +22,13 @@ public class Main extends Application{
         primaryStage.setScene(board);
         primaryStage.show();
 
+        int tour = 0;
+
+//        while (!board.isGameFinished()) {
+//            board.update(tour);
+//            tour +=1;
+//        }
+
       /*  Image horseSheet = new Image("Little_blue_horse.png");
         ImageView horse = new ImageView(horseSheet);
         horse.setViewport(new Rectangle2D(0,0,480,480));
