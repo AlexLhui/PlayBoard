@@ -18,7 +18,7 @@ public class Main extends Application{
         Group root = new Group();
         Pane pane = new Pane(root);
         //Scene theScene = new Scene(pane, 600, 600,true);
-        Board board = new Board(pane,600,600,true,"SmallHorsesBoardJavaFx.png");
+        Board board = new Board(pane,600,600,true,"SmallHorsesBoardJavaFx.png",2); //We will have to change number of teams
         primaryStage.setScene(board);
         primaryStage.show();
 
@@ -28,8 +28,6 @@ public class Main extends Application{
         horse.setX(100);
         horse.setY(100);
         pane.getChildren().add(horse); */
-
-        board.initBoard(2);
 
     }
 

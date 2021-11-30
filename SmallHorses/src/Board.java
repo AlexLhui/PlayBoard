@@ -27,21 +27,13 @@ public class Board extends Scene {
      * Squares 70 to 72 : Final arrival for yellow team
      */
 
-    public Board(Pane pane, double v, double v1, boolean b, String filename){
+    public Board(Pane pane, double v, double v1, boolean b, String filename, int numberOfTeam){
         super(pane, v, v1, b);
         Image boardSheet = new Image(filename);
         ImageView board = new ImageView(boardSheet);
         board.setViewport(new Rectangle2D(0,0,600,600));
         pane.getChildren().add(board);
-    }
 
-    private static Random numberGenerator = new Random();
-
-    public <T> T randomElement(T[] elements){ // Permet d'obtenir un élément au hasard dans un enum ou tableau
-        return elements[numberGenerator.nextInt(elements.length)];
-    }
-
-    public void initBoard(int numberOfTeam){
         couleur = new ArrayList<>();
         couleur.add(Color.BLUE);
         couleur.add(Color.RED);
@@ -53,51 +45,55 @@ public class Board extends Scene {
         for(int i = 0; i<numberOfTeam; i++){
             int a = (int) (Math.random()*3);
             if(i!=0) {
-                if(i == 1) {
+                if(i == 1) { //Player 2
                     while(team.get(0).color == couleur.get(a)) {
                         a = (int) (Math.random()*3);
                     }
-                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "file:SmallHorsesTransparent.png",a);
-                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "file:SmallHorsesTransparent.png",a);
-                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "file:SmallHorsesTransparent.png",a);
-                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "file:SmallHorsesTransparent.png",a);
+                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
+                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
+                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
+                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
                     Team teamObj = new Team(couleur.get(a), horse1, horse2, horse3, horse4);
                     team.add(teamObj);
                     teamObj.setNumberOfTeam(numberOfTeam);
+                    System.out.println("Player 2 initialized");
                 }
-                if(i == 2){
+                if(i == 2){ //Player 3
                     while((team.get(0).color == couleur.get(a)) && (team.get(1).color == couleur.get(a))){
                         a = (int) (Math.random()*3);
                     }
-                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "file:SmallHorsesTransparent.png",a);
-                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "file:SmallHorsesTransparent.png",a);
-                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "file:SmallHorsesTransparent.png",a);
-                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "file:SmallHorsesTransparent.png",a);
+                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
+                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
+                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
+                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
                     Team teamObj = new Team(couleur.get(a), horse1, horse2, horse3, horse4);
                     team.add(teamObj);
                     teamObj.setNumberOfTeam(numberOfTeam);
+                    System.out.println("Player 3 initialized");
                 }
-                if(i == 3){
+                if(i == 3){ //Player 4
                     while((team.get(0).color == couleur.get(a)) && (team.get(1).color == couleur.get(a)) && (team.get(2).color == couleur.get(a))){
                         a = (int) (Math.random()*3);
                     }
-                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "file:SmallHorsesTransparent.png",a);
-                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "file:SmallHorsesTransparent.png",a);
-                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "file:SmallHorsesTransparent.png",a);
-                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "file:SmallHorsesTransparent.png",a);
+                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
+                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
+                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
+                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
                     Team teamObj = new Team(couleur.get(a), horse1, horse2, horse3, horse4);
                     team.add(teamObj);
                     teamObj.setNumberOfTeam(numberOfTeam);
+                    System.out.println("Player 4 initialized");
                 }
             }
-            else{
-                Horse horse1 = new Horse(1, Horse.Etat.STABLE, "file:SmallHorsesTransparent.png",a);
-                Horse horse2 = new Horse(1, Horse.Etat.STABLE, "file:SmallHorsesTransparent.png",a);
-                Horse horse3 = new Horse(1, Horse.Etat.STABLE, "file:SmallHorsesTransparent.png",a);
-                Horse horse4 = new Horse(1, Horse.Etat.STABLE, "file:SmallHorsesTransparent.png",a);
+            else{ //Player 1
+                Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
+                Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
+                Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
+                Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
                 Team teamObj = new Team(couleur.get(a),horse1,horse2,horse3,horse4);
                 team.add(teamObj);
                 teamObj.setNumberOfTeam(numberOfTeam);
+                System.out.println("Player 1 initialized");
             }
         } // Code du dessus attribue des couleurs au hasard aux joueurs
 
@@ -105,109 +101,130 @@ public class Board extends Scene {
             if(team.get(j).color == Color.BLUE){
                 team.get(j).getHorse1().setPosition(1);
                 team.get(j).getHorse1().setNumberHorse(1);
-                team.get(j).getHorse1().setColor(Color.BLUE);
-            //    team.get(j).getHorse1().setImageok("Little_blue_horse_sized.png");
+                //    team.get(j).getHorse1().setImageok("Little_blue_horse_sized.png");
                 team.get(j).getHorse1().getImage().setX(46);
                 team.get(j).getHorse1().getImage().setY(525);
+                pane.getChildren().add(team.get(j).getHorse1().getImage());
                 team.get(j).getHorse2().setPosition(2);
                 team.get(j).getHorse2().setNumberHorse(2);
                 team.get(j).getHorse2().setColor(Color.BLUE);
-            //    team.get(j).getHorse2().setImageok("Little_blue_horse_sized.png");
+                //    team.get(j).getHorse2().setImageok("Little_blue_horse_sized.png");
                 team.get(j).getHorse2().getImage().setX(95);
                 team.get(j).getHorse2().getImage().setY(525);
+                pane.getChildren().add(team.get(j).getHorse2().getImage());
                 team.get(j).getHorse3().setPosition(3);
                 team.get(j).getHorse3().setNumberHorse(3);
                 team.get(j).getHorse3().setColor(Color.BLUE);
-            //    team.get(j).getHorse3().setImageok("Little_blue_horse_sized.png");
+                //    team.get(j).getHorse3().setImageok("Little_blue_horse_sized.png");
                 team.get(j).getHorse3().getImage().setX(95);
                 team.get(j).getHorse3().getImage().setY(476);
+                pane.getChildren().add(team.get(j).getHorse3().getImage());
                 team.get(j).getHorse4().setPosition(4);
                 team.get(j).getHorse4().setNumberHorse(4);
                 team.get(j).getHorse4().setColor(Color.BLUE);
-            //    team.get(j).getHorse4().setImageok("Little_blue_horse_sized.png");
+                //    team.get(j).getHorse4().setImageok("Little_blue_horse_sized.png");
                 team.get(j).getHorse4().getImage().setX(46);
                 team.get(j).getHorse4().getImage().setY(476);
+                pane.getChildren().add(team.get(j).getHorse4().getImage());
             }
             else if(team.get(j).color == Color.RED){
                 team.get(j).getHorse1().setPosition(5);
                 team.get(j).getHorse1().setNumberHorse(1);
                 team.get(j).getHorse1().setColor(Color.RED);
-            //    team.get(j).getHorse1().setImageok("Little_red_horse_sized.png");
+                //    team.get(j).getHorse1().setImageok("Little_red_horse_sized.png");
                 team.get(j).getHorse1().getImage().setX(46);
                 team.get(j).getHorse1().getImage().setY(84);
+                pane.getChildren().add(team.get(j).getHorse1().getImage());
                 team.get(j).getHorse2().setPosition(6);
                 team.get(j).getHorse2().setNumberHorse(2);
                 team.get(j).getHorse2().setColor(Color.RED);
-            //    team.get(j).getHorse2().setImageok("Little_red_horse_sized.png");
+                //    team.get(j).getHorse2().setImageok("Little_red_horse_sized.png");
                 team.get(j).getHorse2().getImage().setX(95);
                 team.get(j).getHorse2().getImage().setY(84);
+                pane.getChildren().add(team.get(j).getHorse2().getImage());
                 team.get(j).getHorse3().setPosition(7);
                 team.get(j).getHorse3().setNumberHorse(3);
                 team.get(j).getHorse3().setColor(Color.RED);
-            //    team.get(j).getHorse3().setImageok("Little_red_horse_sized.png");
+                //    team.get(j).getHorse3().setImageok("Little_red_horse_sized.png");
                 team.get(j).getHorse3().getImage().setX(95);
                 team.get(j).getHorse3().getImage().setY(35);
+                pane.getChildren().add(team.get(j).getHorse3().getImage());
                 team.get(j).getHorse4().setPosition(8);
                 team.get(j).getHorse4().setNumberHorse(4);
                 team.get(j).getHorse4().setColor(Color.RED);
-            //    team.get(j).getHorse4().setImageok("Little_red_horse_sized.png");
+                //    team.get(j).getHorse4().setImageok("Little_red_horse_sized.png");
                 team.get(j).getHorse4().getImage().setX(46);
                 team.get(j).getHorse4().getImage().setY(35);
+                pane.getChildren().add(team.get(j).getHorse4().getImage());
             }
             else if(team.get(j).color == Color.GREEN){
                 team.get(j).getHorse1().setPosition(9);
                 team.get(j).getHorse1().setNumberHorse(1);
                 team.get(j).getHorse1().setColor(Color.GREEN);
-            //    team.get(j).getHorse1().setImageok("Little_green_horse_sized.png");
+                //    team.get(j).getHorse1().setImageok("Little_green_horse_sized.png");
                 team.get(j).getHorse1().getImage().setX(487);
                 team.get(j).getHorse1().getImage().setY(84);
+                pane.getChildren().add(team.get(j).getHorse1().getImage());
                 team.get(j).getHorse2().setPosition(10);
                 team.get(j).getHorse2().setNumberHorse(2);
                 team.get(j).getHorse2().setColor(Color.GREEN);
-            //    team.get(j).getHorse2().setImageok("Little_green_horse_sized.png");
+                //    team.get(j).getHorse2().setImageok("Little_green_horse_sized.png");
                 team.get(j).getHorse2().getImage().setX(536);
                 team.get(j).getHorse2().getImage().setY(84);
+                pane.getChildren().add(team.get(j).getHorse2().getImage());
                 team.get(j).getHorse3().setPosition(11);
                 team.get(j).getHorse3().setNumberHorse(3);
                 team.get(j).getHorse3().setColor(Color.GREEN);
-            //    team.get(j).getHorse3().setImageok("Little_green_horse_sized.png");
+                //    team.get(j).getHorse3().setImageok("Little_green_horse_sized.png");
                 team.get(j).getHorse3().getImage().setX(536);
                 team.get(j).getHorse3().getImage().setY(35);
+                pane.getChildren().add(team.get(j).getHorse3().getImage());
                 team.get(j).getHorse4().setPosition(12);
                 team.get(j).getHorse4().setNumberHorse(4);
                 team.get(j).getHorse4().setColor(Color.GREEN);
-            //    team.get(j).getHorse4().setImageok("Little_green_horse_sized.png");
+                //    team.get(j).getHorse4().setImageok("Little_green_horse_sized.png");
                 team.get(j).getHorse4().getImage().setX(487);
                 team.get(j).getHorse4().getImage().setY(35);
+                pane.getChildren().add(team.get(j).getHorse4().getImage());
             }
             else if(team.get(j).color == Color.YELLOW){
                 team.get(j).getHorse1().setPosition(13);
                 team.get(j).getHorse1().setNumberHorse(1);
                 team.get(j).getHorse1().setColor(Color.YELLOW);
-            //    team.get(j).getHorse1().setImageok("Little_yellow_horse_sized.png");
+                //    team.get(j).getHorse1().setImageok("Little_yellow_horse_sized.png");
                 team.get(j).getHorse1().getImage().setX(487);
                 team.get(j).getHorse1().getImage().setY(525);
+                pane.getChildren().add(team.get(j).getHorse1().getImage());
                 team.get(j).getHorse2().setPosition(14);
                 team.get(j).getHorse2().setNumberHorse(2);
                 team.get(j).getHorse2().setColor(Color.YELLOW);
-            //    team.get(j).getHorse2().setImageok("Little_yellow_horse_sized.png");
+                //    team.get(j).getHorse2().setImageok("Little_yellow_horse_sized.png");
                 team.get(j).getHorse2().getImage().setX(536);
                 team.get(j).getHorse2().getImage().setY(525);
+                pane.getChildren().add(team.get(j).getHorse2().getImage());
                 team.get(j).getHorse3().setPosition(15);
                 team.get(j).getHorse3().setNumberHorse(3);
                 team.get(j).getHorse3().setColor(Color.YELLOW);
-            //    team.get(j).getHorse3().setImageok("Little_yellow_horse_sized.png");
+                //    team.get(j).getHorse3().setImageok("Little_yellow_horse_sized.png");
                 team.get(j).getHorse3().getImage().setX(536);
                 team.get(j).getHorse3().getImage().setY(476);
+                pane.getChildren().add(team.get(j).getHorse3().getImage());
                 team.get(j).getHorse4().setPosition(16);
                 team.get(j).getHorse4().setNumberHorse(4);
                 team.get(j).getHorse4().setColor(Color.YELLOW);
-            //    team.get(j).getHorse4().setImageok("Little_yellow_horse_sized.png");
+                //    team.get(j).getHorse4().setImageok("Little_yellow_horse_sized.png");
                 team.get(j).getHorse4().getImage().setX(487);
                 team.get(j).getHorse4().getImage().setY(476);
+                pane.getChildren().add(team.get(j).getHorse4().getImage());
             }
         }
         //Code du dessus attribue les positions initiales aux chevaux et leur numéro de série
+    }
+
+    private static Random numberGenerator = new Random();
+
+    public <T> T randomElement(T[] elements){ // Permet d'obtenir un élément au hasard dans un enum ou tableau
+        return elements[numberGenerator.nextInt(elements.length)];
     }
 
 
