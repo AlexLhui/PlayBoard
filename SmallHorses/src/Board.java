@@ -19,7 +19,8 @@ public class Board extends Scene {
     private boolean gameFinished = false;
     int longueur;
     int largeur;
-    int cote;
+    int largCase;
+    int longCase;
     int cases;
     Dice dice;
 
@@ -37,6 +38,16 @@ public class Board extends Scene {
 
     public boolean isGameFinished() {
         return gameFinished;
+    }
+
+    public int largTolarCase(int largeur){
+        this.largCase = largeur/11;
+        return largCase;
+    }
+
+    public int longTolongCase(int longueur){
+        this.longCase = longueur/11;
+        return longCase;
     }
 
     public Board(Pane pane, double v, double v1, boolean b, String filename, int numberOfTeam){
