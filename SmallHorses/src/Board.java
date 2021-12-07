@@ -21,6 +21,7 @@ public class Board extends Scene {
     int largeur;
     int cote;
     int cases;
+    Dice dice;
 
     /*
      * Squares 1 to 4 : Blue stable
@@ -267,11 +268,15 @@ public class Board extends Scene {
 
     public void update(int tour){
         int playerTurn = tour%team.get(0).getNumberOfTeam(); //To get the number of team
-        this.setOnKeyPressed(keyEvent -> {
-            String key = keyEvent.getCode().toString();
-            if(key.equals("SPACE")){
-                int res = this.dice.throwDice();
-            }
-        });
+        dice.thrown = true;
+        while(dice.thrown) {
+            this.setOnKeyPressed(keyEvent -> {
+                String key = keyEvent.getCode().toString();
+                if (key.equals("SPACE")) {
+                    int res = this.dice.throwDice();
+                }
+            });
+            dice.thrown = false;
+        }
     }
 }
