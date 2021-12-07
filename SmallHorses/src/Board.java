@@ -17,6 +17,9 @@ public class Board extends Scene {
     ArrayList<Team> team;
     ArrayList<Color> teamList;
     private boolean gameFinished = false;
+    int longueur;
+    int largeur;
+    int cases;
 
     Dice dice = new Dice();
 
