@@ -6,7 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Dice {
 
-    private int lastResult = 1;
+    private int lastResult;
     private final ImageView image;
     public boolean thrown = false;
     public final int sizeX = 44;
