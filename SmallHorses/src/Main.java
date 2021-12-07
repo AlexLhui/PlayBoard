@@ -23,22 +23,17 @@ public class Main extends Application{
         primaryStage.show();
 
         int tour = 0;
+        board.update(tour);
 
 //        while (!board.isGameFinished()) {
 //            board.update(tour);
 //            tour +=1;
 //        }
 
-      /*  Image horseSheet = new Image("Little_blue_horse.png");
-        ImageView horse = new ImageView(horseSheet);
-        horse.setViewport(new Rectangle2D(0,0,480,480));
-        horse.setX(100);
-        horse.setY(100);
-        pane.getChildren().add(horse); */
-
     }
 
     public static void main(String[] args) {
         launch(args);
+
     }
 }
