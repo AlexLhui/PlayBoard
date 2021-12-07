@@ -17,6 +17,9 @@ public class Board extends Scene {
     ArrayList<Team> team;
     ArrayList<Color> teamList;
     private boolean gameFinished = false;
+    int longueur;
+    int largeur;
+    int cases;
 
     Dice dice = new Dice();
 
@@ -68,6 +71,7 @@ public class Board extends Scene {
                     team.add(teamObj);
                     teamList.add(couleur.get(a));
                     teamObj.setNumberOfTeam(numberOfTeam);
+                    team.get(1).player = 2;
                     System.out.println("Player 2 initialized");
                 }
                 if(i == 2){ //Player 3
@@ -83,6 +87,7 @@ public class Board extends Scene {
                     team.add(teamObj);
                     teamList.add(couleur.get(a));
                     teamObj.setNumberOfTeam(numberOfTeam);
+                    team.get(2).player = 3;
                     System.out.println("Player 3 initialized");
                 }
                 if(i == 3){ //Player 4
@@ -98,6 +103,7 @@ public class Board extends Scene {
                     team.add(teamObj);
                     teamList.add(couleur.get(a));
                     teamObj.setNumberOfTeam(numberOfTeam);
+                    team.get(3).player = 4;
                     System.out.println("Player 4 initialized");
                 }
             }
@@ -110,6 +116,7 @@ public class Board extends Scene {
                 team.add(teamObj);
                 teamObj.setNumberOfTeam(numberOfTeam);
                 teamList.add(couleur.get(a));
+                team.get(0).player = 1;
                 System.out.println("Player 1 initialized");
             }
         } // Code du dessus attribue des couleurs au hasard aux joueurs
@@ -263,11 +270,15 @@ public class Board extends Scene {
 
     public void update(int tour){
         int playerTurn = tour%team.get(0).getNumberOfTeam(); //To get the number of team
-        this.setOnKeyPressed(keyEvent -> {
-            String key = keyEvent.getCode().toString();
-            if(key.equals("SPACE")){
-                int res = dice.throwDice();
-            }
-        });
+        dice.thrown = true;
+        while(dice.thrown) {
+            this.setOnKeyPressed(keyEvent -> {
+                String key = keyEvent.getCode().toString();
+                if (key.equals("SPACE")) {
+                    int res = dice.throwDice();
+                }
+            });
+            dice.thrown = false;
+        }
     }
 }

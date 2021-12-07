@@ -6,6 +6,7 @@ public class Dice {
 
     private int lastResult;
     private ImageView image;
+    public boolean thrown = false;
 
     public int getLastResult() {
         return lastResult;
