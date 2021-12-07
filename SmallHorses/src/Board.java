@@ -42,12 +42,12 @@ public class Board extends Scene {
     }
 
     public int largTolarCase(int largeur){
-        this.largCase = largeur/11;
+        this.largCase = (largeur-106)/11;
         return largCase;
     }
 
     public int longTolongCase(int longueur){
-        this.longCase = longueur/11;
+        this.longCase = (longueur-106)/11;
         return longCase;
     }
 
