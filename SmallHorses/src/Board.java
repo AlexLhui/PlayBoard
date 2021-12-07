@@ -12,6 +12,7 @@ import java.util.Random;
 public class Board extends Scene {
 
     public final int nbCase = 72;
+    public int offset = 44;
     private ImageView image;
     ArrayList<Color> couleur;
     ArrayList<Team> team;
@@ -67,6 +68,9 @@ public class Board extends Scene {
         teamList = new ArrayList<>();
 
         this.dice = new Dice();
+        pane.getChildren().add(this.dice.getImage());
+        this.dice.getImage().setX(278);
+        this.dice.getImage().setY(278);
 
         for(int i = 0; i<numberOfTeam; i++){
             int a = (int) (Math.random()*4);
@@ -285,6 +289,8 @@ public class Board extends Scene {
                 String key = keyEvent.getCode().toString();
                 if (key.equals("SPACE")) {
                     int res = this.dice.throwDice();
+                    System.out.println(res);
+
                 }
             });
             dice.thrown = false;

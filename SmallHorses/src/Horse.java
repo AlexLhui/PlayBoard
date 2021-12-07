@@ -10,7 +10,7 @@ public class Horse {
     Etat situation;
     private int position;
     private int numberHorse; //From 1 to 4
-    private ImageView image;
+    private final ImageView image;
     public final int sizeX = 44;
     public final int sizeY = 44;
     public static int offset = 44;
