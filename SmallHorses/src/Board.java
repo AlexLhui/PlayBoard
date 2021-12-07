@@ -55,7 +55,7 @@ public class Board extends Scene {
         team = new ArrayList<>();
         teamList = new ArrayList<>();
 
-        Dice dice = new Dice();
+        this.dice = new Dice();
 
         for(int i = 0; i<numberOfTeam; i++){
             int a = (int) (Math.random()*4);
