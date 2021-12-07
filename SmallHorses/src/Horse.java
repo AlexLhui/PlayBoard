@@ -76,7 +76,7 @@ public class Horse {
         this.position = position;
         this.situation = situation;
         this.image = new ImageView(new Image(filename));
-        this.image.setViewport(new Rectangle2D(N*offset, 0, sizeX, sizeY));
+        this.image.setViewport(new Rectangle2D(N*sizeX, 0, sizeX, sizeY));
     }
 
 }
