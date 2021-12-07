@@ -21,10 +21,10 @@ public class Dice {
     }
 
     public int throwDice() {
-        int res = ThreadLocalRandom.current().nextInt(1,6+1);
-        setLastResult(res);
-        this.image.setViewport(new Rectangle2D((res-1)*sizeX, 0, sizeX, sizeY));
-        return res;
+            int res = ThreadLocalRandom.current().nextInt(1, 6 + 1);
+            setLastResult(res);
+            this.image.setViewport(new Rectangle2D((res - 1) * sizeX, 0, sizeX, sizeY));
+            return res;
     }
 
     public Dice () {

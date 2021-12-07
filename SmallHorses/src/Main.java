@@ -13,6 +13,7 @@ import static javafx.application.Application.launch;
 
 public class Main extends Application{
 
+
     public void start(Stage primaryStage){
         primaryStage.setTitle("Petits chevaux");
         Group root = new Group();

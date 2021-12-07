@@ -272,6 +272,14 @@ public class Board extends Scene {
             }
         }
         //Code du dessus attribue les positions initiales aux chevaux et leur numéro de série
+
+        this.setOnKeyPressed(keyEvent -> {
+            String key = keyEvent.getCode().toString();
+            if (key.equals("SPACE")) {
+                int res = this.dice.throwDice();
+                System.out.println(res);
+            }
+        });
     }
 
     private static Random numberGenerator = new Random();
@@ -283,17 +291,6 @@ public class Board extends Scene {
 
     public void update(int tour){
         int playerTurn = tour%team.get(0).getNumberOfTeam(); //To get the number of team
-        dice.thrown = true;
-        while(dice.thrown) {
-            this.setOnKeyPressed(keyEvent -> {
-                String key = keyEvent.getCode().toString();
-                if (key.equals("SPACE")) {
-                    int res = this.dice.throwDice();
-                    System.out.println(res);
 
-                }
-            });
-            dice.thrown = false;
-        }
     }
 }
