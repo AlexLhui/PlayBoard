@@ -31,7 +31,7 @@ public class Dice {
         int res = getLastResult();
         this.lastResult = getLastResult();
         this.image = new ImageView(new Image("dice_digits.png"));
-        this.image.setViewport(new Rectangle2D(6*sizeX, 0, sizeX, sizeY));
+        this.image.setViewport(new Rectangle2D(6*sizeX, 0, sizeX, sizeY)); //Out of the digits => no image
     }
 
     public ImageView getImage(){
