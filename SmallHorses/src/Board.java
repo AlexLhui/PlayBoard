@@ -19,8 +19,10 @@ public class Board extends Scene {
     private boolean gameFinished = false;
     int longueur;
     int largeur;
-    int cote;
+    int largCase;
+    int longCase;
     int cases;
+    Dice dice;
 
     /*
      * Squares 1 to 4 : Blue stable
@@ -36,6 +38,16 @@ public class Board extends Scene {
 
     public boolean isGameFinished() {
         return gameFinished;
+    }
+
+    public int largTolarCase(int largeur){
+        this.largCase = largeur/11;
+        return largCase;
+    }
+
+    public int longTolongCase(int longueur){
+        this.longCase = longueur/11;
+        return longCase;
     }
 
     public Board(Pane pane, double v, double v1, boolean b, String filename, int numberOfTeam){
@@ -54,7 +66,7 @@ public class Board extends Scene {
         team = new ArrayList<>();
         teamList = new ArrayList<>();
 
-        Dice dice = new Dice();
+        this.dice = new Dice();
 
         for(int i = 0; i<numberOfTeam; i++){
             int a = (int) (Math.random()*4);
@@ -267,11 +279,15 @@ public class Board extends Scene {
 
     public void update(int tour){
         int playerTurn = tour%team.get(0).getNumberOfTeam(); //To get the number of team
-        this.setOnKeyPressed(keyEvent -> {
-            String key = keyEvent.getCode().toString();
-            if(key.equals("SPACE")){
-                int res = this.dice.throwDice();
-            }
-        });
+        dice.thrown = true;
+        while(dice.thrown) {
+            this.setOnKeyPressed(keyEvent -> {
+                String key = keyEvent.getCode().toString();
+                if (key.equals("SPACE")) {
+                    int res = this.dice.throwDice();
+                }
+            });
+            dice.thrown = false;
+        }
     }
 }
