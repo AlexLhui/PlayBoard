@@ -263,7 +263,11 @@ public class Board extends Scene {
 
     public void update(int tour){
         int playerTurn = tour%team.get(0).getNumberOfTeam(); //To get the number of team
-
-        int res = dice.throwDice();
+        this.setOnKeyPressed(keyEvent -> {
+            String key = keyEvent.getCode().toString();
+            if(key.equals("SPACE")){
+                int res = dice.throwDice();
+            }
+        });
     }
 }
