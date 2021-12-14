@@ -26,15 +26,15 @@ public class Board extends Scene {
     Dice dice;
 
     /*
-     * Squares 1 to 4 : Blue stable
-     * Squares 5 to 8 : Red stable
-     * Squares 9 to 12 : Green stable
-     * Squares 13 to 16 : Yellow stable
-     * Squares 17 to 56 : Game
-     * Squares 57 to 60 : Final arrival for blue team
-     * Squares 61 to 64 : Final arrival for red team
-     * Squares 65 to 68 : Final arrival for green team
-     * Squares 70 to 72 : Final arrival for yellow team
+     * Cases 1 à 4 : Blue stable
+     * Cases 5 à 8 : Red stable
+     * Cases 9 à 12 : Green stable
+     * Cases 13 à 16 : Yellow stable
+     * Cases 17 à 56 : Game
+     * Cases 57 à 60 : Final arrival for blue team
+     * Cases 61 à 64 : Final arrival for red team
+     * Cases 65 à 68 : Final arrival for green team
+     * Cases 70 à 72 : Final arrival for yellow team
      */
 
     public boolean isGameFinished() {
@@ -273,7 +273,7 @@ public class Board extends Scene {
         }
         //Code du dessus attribue les positions initiales aux chevaux et leur numéro de série
 
-        this.setOnKeyPressed(keyEvent -> {
+        this.setOnKeyPressed(keyEvent -> { // A mettre dans le update
             String key = keyEvent.getCode().toString();
             if (key.equals("SPACE")) {
                 int res = this.dice.throwDice();
@@ -290,7 +290,29 @@ public class Board extends Scene {
 
 
     public void update(int tour){
+        //Si tour < nombre d'équipes => on utilise la variable playerTurn1 pour décider qui joue
+        int playerTurn1 = (int) (Math.random()*team.get(0).getNumberOfTeam()); // On attribue au hasard le joueur qui commence
         int playerTurn = tour%team.get(0).getNumberOfTeam(); //To get the number of team
-
+        // On attend l'événement : lance de dé de la part du joueur
+        /* 2 possibilités :
+                il fait 6 => il sort un cheval de l'écurie, il joue ou il ne peut pas jouer, après un 6 le joueur rejoue
+                il fait entre 1 et 5 => il joue ou il passe son tour s'il ne peut pas
+         */
+        // Lorsque l'image bouge, 5 possibilités :
+        /*
+        Soit le cheval est juste sorti de l'écurie
+        Soit le cheval avance comme prévu
+        Soit le cheval est bloqué par un autre devant il s'arrête derrière
+        Soit il fait un lancé qui arrive juste sur le cheval de devant : il s'arrête derrière si c'est un de son équipe sinon il prend la place et le renvoie à l'écurie du propriétaire
+        Soit il arrive dans les cases d'arrivé et ne bouge pas s'il a fait un score trop élevé, avance s'il a fait le bon score ou le score (bloquage du cheval) ou un score inférieur à celui attendu
+         */
+        // Si un joueur a ses 4 chevaux sur la piste d'arrivé : il gagne (fonction end)
     }
 }
+/* Idée d'une manière de traiter l'attente de l'appui sur le bouton
+jButton.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent evt) {
+        TrucKiVaBien(evt) ; //envoie les infos
+        fenetre.dispose() ;  // dégage la fenetre et rend la main au main
+        }
+        }); */
