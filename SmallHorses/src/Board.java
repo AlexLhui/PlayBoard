@@ -12,7 +12,10 @@ import java.util.Random;
 public class Board extends Scene {
 
     public final int nbCase = 72;
-    public int offset = 44;
+    private final int leftOffset = 958;
+    private final int upperOffset = 118;
+    private final int squareSize = 160;
+    private final int lineSize = 18;
     private ImageView image;
     ArrayList<Color> couleur;
     ArrayList<Team> team;
@@ -41,21 +44,21 @@ public class Board extends Scene {
         return gameFinished;
     }
 
-    public int largTolarCase(int largeur){
-        this.largCase = (largeur-106)/11;
-        return largCase;
-    }
+//    public int largTolarCase(int largeur){
+//        this.largCase = (largeur-106)/11;
+//        return largCase;
+//    }
+//
+//    public int longTolongCase(int longueur){
+//        this.longCase = (longueur-106)/11;
+//        return longCase;
+//    }
 
-    public int longTolongCase(int longueur){
-        this.longCase = (longueur-106)/11;
-        return longCase;
-    }
-
-    public Board(Pane pane, double v, double v1, boolean b, String filename, int numberOfTeam){
-        super(pane, v, v1, b);
-        Image boardSheet = new Image(filename);
+    public Board(Pane pane, double width, double height, boolean b, String filename, int numberOfTeam){
+        super(pane, width, height, b);
+        Image boardSheet = new Image(filename,width,height,true,true);
         ImageView board = new ImageView(boardSheet);
-        board.setViewport(new Rectangle2D(0,0,600,600));
+        board.setViewport(new Rectangle2D(0,0,width,height));
         pane.getChildren().add(board);
 
         couleur = new ArrayList<>();
@@ -69,8 +72,8 @@ public class Board extends Scene {
 
         this.dice = new Dice();
         pane.getChildren().add(this.dice.getImage());
-        this.dice.getImage().setX(278);
-        this.dice.getImage().setY(278);
+        this.dice.getImage().setX(leftOffset+6*lineSize+5*squareSize);
+        this.dice.getImage().setY(upperOffset+6*lineSize+5*squareSize);
 
         for(int i = 0; i<numberOfTeam; i++){
             int a = (int) (Math.random()*4);
@@ -80,10 +83,10 @@ public class Board extends Scene {
                     while (teamList.contains(couleur.get(a))) {
                         a = (int) (Math.random()*4);
                     }
-                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
+                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTest.png",a);
+                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorseTest.png",a);
+                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorseTest.png",a);
+                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorseTest.png",a);
                     Team teamObj = new Team(couleur.get(a), horse1, horse2, horse3, horse4);
                     team.add(teamObj);
                     teamList.add(couleur.get(a));
@@ -95,10 +98,10 @@ public class Board extends Scene {
                     while (teamList.contains(couleur.get(a))) {
                         a = (int) (Math.random()*4);
                     }
-                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
+                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorseTest.png",a);
+                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorseTest.png",a);
+                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorseTest.png",a);
+                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorseTest.png",a);
                     Team teamObj = new Team(couleur.get(a), horse1, horse2, horse3, horse4);
                     team.add(teamObj);
                     teamList.add(couleur.get(a));
@@ -110,10 +113,10 @@ public class Board extends Scene {
                     while (teamList.contains(couleur.get(a))) {
                         a = (int) (Math.random()*4);
                     }
-                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
+                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorseTest.png",a);
+                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorseTest.png",a);
+                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorseTest.png",a);
+                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorseTest.png",a);
                     Team teamObj = new Team(couleur.get(a), horse1, horse2, horse3, horse4);
                     team.add(teamObj);
                     teamList.add(couleur.get(a));
@@ -122,10 +125,10 @@ public class Board extends Scene {
                 }
             }
             else{ //Player 1
-                Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
+                Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorseTest.png",a);
+                Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorseTest.png",a);
+                Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorseTest.png",a);
+                Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorseTest.png",a);
                 Team teamObj = new Team(couleur.get(a),horse1,horse2,horse3,horse4);
                 team.add(teamObj);
                 teamObj.setNumberOfTeam(numberOfTeam);
