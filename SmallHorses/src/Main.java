@@ -9,17 +9,24 @@ import javafx.scene.Group;
 import javafx.animation.AnimationTimer;
 import javax.swing.*;
 
+import java.awt.*;
+
 import static javafx.application.Application.launch;
 
 public class Main extends Application{
 
 
     public void start(Stage primaryStage){
+        Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); // getScreenSize() returns the size of the screen in pixels
+        int screenWidth = (int)size.getWidth(); // screenWidth will store the width of the screen
+        int screenHeight = (int)size.getHeight(); // screenHeight will store the height of the screen
+        System.out.println("Width : " + screenWidth + "Height : " + screenHeight);
+
         primaryStage.setTitle("Petits chevaux");
         Group root = new Group();
         Pane pane = new Pane(root);
         //Scene theScene = new Scene(pane, 600, 600,true);
-        Board board = new Board(pane,600,600,true,"SmallHorsesBoardJavaFx.png",3); //We will have to change number of teams
+        Board board = new Board(pane,screenWidth,screenHeight,true,"SmallHorsesBoardJavaFx.png",3); //We will have to change number of teams
         primaryStage.setScene(board);
         primaryStage.show();
 
