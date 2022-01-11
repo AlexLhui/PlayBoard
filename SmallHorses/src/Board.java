@@ -296,6 +296,15 @@ public class Board extends Scene {
         //Si tour < nombre d'équipes => on utilise la variable playerTurn1 pour décider qui joue
         int playerTurn1 = (int) (Math.random()*team.get(0).getNumberOfTeam()); // On attribue au hasard le joueur qui commence
         int playerTurn = tour%team.get(0).getNumberOfTeam(); //To get the number of team
+        if(dice.notSetDice){
+            this.setOnKeyPressed(keyEvent -> { // A mettre dans le update
+                String key = keyEvent.getCode().toString();
+                if (key.equals("SPACE")) {
+                    int res = this.dice.throwDice();
+                    System.out.println(res);
+                }
+            });
+        }
         // On attend l'événement : lance de dé de la part du joueur
         /* 2 possibilités :
                 il fait 6 => il sort un cheval de l'écurie, il joue ou il ne peut pas jouer, après un 6 le joueur rejoue
