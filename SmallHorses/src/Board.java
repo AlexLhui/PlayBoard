@@ -316,6 +316,16 @@ public class Board extends Scene {
                     System.out.println(res);
                 }
             });
+            //if res = 6
+            //if il n'y a pas de cheval sur la case de départ
+            // Je peux choisir de sortir
+            // if il existe un cheval de l'équipe sur le plateau
+            // Je peux appeler changePosition
+            //On attend qu'il rejoue
+            //if res < 6
+            //if il existe un cheval de l'équipe sur le plateau
+            // Je peux appeler changePosition
+            //Sinon : passe son tour
         }
         // On attend l'événement : lance de dé de la part du joueur
         /* 2 possibilités :
