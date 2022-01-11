@@ -2,6 +2,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Dice {
@@ -28,15 +29,15 @@ public class Dice {
     public int throwDice() {
             int res = ThreadLocalRandom.current().nextInt(1, 6 + 1);
             setLastResult(res);
-            this.image.setViewport(new Rectangle2D((res - 1) * sizeX, 0, sizeX, sizeY));
+            this.image.setViewport(new Rectangle2D((res - 1) * (sizeX*screenHeight/600), 0, sizeY*screenHeight/600, (int)(sizeY*screenHeight/600)));
             return res;
     }
 
     public Dice () {
         int res = getLastResult();
         this.lastResult = getLastResult();
-        this.image = new ImageView(new Image("dice_digits.png"));
-        this.image.setViewport(new Rectangle2D(6*sizeX, 0, sizeX, sizeY)); //Out of the digits => no image
+        this.image = new ImageView(new Image("dice_digits.png", sizeX*6*screenHeight/600, sizeY*screenHeight/600,true,true));
+        this.image.setViewport(new Rectangle2D(sizeX*6*screenHeight/600, 0, sizeX*screenHeight/600, sizeY*screenHeight/600)); //Out of the digits => no image
     }
 
     public ImageView getImage(){

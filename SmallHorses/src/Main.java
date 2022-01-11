@@ -15,7 +15,6 @@ import static javafx.application.Application.launch;
 
 public class Main extends Application{
 
-
     public void start(Stage primaryStage){
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); // getScreenSize() returns the size of the screen in pixels
         int screenWidth = (int)size.getWidth(); // screenWidth will store the width of the screen
@@ -26,8 +25,9 @@ public class Main extends Application{
         Group root = new Group();
         Pane pane = new Pane(root);
         //Scene theScene = new Scene(pane, 600, 600,true);
-        Board board = new Board(pane,screenWidth,screenHeight,true,"SmallHorsesBoardJavaFx.png",3); //We will have to change number of teams
+        Board board = new Board(pane,screenWidth,screenHeight,true,"SmallHorsesBoardJavaFx.png",4); //We will have to change number of teams
         primaryStage.setScene(board);
+        primaryStage.setFullScreen(true);
         primaryStage.show();
 
         int tour = 0;

@@ -6,16 +6,19 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Board extends Scene {
 
+    Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); // getScreenSize() returns the size of the screen in pixels
+    int screenWidth = (int)size.getWidth(); // screenWidth will store the width of the screen
+    int screenHeight = (int)size.getHeight(); // screenHeight will store the height of the screen
+    public final float ratioX = (float)screenHeight/600;
+    public final float ratioY = (float)screenHeight/600;
+
     public final int nbCase = 72;
-    private final int leftOffset = 958;
-    private final int upperOffset = 118;
-    private final int squareSize = 160;
-    private final int lineSize = 18;
     private ImageView image;
     ArrayList<Color> couleur;
     ArrayList<Team> team;
@@ -56,9 +59,11 @@ public class Board extends Scene {
 
     public Board(Pane pane, double width, double height, boolean b, String filename, int numberOfTeam){
         super(pane, width, height, b);
-        Image boardSheet = new Image(filename,width,height,true,true);
+        Image boardSheet = new Image(filename,height,height,true,true);
         ImageView board = new ImageView(boardSheet);
-        board.setViewport(new Rectangle2D(0,0,width,height));
+        board.setViewport(new Rectangle2D(0,0,height,height));
+        board.setX((width-height)/2);
+        board.setY(0);
         pane.getChildren().add(board);
 
         couleur = new ArrayList<>();
@@ -72,8 +77,9 @@ public class Board extends Scene {
 
         this.dice = new Dice();
         pane.getChildren().add(this.dice.getImage());
-        this.dice.getImage().setX(leftOffset+6*lineSize+5*squareSize);
-        this.dice.getImage().setY(upperOffset+6*lineSize+5*squareSize);
+        int squareSize = 44 * screenHeight / 600;
+        this.dice.getImage().setX((int)(width/2- squareSize /2));
+        this.dice.getImage().setY((int)(height/2- squareSize /2));
 
         for(int i = 0; i<numberOfTeam; i++){
             int a = (int) (Math.random()*4);
@@ -83,7 +89,7 @@ public class Board extends Scene {
                     while (teamList.contains(couleur.get(a))) {
                         a = (int) (Math.random()*4);
                     }
-                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTest.png",a);
+                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorseTest.png",a);
                     Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorseTest.png",a);
                     Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorseTest.png",a);
                     Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorseTest.png",a);
@@ -138,33 +144,36 @@ public class Board extends Scene {
         } // Code du dessus attribue des couleurs au hasard aux joueurs
 
         for(int j = 0; j<numberOfTeam; j++){
+            int upperOffset = 118;
+            int leftOffset = 958;
+            int lineSize = 18;
             if(team.get(j).color == Color.BLUE){
                 team.get(j).getHorse1().setPosition(1);
                 team.get(j).getHorse1().setNumberHorse(1);
                 //    team.get(j).getHorse1().setImageok("Little_blue_horse_sized.png");
-                team.get(j).getHorse1().getImage().setX(33);
-                team.get(j).getHorse1().getImage().setY(523);
+                team.get(j).getHorse1().getImage().setX(ratioX* leftOffset);
+                team.get(j).getHorse1().getImage().setY(ratioY*(upperOffset +9* squareSize +9* lineSize));
                 pane.getChildren().add(team.get(j).getHorse1().getImage());
                 team.get(j).getHorse2().setPosition(2);
                 team.get(j).getHorse2().setNumberHorse(2);
                 team.get(j).getHorse2().setColor(Color.BLUE);
                 //    team.get(j).getHorse2().setImageok("Little_blue_horse_sized.png");
-                team.get(j).getHorse2().getImage().setX(82);
-                team.get(j).getHorse2().getImage().setY(523);
+                team.get(j).getHorse2().getImage().setX(ratioX*(leftOffset + squareSize + lineSize));
+                team.get(j).getHorse2().getImage().setY(ratioY*(upperOffset +9* squareSize +9* lineSize));
                 pane.getChildren().add(team.get(j).getHorse2().getImage());
                 team.get(j).getHorse3().setPosition(3);
                 team.get(j).getHorse3().setNumberHorse(3);
                 team.get(j).getHorse3().setColor(Color.BLUE);
                 //    team.get(j).getHorse3().setImageok("Little_blue_horse_sized.png");
-                team.get(j).getHorse3().getImage().setX(82);
-                team.get(j).getHorse3().getImage().setY(474);
+                team.get(j).getHorse3().getImage().setX(ratioX*(leftOffset + squareSize + lineSize));
+                team.get(j).getHorse3().getImage().setY(ratioY*(upperOffset +8* squareSize +8* lineSize));
                 pane.getChildren().add(team.get(j).getHorse3().getImage());
                 team.get(j).getHorse4().setPosition(4);
                 team.get(j).getHorse4().setNumberHorse(4);
                 team.get(j).getHorse4().setColor(Color.BLUE);
                 //    team.get(j).getHorse4().setImageok("Little_blue_horse_sized.png");
-                team.get(j).getHorse4().getImage().setX(33);
-                team.get(j).getHorse4().getImage().setY(474);
+                team.get(j).getHorse4().getImage().setX(ratioX* leftOffset);
+                team.get(j).getHorse4().getImage().setY(ratioY*(upperOffset +8* squareSize +8* lineSize));
                 pane.getChildren().add(team.get(j).getHorse4().getImage());
                 System.out.println("Blue");
             }
@@ -173,32 +182,35 @@ public class Board extends Scene {
                 team.get(j).getHorse1().setNumberHorse(1);
                 team.get(j).getHorse1().setColor(Color.RED);
                 //    team.get(j).getHorse1().setImageok("Little_red_horse_sized.png");
-                team.get(j).getHorse1().getImage().setX(33);
-                team.get(j).getHorse1().getImage().setY(82);
+                //ratioX*leftOffset
+                team.get(j).getHorse1().getImage().setX(399);
+                //ratioY*(upperOffset+squareSize+lineSize)
+                team.get(j).getHorse1().getImage().setY(49);
+                System.out.println("x : " + ratioX* leftOffset + ", y : " + ratioY*(upperOffset + squareSize + lineSize));
                 team.get(j).getHorse1().getImage().setRotate(90);
                 pane.getChildren().add(team.get(j).getHorse1().getImage());
                 team.get(j).getHorse2().setPosition(6);
                 team.get(j).getHorse2().setNumberHorse(2);
                 team.get(j).getHorse2().setColor(Color.RED);
                 //    team.get(j).getHorse2().setImageok("Little_red_horse_sized.png");
-                team.get(j).getHorse2().getImage().setX(82);
-                team.get(j).getHorse2().getImage().setY(82);
+                team.get(j).getHorse2().getImage().setX(ratioX*(leftOffset + squareSize + lineSize));
+                team.get(j).getHorse2().getImage().setY(ratioY*(upperOffset + squareSize + lineSize));
                 team.get(j).getHorse2().getImage().setRotate(90);
                 pane.getChildren().add(team.get(j).getHorse2().getImage());
                 team.get(j).getHorse3().setPosition(7);
                 team.get(j).getHorse3().setNumberHorse(3);
                 team.get(j).getHorse3().setColor(Color.RED);
                 //    team.get(j).getHorse3().setImageok("Little_red_horse_sized.png");
-                team.get(j).getHorse3().getImage().setX(82);
-                team.get(j).getHorse3().getImage().setY(33);
+                team.get(j).getHorse3().getImage().setX(ratioX*(leftOffset + squareSize + lineSize));
+                team.get(j).getHorse3().getImage().setY(ratioY* upperOffset);
                 team.get(j).getHorse3().getImage().setRotate(90);
                 pane.getChildren().add(team.get(j).getHorse3().getImage());
                 team.get(j).getHorse4().setPosition(8);
                 team.get(j).getHorse4().setNumberHorse(4);
                 team.get(j).getHorse4().setColor(Color.RED);
                 //    team.get(j).getHorse4().setImageok("Little_red_horse_sized.png");
-                team.get(j).getHorse4().getImage().setX(33);
-                team.get(j).getHorse4().getImage().setY(33);
+                team.get(j).getHorse4().getImage().setX(ratioX* leftOffset);
+                team.get(j).getHorse4().getImage().setY(ratioY* upperOffset);
                 team.get(j).getHorse4().getImage().setRotate(90);
                 pane.getChildren().add(team.get(j).getHorse4().getImage());
                 System.out.println("Red");

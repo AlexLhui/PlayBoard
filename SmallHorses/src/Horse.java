@@ -3,8 +3,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
+import java.awt.*;
+
 
 public class Horse {
+
+    Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); // getScreenSize() returns the size of the screen in pixels
+    double screenWidth = size.getWidth(); // screenWidth will store the width of the screen
+    double screenHeight = size.getHeight(); // screenHeight will store the height of the screen
 
     public enum Etat{STABLE, CIRCUIT, ARRIVED}
     Etat situation;
@@ -13,7 +19,7 @@ public class Horse {
     private final ImageView image;
     public final int sizeX = 44;
     public final int sizeY = 44;
-    public static int offset = 44;
+    public static int offset = 160;
     Color color;
 
     public int getNumberHorse(){
@@ -38,8 +44,8 @@ public class Horse {
     public void initPosition(Horse chev){
         if(chev.color == Color.BLUE){
             chev.setPosition(17);
-            chev.getImage().setX(229);
-            chev.getImage().setY(523);
+            chev.getImage().setX((screenWidth/2) - (sizeX*screenHeight/600));
+            chev.getImage().setY((screenHeight/2) +6* (sizeX*screenHeight/600));
         }
         else if(chev.color == Color.RED){
             chev.setPosition(27);
@@ -75,8 +81,8 @@ public class Horse {
     public Horse(int position, Etat situation, String filename, int N){
         this.position = position;
         this.situation = situation;
-        this.image = new ImageView(new Image(filename));
-        this.image.setViewport(new Rectangle2D(N*sizeX, 0, sizeX, sizeY));
+        this.image = new ImageView(new Image(filename,(int)(sizeX*6*screenHeight/600),(int)(sizeY*screenHeight/600),true,true));
+        this.image.setViewport(new Rectangle2D(0, 0, (int)(sizeX*screenHeight/600), (int)(sizeY*screenHeight/600)));
     }
 
 }
