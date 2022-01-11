@@ -293,29 +293,18 @@ public class Board extends Scene {
                 String key = keyEvent.getCode().toString();
                 if (key.equals("SPACE")) {
                     int res = this.dice.throwDice();
-                    System.out.println(res);
                 }
             });
-
+            //if res = 6
+                //if il n'y a pas de cheval sur la case de départ
+                    // Je peux choisir de sortir
+                // if il existe un cheval de l'équipe sur le plateau
+                    // Je peux appeler changePosition
+            //On attend qu'il rejoue
+            //if res < 6
+                //if il existe un cheval de l'équipe sur le plateau
+                    // Je peux appeler changePosition
+                //Sinon : passe son tour
         }
-        /* 2 possibilités :
-                il fait 6 => il sort un cheval de l'écurie, il joue ou il ne peut pas jouer, après un 6 le joueur rejoue
-                il fait entre 1 et 5 => il joue ou il passe son tour s'il ne peut pas
-         */
-        // Lorsque l'image bouge, 5 possibilités :
-        /*
-        Soit le cheval est juste sorti de l'écurie
-        Soit le cheval avance comme prévu
-        Soit il fait un lancé qui arrive juste sur le cheval de devant : il s'arrête derrière si c'est un de son équipe sinon il prend la place et le renvoie à l'écurie du propriétaire
-        Soit il arrive dans les cases d'arrivé et ne bouge pas s'il a fait un score trop élevé, avance s'il a fait le bon score ou le score (bloquage du cheval) ou un score inférieur à celui attendu
-         */
-        // Si un joueur a ses 4 chevaux sur la piste d'arrivé : il gagne (fonction end)
     }
 }
-/* Idée d'une manière de traiter l'attente de l'appui sur le bouton
-jButton.addActionListener(new ActionListener() {
-public void actionPerformed(ActionEvent evt) {
-        TrucKiVaBien(evt) ; //envoie les infos
-        fenetre.dispose() ;  // dégage la fenetre et rend la main au main
-        }
-        }); */

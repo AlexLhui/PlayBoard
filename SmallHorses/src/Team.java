@@ -36,7 +36,7 @@ public class Team {
         this.horse4 = horse4;
     }
 
-    public void changePosition(int res, int position){
+    public void changePosition(int res, int position){ // La fonction doit prendre en compte si atterit sur un cheval ou si on arrive à l'arrivé et que l'on peut pas finir
         position = res + position;
         // fonction renvoie les coordonnées en fonction de la position
         // setX et setY de l'image
