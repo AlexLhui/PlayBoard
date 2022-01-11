@@ -276,13 +276,6 @@ public class Board extends Scene {
         }
         //Code du dessus attribue les positions initiales aux chevaux et leur numéro de série
 
-        this.setOnKeyPressed(keyEvent -> { // A mettre dans le update
-            String key = keyEvent.getCode().toString();
-            if (key.equals("SPACE")) {
-                int res = this.dice.throwDice();
-                System.out.println(res);
-            }
-        });
     }
 
     private static Random numberGenerator = new Random();
@@ -294,9 +287,17 @@ public class Board extends Scene {
 
     public void update(int tour){
         //Si tour < nombre d'équipes => on utilise la variable playerTurn1 pour décider qui joue
-        int playerTurn1 = (int) (Math.random()*team.get(0).getNumberOfTeam()); // On attribue au hasard le joueur qui commence
         int playerTurn = tour%team.get(0).getNumberOfTeam(); //To get the number of team
-        // On attend l'événement : lance de dé de la part du joueur
+        if(dice.notSetDice){
+            this.setOnKeyPressed(keyEvent -> { // Lance le dé
+                String key = keyEvent.getCode().toString();
+                if (key.equals("SPACE")) {
+                    int res = this.dice.throwDice();
+                    System.out.println(res);
+                }
+            });
+
+        }
         /* 2 possibilités :
                 il fait 6 => il sort un cheval de l'écurie, il joue ou il ne peut pas jouer, après un 6 le joueur rejoue
                 il fait entre 1 et 5 => il joue ou il passe son tour s'il ne peut pas
@@ -305,7 +306,6 @@ public class Board extends Scene {
         /*
         Soit le cheval est juste sorti de l'écurie
         Soit le cheval avance comme prévu
-        Soit le cheval est bloqué par un autre devant il s'arrête derrière
         Soit il fait un lancé qui arrive juste sur le cheval de devant : il s'arrête derrière si c'est un de son équipe sinon il prend la place et le renvoie à l'écurie du propriétaire
         Soit il arrive dans les cases d'arrivé et ne bouge pas s'il a fait un score trop élevé, avance s'il a fait le bon score ou le score (bloquage du cheval) ou un score inférieur à celui attendu
          */

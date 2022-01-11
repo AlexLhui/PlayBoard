@@ -36,4 +36,10 @@ public class Team {
         this.horse4 = horse4;
     }
 
+    public void changePosition(int res, int position){
+        position = res + position;
+        // fonction renvoie les coordonnées en fonction de la position
+        // setX et setY de l'image
+    }
+
 }

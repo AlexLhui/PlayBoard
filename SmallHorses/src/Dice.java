@@ -11,6 +11,7 @@ public class Dice {
     public boolean thrown = false;
     public final int sizeX = 44;
     public final int sizeY = 44;
+    public boolean notSetDice = true;
 
     public int getLastResult() {
         return lastResult;
