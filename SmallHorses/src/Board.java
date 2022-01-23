@@ -340,10 +340,3 @@ public class Board extends Scene {
         // Si un joueur a ses 4 chevaux sur la piste d'arrivé : il gagne (fonction end)
     }
 }
-/* Idée d'une manière de traiter l'attente de l'appui sur le bouton
-jButton.addActionListener(new ActionListener() {
-public void actionPerformed(ActionEvent evt) {
-        TrucKiVaBien(evt) ; //envoie les infos
-        fenetre.dispose() ;  // dégage la fenetre et rend la main au main
-        }
-        }); */
