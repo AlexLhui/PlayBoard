@@ -300,6 +300,171 @@ public class Board extends Scene {
         return elements[numberGenerator.nextInt(elements.length)];
     }
 
+    public boolean isFilled(int position){
+        for(Team j : team){
+            if(j.getHorse1().getPosition() == position){
+                return true;
+            }
+            else if(j.getHorse2().getPosition() == position){
+                return true;
+            }
+            else if(j.getHorse3().getPosition() == position){
+                return true;
+            }
+            else if(j.getHorse4().getPosition() == position){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void changePosition(int res, Horse horse){//Fonction isFilled pour savoir si une case est occupée par un cheval
+        int position_bis = (res + horse.getPosition())%40;//Pas sûr
+        int startedPosition = 0;
+        double x, y = 0;
+        for(Team j : team) {
+            if (j.color == horse.color){
+                startedPosition = j.getPositionDepart(); //Avoir la position de départ pour une  couleur donnée
+            }
+        }
+        if(position_bis-startedPosition < 40){ // S'il fait moins qu'un tour + Ne comprend pas l'erreur
+            if(isFilled(position_bis)){
+                for(Team j : team){
+                    if(j.getHorse1().getPosition() == position_bis){
+                        if(j.color == Color.RED){
+                            j.getHorse1().setPosition(42); //Remplacer 42 par la bonne valeur + setX et setY les bonnes coord
+                        }
+                        else if(j.color == Color.GREEN){
+                            j.getHorse1().setPosition(42);
+                        }
+                        else if(j.color == Color.BLUE){
+                            j.getHorse1().setPosition(42);
+                        }
+                        else if(j.color == Color.YELLOW){
+                            j.getHorse1().setPosition(42);
+                        }
+                    }
+                    else if(j.getHorse2().getPosition() == position_bis){
+                        if(j.color == Color.RED){
+                            j.getHorse2().setPosition(42);
+                        }
+                        else if(j.color == Color.GREEN){
+                            j.getHorse2().setPosition(42);
+                        }
+                        else if(j.color == Color.BLUE){
+                            j.getHorse2().setPosition(42);
+                        }
+                        else if(j.color == Color.YELLOW){
+                            j.getHorse2().setPosition(42);
+                        }
+                    }
+                    else if(j.getHorse3().getPosition() == position_bis){
+                        if(j.color == Color.RED){
+                            j.getHorse3().setPosition(42);
+                        }
+                        else if(j.color == Color.GREEN){
+                            j.getHorse3().setPosition(42);
+                        }
+                        else if(j.color == Color.BLUE){
+                            j.getHorse3().setPosition(42);
+                        }
+                        else if(j.color == Color.YELLOW){
+                            j.getHorse3().setPosition(42);
+                        }
+                    }
+                    else if(j.getHorse4().getPosition() == position_bis){
+                        if(j.color == Color.RED){
+                            j.getHorse4().setPosition(42);
+                        }
+                        else if(j.color == Color.GREEN){
+                            j.getHorse4().setPosition(42);
+                        }
+                        else if(j.color == Color.BLUE){
+                            j.getHorse4().setPosition(42);
+                        }
+                        else if(j.color == Color.YELLOW){
+                            j.getHorse4().setPosition(42);
+                        }
+                    }
+                }
+            }
+            horse.setPosition(position_bis);
+            x = horse.getXPos(position_bis);
+            y = horse.getYPos(position_bis);
+            horse.getImage().setX(x); // Affichage à la bonne position
+            horse.getImage().setY(y);
+        }
+        else{
+            position_bis = startedPosition-1;
+            if(isFilled(position_bis)){
+                for(Team j : team){
+                    if(j.getHorse1().getPosition() == position_bis){ // Remplacer 42 par la bonne valeur + setX et setY les bonnes coord
+                        if(j.color == Color.RED){
+                            j.getHorse1().setPosition(42);
+                        }
+                        else if(j.color == Color.GREEN){
+                            j.getHorse1().setPosition(42);
+                        }
+                        else if(j.color == Color.BLUE){
+                            j.getHorse1().setPosition(42);
+                        }
+                        else if(j.color == Color.YELLOW){
+                            j.getHorse1().setPosition(42);
+                        }
+                    }
+                    else if(j.getHorse2().getPosition() == position_bis){
+                        if(j.color == Color.RED){
+                            j.getHorse2().setPosition(42);
+                        }
+                        else if(j.color == Color.GREEN){
+                            j.getHorse2().setPosition(42);
+                        }
+                        else if(j.color == Color.BLUE){
+                            j.getHorse2().setPosition(42);
+                        }
+                        else if(j.color == Color.YELLOW){
+                            j.getHorse2().setPosition(42);
+                        }
+                    }
+                    else if(j.getHorse3().getPosition() == position_bis){
+                        if(j.color == Color.RED){
+                            j.getHorse3().setPosition(42);
+                        }
+                        else if(j.color == Color.GREEN){
+                            j.getHorse3().setPosition(42);
+                        }
+                        else if(j.color == Color.BLUE){
+                            j.getHorse3().setPosition(42);
+                        }
+                        else if(j.color == Color.YELLOW){
+                            j.getHorse3().setPosition(42);
+                        }
+                    }
+                    else if(j.getHorse4().getPosition() == position_bis){
+                        if(j.color == Color.RED){
+                            j.getHorse4().setPosition(42);
+                        }
+                        else if(j.color == Color.GREEN){
+                            j.getHorse4().setPosition(42);
+                        }
+                        else if(j.color == Color.BLUE){
+                            j.getHorse4().setPosition(42);
+                        }
+                        else if(j.color == Color.YELLOW){
+                            j.getHorse4().setPosition(42);
+                        }
+                    }
+                }
+            }
+            horse.setPosition(position_bis);
+            x = horse.getXPos(position_bis);
+            y = horse.getYPos(position_bis);
+            horse.getImage().setX(x); // Affichage à la bonne position
+            horse.getImage().setY(y);
+        }
+        // setX et setY de l'image
+    }
+
 
     public void update(int tour){
         //Si tour < nombre d'équipes => on utilise la variable playerTurn1 pour décider qui joue

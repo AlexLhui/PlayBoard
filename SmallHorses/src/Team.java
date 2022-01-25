@@ -9,7 +9,9 @@ public class Team {
     private Horse horse3;
     private Horse horse4;
     Color color;
-    int positionDepart;
+    private int positionDepart;
+
+    public int getPositionDepart(){return positionDepart;}
 
     public int getNumberOfTeam() {
         return numberOfTeam;
@@ -35,18 +37,6 @@ public class Team {
         this.horse2 = horse2;
         this.horse3 = horse3;
         this.horse4 = horse4;
-    }
-
-    public void changePosition(int res, int position){//Fonction isFilled pour savoir si une case est occupée par un cheval
-        int position_bis = (res + position)%40;//Pas sûr
-        if(position_bis-positionDepart < 40){
-            // S'il y a déjà un cheval ici
-        }
-        else{
-            position_bis = positionDepart-1;
-            //affiche le cheval ici (manque fonction qui renvoie les coord selon la position)
-        }
-        // setX et setY de l'image
     }
 
 }
