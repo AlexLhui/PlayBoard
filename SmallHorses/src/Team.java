@@ -37,6 +37,18 @@ public class Team {
         this.horse2 = horse2;
         this.horse3 = horse3;
         this.horse4 = horse4;
+        if(color == Color.BLUE){
+            this.positionDepart = 17;
+        }
+        else if(color == Color.RED){
+            this.positionDepart = 27;
+        }
+        else if(color == Color.GREEN){
+            this.positionDepart = 37;
+        }
+        else if(color == Color.YELLOW){
+            this.positionDepart = 47;
+        }
     }
 
 }

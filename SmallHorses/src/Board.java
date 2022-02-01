@@ -332,58 +332,58 @@ public class Board extends Scene {
                 for(Team j : team){
                     if(j.getHorse1().getPosition() == position_bis){
                         if(j.color == Color.RED){
-                            j.getHorse1().setPosition(42); //Remplacer 42 par la bonne valeur + setX et setY les bonnes coord
+                            j.getHorse1().setPosition(5); //Remplacer 42 par la bonne valeur + setX et setY les bonnes coord
                         }
                         else if(j.color == Color.GREEN){
-                            j.getHorse1().setPosition(42);
+                            j.getHorse1().setPosition(9);
                         }
                         else if(j.color == Color.BLUE){
-                            j.getHorse1().setPosition(42);
+                            j.getHorse1().setPosition(1);
                         }
                         else if(j.color == Color.YELLOW){
-                            j.getHorse1().setPosition(42);
+                            j.getHorse1().setPosition(13);
                         }
                     }
                     else if(j.getHorse2().getPosition() == position_bis){
                         if(j.color == Color.RED){
-                            j.getHorse2().setPosition(42);
+                            j.getHorse2().setPosition(6);
                         }
                         else if(j.color == Color.GREEN){
-                            j.getHorse2().setPosition(42);
+                            j.getHorse2().setPosition(10);
                         }
                         else if(j.color == Color.BLUE){
-                            j.getHorse2().setPosition(42);
+                            j.getHorse2().setPosition(2);
                         }
                         else if(j.color == Color.YELLOW){
-                            j.getHorse2().setPosition(42);
+                            j.getHorse2().setPosition(14);
                         }
                     }
                     else if(j.getHorse3().getPosition() == position_bis){
                         if(j.color == Color.RED){
-                            j.getHorse3().setPosition(42);
+                            j.getHorse3().setPosition(7);
                         }
                         else if(j.color == Color.GREEN){
-                            j.getHorse3().setPosition(42);
+                            j.getHorse3().setPosition(11);
                         }
                         else if(j.color == Color.BLUE){
-                            j.getHorse3().setPosition(42);
+                            j.getHorse3().setPosition(3);
                         }
                         else if(j.color == Color.YELLOW){
-                            j.getHorse3().setPosition(42);
+                            j.getHorse3().setPosition(15);
                         }
                     }
                     else if(j.getHorse4().getPosition() == position_bis){
                         if(j.color == Color.RED){
-                            j.getHorse4().setPosition(42);
+                            j.getHorse4().setPosition(8);
                         }
                         else if(j.color == Color.GREEN){
-                            j.getHorse4().setPosition(42);
+                            j.getHorse4().setPosition(12);
                         }
                         else if(j.color == Color.BLUE){
-                            j.getHorse4().setPosition(42);
+                            j.getHorse4().setPosition(4);
                         }
                         else if(j.color == Color.YELLOW){
-                            j.getHorse4().setPosition(42);
+                            j.getHorse4().setPosition(16);
                         }
                     }
                 }
@@ -400,58 +400,58 @@ public class Board extends Scene {
                 for(Team j : team){
                     if(j.getHorse1().getPosition() == position_bis){ // Remplacer 42 par la bonne valeur + setX et setY les bonnes coord
                         if(j.color == Color.RED){
-                            j.getHorse1().setPosition(42);
+                            j.getHorse1().setPosition(5);
                         }
                         else if(j.color == Color.GREEN){
-                            j.getHorse1().setPosition(42);
+                            j.getHorse1().setPosition(9);
                         }
                         else if(j.color == Color.BLUE){
-                            j.getHorse1().setPosition(42);
+                            j.getHorse1().setPosition(1);
                         }
                         else if(j.color == Color.YELLOW){
-                            j.getHorse1().setPosition(42);
+                            j.getHorse1().setPosition(13);
                         }
                     }
                     else if(j.getHorse2().getPosition() == position_bis){
                         if(j.color == Color.RED){
-                            j.getHorse2().setPosition(42);
+                            j.getHorse2().setPosition(6);
                         }
                         else if(j.color == Color.GREEN){
-                            j.getHorse2().setPosition(42);
+                            j.getHorse2().setPosition(10);
                         }
                         else if(j.color == Color.BLUE){
-                            j.getHorse2().setPosition(42);
+                            j.getHorse2().setPosition(2);
                         }
                         else if(j.color == Color.YELLOW){
-                            j.getHorse2().setPosition(42);
+                            j.getHorse2().setPosition(14);
                         }
                     }
                     else if(j.getHorse3().getPosition() == position_bis){
                         if(j.color == Color.RED){
-                            j.getHorse3().setPosition(42);
+                            j.getHorse3().setPosition(7);
                         }
                         else if(j.color == Color.GREEN){
-                            j.getHorse3().setPosition(42);
+                            j.getHorse3().setPosition(11);
                         }
                         else if(j.color == Color.BLUE){
-                            j.getHorse3().setPosition(42);
+                            j.getHorse3().setPosition(3);
                         }
                         else if(j.color == Color.YELLOW){
-                            j.getHorse3().setPosition(42);
+                            j.getHorse3().setPosition(15);
                         }
                     }
                     else if(j.getHorse4().getPosition() == position_bis){
                         if(j.color == Color.RED){
-                            j.getHorse4().setPosition(42);
+                            j.getHorse4().setPosition(8);
                         }
                         else if(j.color == Color.GREEN){
-                            j.getHorse4().setPosition(42);
+                            j.getHorse4().setPosition(12);
                         }
                         else if(j.color == Color.BLUE){
-                            j.getHorse4().setPosition(42);
+                            j.getHorse4().setPosition(4);
                         }
                         else if(j.color == Color.YELLOW){
-                            j.getHorse4().setPosition(42);
+                            j.getHorse4().setPosition(16);
                         }
                     }
                 }
