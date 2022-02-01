@@ -149,6 +149,7 @@ public class Board extends Scene {
             if(team.get(j).color == Color.BLUE){
                 chev1.setPosition(1);
                 chev1.setNumberHorse(1);
+                chev1.setColor(Color.BLUE);
                 //    team.get(j).getHorse1().setImageok("Little_blue_horse_sized.png");
                 chev1.getImage().setX(chev1.getXPos(1));
                 chev1.getImage().setY(chev1.getYPos(1));
