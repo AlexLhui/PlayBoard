@@ -466,7 +466,7 @@ public class Board extends Scene {
     }
 
 
-    public void update(int tour){
+    public void update(int tour, int player){
         //Si tour < nombre d'équipes => on utilise la variable playerTurn1 pour décider qui joue
         int playerTurn1 = (int) (Math.random()*team.get(0).getNumberOfTeam()); // On attribue au hasard le joueur qui commence
         int playerTurn = tour%team.get(0).getNumberOfTeam(); //To get the number of team
@@ -476,6 +476,12 @@ public class Board extends Scene {
                 if (key.equals("SPACE")) {
                     int res = this.dice.throwDice();
                     System.out.println(res);
+                    if (res == 6 && team.get(player).getHorse1().situation == Horse.Etat.STABLE) {
+                        team.get(player).getHorse1().setPosition(team.get(player).getHorse1().getPosition()+17);
+                        team.get(player).getHorse1().getImage().setX(team.get(player).getHorse1().getXPos(team.get(player).getHorse1().getPosition()+17));
+                        team.get(player).getHorse1().getImage().setY(team.get(player).getHorse1().getYPos(team.get(player).getHorse1().getPosition()+17));
+                        team.get(player).getHorse1().situation = Horse.Etat.CIRCUIT;
+                    }
                 }
             });
             //if res = 6

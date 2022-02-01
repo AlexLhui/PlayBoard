@@ -20,7 +20,7 @@ public class Horse {
     public final double lineSize = 5*screenHeight/600;
 
     public enum Etat{STABLE, CIRCUIT, ARRIVED}
-    Etat situation;
+    public Etat situation;
     private int position;
     private int numberHorse; //From 1 to 4
     private final ImageView image;

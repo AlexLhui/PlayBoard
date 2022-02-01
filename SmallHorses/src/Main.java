@@ -14,6 +14,8 @@ import java.awt.*;
 import static javafx.application.Application.launch;
 
 public class Main extends Application{
+    private int tour = 0;
+    private int numberOfPlayers = 4;
 
     public void start(Stage primaryStage){
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); // getScreenSize() returns the size of the screen in pixels
@@ -25,17 +27,18 @@ public class Main extends Application{
         Group root = new Group();
         Pane pane = new Pane(root);
         //Scene theScene = new Scene(pane, 600, 600,true);
-        Board board = new Board(pane,screenWidth,screenHeight,true,"SmallHorsesBoardJavaFx.png",4); //We will have to change number of teams
+        Board board = new Board(pane,screenWidth,screenHeight,true,"SmallHorsesBoardJavaFx.png",numberOfPlayers); //We will have to change number of teams
         primaryStage.setScene(board);
         primaryStage.setFullScreen(true);
         primaryStage.show();
 
-        int tour = 0;
-        board.update(tour);
+        int player = 2; //Random 1-4
+        board.update(tour, player);
 
 //        while (!board.isGameFinished()) {
-//            board.update(tour);
+//            board.update(tour, player);
 //            tour +=1;
+//            player = player%4 + 1;
 //        }
 
     }
