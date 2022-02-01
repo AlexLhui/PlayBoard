@@ -169,6 +169,286 @@ public class Horse {
         return team.get(1).getHorse1(); //Arbitrary, we will never go to this line
     }
 
+    public boolean isHorseMovable(ArrayList<Team> team, Horse horse, int res) {
+        int currentPos = horse.getPosition();
+        switch(currentPos) {
+            case 1 :
+            case 2 :
+            case 3 :
+            case 4 :
+                if (horse.isFilled(team,17)) {
+                    Horse disturbingHorse = getHorseFilled(team,17);
+                    return (disturbingHorse.color != horse.color);
+                }
+                else {
+                    return true;
+                }
+            case 5 :
+            case 6 :
+            case 7 :
+            case 8 :
+                if (horse.isFilled(team,27)) {
+                    Horse disturbingHorse = getHorseFilled(team,27);
+                    return (disturbingHorse.color != horse.color);
+                }
+                else {
+                    return true;
+                }
+            case 9 :
+            case 10 :
+            case 11 :
+            case 12 :
+                if (horse.isFilled(team,37)) {
+                    Horse disturbingHorse = getHorseFilled(team,37);
+                    return (disturbingHorse.color != horse.color);
+                }
+                else {
+                    return true;
+                }
+            case 13 :
+            case 14 :
+            case 15 :
+            case 16 :
+                if (horse.isFilled(team,47)) {
+                    Horse disturbingHorse = getHorseFilled(team,47);
+                    return (disturbingHorse.color != horse.color);
+                }
+                else {
+                    return true;
+                }
+            case 17 :
+            case 18 :
+            case 19 :
+            case 20 :
+            case 21 :
+            case 22 :
+            case 23 :
+            case 24 :
+            case 25 :
+            case 27 :
+            case 28 :
+            case 29 :
+            case 30 :
+            case 31 :
+            case 32 :
+            case 33 :
+            case 34 :
+            case 35 :
+            case 37 :
+            case 38 :
+            case 39 :
+            case 40 :
+            case 41 :
+            case 42 :
+            case 43 :
+            case 44 :
+            case 45 :
+            case 47 :
+            case 48 :
+            case 49 :
+            case 50 :
+            case 51 :
+            case 52 :
+            case 53 :
+            case 54 :
+            case 55 :
+                return true;
+            case 56 : //If the blue horse wants to move to the blue cases
+                if (horse.color == Color.BLUE) {
+                    if (isFilled(team,57)) {
+                        return false;
+                    }
+                    else {
+                        return (res == 1); //The player has to do the score he is facing
+                    }
+                }
+                else {
+                    return true;
+                }
+            case 57 :
+                if (horse.color == Color.BLUE) {
+                    if (isFilled(team,58)) {
+                        return false;
+                    }
+                    else {
+                        return (res == 2); //The player has to do the score he is facing
+                    }
+                }
+                else {
+                    return true;
+                }
+            case 58 :
+                if (horse.color == Color.BLUE) {
+                    if (isFilled(team,59)) {
+                        return false;
+                    }
+                    else {
+                        return (res == 3); //The player has to do the score he is facing
+                    }
+                }
+                else {
+                    return true;
+                }
+            case 59 :
+                if (horse.color == Color.BLUE) {
+                    if (isFilled(team,60)) {
+                        return false;
+                    }
+                    else {
+                        return (res == 4); //The player has to do the score he is facing
+                    }
+                }
+                else {
+                    return true;
+                }
+            case 26 :
+                if (horse.color == Color.RED) {
+                    if (isFilled(team,61)) {
+                        return false;
+                    }
+                    else {
+                        return (res == 1); //The player has to do the score he is facing
+                    }
+                }
+                else {
+                    return true;
+                }
+            case 61 :
+                if (horse.color == Color.RED) {
+                    if (isFilled(team,62)) {
+                        return false;
+                    }
+                    else {
+                        return (res == 2); //The player has to do the score he is facing
+                    }
+                }
+                else {
+                    return true;
+                }
+            case 62 :
+                if (horse.color == Color.RED) {
+                    if (isFilled(team,63)) {
+                        return false;
+                    }
+                    else {
+                        return (res == 3); //The player has to do the score he is facing
+                    }
+                }
+                else {
+                    return true;
+                }
+            case 63 :
+                if (horse.color == Color.RED) {
+                    if (isFilled(team,64)) {
+                        return false;
+                    }
+                    else {
+                        return (res == 4); //The player has to do the score he is facing
+                    }
+                }
+                else {
+                    return true;
+                }
+            case 36 :
+                if (horse.color == Color.GREEN) {
+                    if (isFilled(team,65)) {
+                        return false;
+                    }
+                    else {
+                        return (res == 1); //The player has to do the score he is facing
+                    }
+                }
+                else {
+                    return true;
+                }
+            case 65 :
+                if (horse.color == Color.GREEN) {
+                    if (isFilled(team,66)) {
+                        return false;
+                    }
+                    else {
+                        return (res == 2); //The player has to do the score he is facing
+                    }
+                }
+                else {
+                    return true;
+                }
+            case 66 :
+                if (horse.color == Color.GREEN) {
+                    if (isFilled(team,67)) {
+                        return false;
+                    }
+                    else {
+                        return (res == 3); //The player has to do the score he is facing
+                    }
+                }
+                else {
+                    return true;
+                }
+            case 67 :
+                if (horse.color == Color.GREEN) {
+                    if (isFilled(team,68)) {
+                        return false;
+                    }
+                    else {
+                        return (res == 4); //The player has to do the score he is facing
+                    }
+                }
+                else {
+                    return true;
+                }
+            case 46 :
+                if (horse.color == Color.YELLOW) {
+                    if (isFilled(team,69)) {
+                        return false;
+                    }
+                    else {
+                        return (res == 1); //The player has to do the score he is facing
+                    }
+                }
+                else {
+                    return true;
+                }
+            case 69 :
+                if (horse.color == Color.YELLOW) {
+                    if (isFilled(team,70)) {
+                        return false;
+                    }
+                    else {
+                        return (res == 2); //The player has to do the score he is facing
+                    }
+                }
+                else {
+                    return true;
+                }
+            case 70 :
+                if (horse.color == Color.YELLOW) {
+                    if (isFilled(team,71)) {
+                        return false;
+                    }
+                    else {
+                        return (res == 3); //The player has to do the score he is facing
+                    }
+                }
+                else {
+                    return true;
+                }
+            case 71 :
+                if (horse.color == Color.YELLOW) {
+                    if (isFilled(team,72)) {
+                        return false;
+                    }
+                    else {
+                        return (res == 4); //The player has to do the score he is facing
+                    }
+                }
+                else {
+                    return true;
+                }
+        }
+        return true;
+    }
+
     public void beenEaten(Horse chev){
         if(chev.color == Color.BLUE){
             chev.setPosAndImg(chev, chev.getNumberHorse());
@@ -224,6 +504,7 @@ public class Horse {
             case 62 :
             case 29 :
                 x = middleX-squareSize/2-3*squareSize-3*lineSize;
+                break;
             case 22 :
             case 63 :
             case 30 :

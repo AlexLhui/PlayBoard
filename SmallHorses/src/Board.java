@@ -393,7 +393,7 @@ public class Board extends Scene {
                         }
                     }
                     break;
-                case 56 : //Check if the blue horse has almost arrived
+                case 56 : //Check if the blue horse has almost arrived //Need to check if the horse was already here !
                     if (horse.color == Color.BLUE) {
                         changePosition(0,horse);
                     }
@@ -464,7 +464,7 @@ public class Board extends Scene {
                 case 52 :
                 case 53 :
                 case 54 :
-                case 55 :
+                case 55 : //??????????
                     if (res == 1 && horse.isFilled(team,pos+1)) {
                         Horse disturbingHorse = horse.getHorseFilled(team,pos+1);
                         if (disturbingHorse.color == horse.color) {
@@ -487,7 +487,6 @@ public class Board extends Scene {
             horse.setPosAndImg(horse, horse.getPosition());
         }
     }
-
 
     public void update(int tour, int player){
         //Si tour < nombre d'équipes => on utilise la variable playerTurn1 pour décider qui joue
