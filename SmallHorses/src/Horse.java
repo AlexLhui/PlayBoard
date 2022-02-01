@@ -4,6 +4,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 
 public class Horse {
@@ -24,7 +25,7 @@ public class Horse {
     private int position;
     private int numberHorse; //From 1 to 4
     private final ImageView image;
-    Color color;
+    public Color color;
 
     public int getNumberHorse(){
         return this.numberHorse;
@@ -67,19 +68,120 @@ public class Horse {
             chev.getImage().setY(chev.getYPos(47));
         }
     }
+
+    public void deployHorse(ArrayList<Team> team, Team currentTeam) {
+        Color color = currentTeam.color;
+        int filledCase = 0;
+        int i;
+        if (color == Color.YELLOW) {
+            for (i = 0; i < 4; i++) {
+                if (isFilled(team,13+i)) { //13 is the first position of yellow start position
+                    filledCase = 13+i;
+                }
+            }
+            if (filledCase != 0) { //If there is a horse to deploy
+                switch (filledCase) {
+                    case 13 -> currentTeam.getHorse1().setPosAndImg(currentTeam.getHorse1(), 47);
+                    case 14 -> currentTeam.getHorse2().setPosAndImg(currentTeam.getHorse2(), 47);
+                    case 15 -> currentTeam.getHorse3().setPosAndImg(currentTeam.getHorse3(), 47);
+                    default -> //case 16
+                            currentTeam.getHorse4().setPosAndImg(currentTeam.getHorse4(), 47);
+                }
+            }
+        }
+        if (color == Color.BLUE) {
+            for (i = 0; i < 4; i++) {
+                if (isFilled(team,1+i)) { //13 is the first position of yellow start position
+                    filledCase = 1+i;
+                }
+            }
+            if (filledCase != 0) { //If there is a horse to deploy
+                switch (filledCase) {
+                    case 1 -> currentTeam.getHorse1().setPosAndImg(currentTeam.getHorse1(), 17);
+                    case 2 -> currentTeam.getHorse2().setPosAndImg(currentTeam.getHorse2(), 17);
+                    case 3 -> currentTeam.getHorse3().setPosAndImg(currentTeam.getHorse3(), 17);
+                    default -> //case 4
+                            currentTeam.getHorse4().setPosAndImg(currentTeam.getHorse4(), 17);
+                }
+            }
+        }
+        if (color == Color.GREEN) {
+            for (i = 0; i < 4; i++) {
+                if (isFilled(team,9+i)) { //13 is the first position of yellow start position
+                    filledCase = 9+i;
+                }
+            }
+            if (filledCase != 0) { //If there is a horse to deploy
+                switch (filledCase) {
+                    case 9 -> currentTeam.getHorse1().setPosAndImg(currentTeam.getHorse1(), 37);
+                    case 10 -> currentTeam.getHorse2().setPosAndImg(currentTeam.getHorse2(), 37);
+                    case 11 -> currentTeam.getHorse3().setPosAndImg(currentTeam.getHorse3(), 37);
+                    default -> //case 12
+                            currentTeam.getHorse4().setPosAndImg(currentTeam.getHorse4(), 37);
+                }
+            }
+        }
+        if (color == Color.RED) {
+            for (i = 0; i < 4; i++) {
+                if (isFilled(team,5+i)) { //13 is the first position of yellow start position
+                    filledCase = 5+i;
+                }
+            }
+            if (filledCase != 0) { //If there is a horse to deploy
+                switch (filledCase) {
+                    case 5 -> currentTeam.getHorse1().setPosAndImg(currentTeam.getHorse1(), 27);
+                    case 6 -> currentTeam.getHorse2().setPosAndImg(currentTeam.getHorse2(), 27);
+                    case 7 -> currentTeam.getHorse3().setPosAndImg(currentTeam.getHorse3(), 27);
+                    default -> //case 8
+                            currentTeam.getHorse4().setPosAndImg(currentTeam.getHorse4(), 27);
+                }
+            }
+        }
+    }
+
+    public boolean isFilled(ArrayList<Team> team, int position){
+        for (Team j : team) {
+            if (j.getHorse1().getPosition() == position) {
+                return true;
+            } else if (j.getHorse2().getPosition() == position) {
+                return true;
+            } else if (j.getHorse3().getPosition() == position) {
+                return true;
+            } else if (j.getHorse4().getPosition() == position) {
+                return true;
+            }
+        }
+    return false;
+    }
+
+    public Horse getHorseFilled(ArrayList<Team> team, int position){
+        for (Team j : team) {
+            if (j.getHorse1().getPosition() == position) {
+                return j.getHorse1();
+            } else if (j.getHorse2().getPosition() == position) {
+                return j.getHorse2();
+            } else if (j.getHorse3().getPosition() == position) {
+                return j.getHorse2();
+            } else if (j.getHorse4().getPosition() == position) {
+                return j.getHorse4();
+            }
+        }
+        return team.get(1).getHorse1(); //Arbitrary, we will never go to this line
+    }
+
     public void beenEaten(Horse chev){
         if(chev.color == Color.BLUE){
-            chev.setPosition(chev.getNumberHorse());
+            chev.setPosAndImg(chev, chev.getNumberHorse());
             //Replacer le cheval dans sa case d'origine !!
         }
         else if(chev.color == Color.RED){
-            chev.setPosition(chev.getNumberHorse()+4);
+            chev.setPosAndImg(chev, chev.getNumberHorse()+4);
         }
         else if(chev.color == Color.GREEN){
-            chev.setPosition(chev.getNumberHorse()+8);
+            chev.setPosAndImg(chev, chev.getNumberHorse()+8);
         }
         else if(chev.color == Color.YELLOW){
-            chev.setPosition(chev.getNumberHorse()+12);
+            chev.setPosAndImg(chev, chev.getNumberHorse()+12);
         }
     }
 
@@ -88,6 +190,13 @@ public class Horse {
         this.situation = situation;
         this.image = new ImageView(new Image(filename,4*squareSize,squareSize,true,true));
         this.image.setViewport(new Rectangle2D(N*squareSize, 0,squareSize,squareSize));
+    }
+
+    public void setPosAndImg(Horse horse, int pos) {
+        double x = getXPos(pos);
+        double y = getYPos(pos);
+        horse.getImage().setX(x);
+        horse.getImage().setY(y);
     }
 
     public double getXPos(int pos) {

@@ -300,169 +300,191 @@ public class Board extends Scene {
         return elements[numberGenerator.nextInt(elements.length)];
     }
 
-    public boolean isFilled(int position){
-        for(Team j : team){
-            if(j.getHorse1().getPosition() == position){
-                return true;
-            }
-            else if(j.getHorse2().getPosition() == position){
-                return true;
-            }
-            else if(j.getHorse3().getPosition() == position){
-                return true;
-            }
-            else if(j.getHorse4().getPosition() == position){
-                return true;
-            }
-        }
-        return false;
-    }
-
     public void changePosition(int res, Horse horse){//Fonction isFilled pour savoir si une case est occupée par un cheval
-        int position_bis = (res + horse.getPosition())%40;//Pas sûr
-        int startedPosition = 0;
-        double x, y = 0;
-        for(Team j : team) {
-            if (j.color == horse.color){
-                startedPosition = j.getPositionDepart(); //Avoir la position de départ pour une  couleur donnée
+        if (res != 0 ){
+            int pos = horse.getPosition();
+            switch(pos) {
+                case 1 :
+                case 2 :
+                case 3 :
+                case 4 :
+                    if (res == 6) {
+                        if (horse.isFilled(team,17)) {
+                            Horse disturbingHorse = horse.getHorseFilled(team,17);
+                            if (disturbingHorse.color == horse.color) { //If the player already has a horse on start case, nothing happens
+                                changePosition(0,horse);
+                            }
+                            else {
+                                disturbingHorse.beenEaten(disturbingHorse);
+                                horse.setPosition(17);
+                                changePosition(0,horse);
+                            }
+                        }
+                        else {
+                            horse.setPosition(17);
+                            changePosition(0,horse);
+                        }
+                    }
+                    break;
+                case 5 :
+                case 6 :
+                case 7 :
+                case 8 :
+                    if (res == 6) {
+                        if (horse.isFilled(team,27)) {
+                            Horse disturbingHorse = horse.getHorseFilled(team,27);
+                            if (disturbingHorse.color == horse.color) { //If the player already has a horse on start case, nothing happens
+                                changePosition(0,horse);
+                            }
+                            else {
+                                disturbingHorse.beenEaten(disturbingHorse);
+                                horse.setPosition(27);
+                                changePosition(0,horse);
+                            }
+                        }
+                        else {
+                            horse.setPosition(27);
+                            changePosition(0,horse);
+                        }
+                    }
+                    break;
+                case 9 :
+                case 10 :
+                case 11 :
+                case 12 :
+                    if (res == 6) {
+                        if (horse.isFilled(team,37)) {
+                            Horse disturbingHorse = horse.getHorseFilled(team,37);
+                            if (disturbingHorse.color == horse.color) { //If the player already has a horse on start case, nothing happens
+                                changePosition(0,horse);
+                            }
+                            else {
+                                disturbingHorse.beenEaten(disturbingHorse);
+                                horse.setPosition(37);
+                                changePosition(0,horse);
+                            }
+                        }
+                        else {
+                            horse.setPosition(37);
+                            changePosition(0,horse);
+                        }
+                    }
+                    break;
+                case 13 :
+                case 14 :
+                case 15 :
+                case 16 :
+                    if (res == 6) {
+                        if (horse.isFilled(team,47)) {
+                            Horse disturbingHorse = horse.getHorseFilled(team,47);
+                            if (disturbingHorse.color == horse.color) { //If the player already has a horse on start case, nothing happens
+                                changePosition(0,horse);
+                            }
+                            else {
+                                disturbingHorse.beenEaten(disturbingHorse);
+                                horse.setPosition(47);
+                                changePosition(0,horse);
+                            }
+                        }
+                        else {
+                            horse.setPosition(47);
+                            changePosition(0,horse);
+                        }
+                    }
+                    break;
+                case 56 : //Check if the blue horse has almost arrived
+                    if (horse.color == Color.BLUE) {
+                        changePosition(0,horse);
+                    }
+                    else {
+                        horse.setPosition(17);
+                        changePosition(res-1,horse);
+                    }
+                    break;
+                case 26 :
+                    if (horse.color == Color.RED) {
+                        changePosition(0,horse);
+                    }
+                    else {
+                        horse.setPosition(27);
+                        changePosition(res-1,horse);
+                    }
+                    break;
+                case 36 :
+                    if (horse.color == Color.GREEN) {
+                        changePosition(0,horse);
+                    }
+                    else {
+                        horse.setPosition(37);
+                        changePosition(res-1,horse);
+                    }
+                    break;
+                case 46 :
+                    if (horse.color == Color.YELLOW) {
+                        changePosition(0,horse);
+                    }
+                    else {
+                        horse.setPosition(47);
+                        changePosition(res-1,horse);
+                    }
+                    break;
+                case 17 :
+                case 18 :
+                case 19 :
+                case 20 :
+                case 21 :
+                case 22 :
+                case 23 :
+                case 24 :
+                case 25 :
+                case 27 :
+                case 28 :
+                case 29 :
+                case 30 :
+                case 31 :
+                case 32 :
+                case 33 :
+                case 34 :
+                case 35 :
+                case 37 :
+                case 38 :
+                case 39 :
+                case 40 :
+                case 41 :
+                case 42 :
+                case 43 :
+                case 44 :
+                case 45 :
+                case 47 :
+                case 48 :
+                case 49 :
+                case 50 :
+                case 51 :
+                case 52 :
+                case 53 :
+                case 54 :
+                case 55 :
+                    if (res == 1 && horse.isFilled(team,pos+1)) {
+                        Horse disturbingHorse = horse.getHorseFilled(team,pos+1);
+                        if (disturbingHorse.color == horse.color) {
+                            changePosition(0,horse);
+                        }
+                        else {
+                            disturbingHorse.beenEaten(disturbingHorse);
+                        }
+                    }
+                    else {
+                        horse.setPosition(pos + 1);
+                        changePosition(res - 1, horse);
+                    }
+                    break;
+                default : //For case ..
+                    break;
             }
         }
-        if(position_bis-startedPosition < 40){ // S'il fait moins qu'un tour + Ne comprend pas l'erreur
-            if(isFilled(position_bis)){
-                for(Team j : team){
-                    if(j.getHorse1().getPosition() == position_bis){
-                        if(j.color == Color.RED){
-                            j.getHorse1().setPosition(5); //Remplacer 42 par la bonne valeur + setX et setY les bonnes coord
-                        }
-                        else if(j.color == Color.GREEN){
-                            j.getHorse1().setPosition(9);
-                        }
-                        else if(j.color == Color.BLUE){
-                            j.getHorse1().setPosition(1);
-                        }
-                        else if(j.color == Color.YELLOW){
-                            j.getHorse1().setPosition(13);
-                        }
-                    }
-                    else if(j.getHorse2().getPosition() == position_bis){
-                        if(j.color == Color.RED){
-                            j.getHorse2().setPosition(6);
-                        }
-                        else if(j.color == Color.GREEN){
-                            j.getHorse2().setPosition(10);
-                        }
-                        else if(j.color == Color.BLUE){
-                            j.getHorse2().setPosition(2);
-                        }
-                        else if(j.color == Color.YELLOW){
-                            j.getHorse2().setPosition(14);
-                        }
-                    }
-                    else if(j.getHorse3().getPosition() == position_bis){
-                        if(j.color == Color.RED){
-                            j.getHorse3().setPosition(7);
-                        }
-                        else if(j.color == Color.GREEN){
-                            j.getHorse3().setPosition(11);
-                        }
-                        else if(j.color == Color.BLUE){
-                            j.getHorse3().setPosition(3);
-                        }
-                        else if(j.color == Color.YELLOW){
-                            j.getHorse3().setPosition(15);
-                        }
-                    }
-                    else if(j.getHorse4().getPosition() == position_bis){
-                        if(j.color == Color.RED){
-                            j.getHorse4().setPosition(8);
-                        }
-                        else if(j.color == Color.GREEN){
-                            j.getHorse4().setPosition(12);
-                        }
-                        else if(j.color == Color.BLUE){
-                            j.getHorse4().setPosition(4);
-                        }
-                        else if(j.color == Color.YELLOW){
-                            j.getHorse4().setPosition(16);
-                        }
-                    }
-                }
-            }
-            horse.setPosition(position_bis);
-            x = horse.getXPos(position_bis);
-            y = horse.getYPos(position_bis);
-            horse.getImage().setX(x); // Affichage à la bonne position
-            horse.getImage().setY(y);
+        else {
+            horse.setPosAndImg(horse, horse.getPosition());
         }
-        else{
-            position_bis = startedPosition-1;
-            if(isFilled(position_bis)){
-                for(Team j : team){
-                    if(j.getHorse1().getPosition() == position_bis){ // Remplacer 42 par la bonne valeur + setX et setY les bonnes coord
-                        if(j.color == Color.RED){
-                            j.getHorse1().setPosition(5);
-                        }
-                        else if(j.color == Color.GREEN){
-                            j.getHorse1().setPosition(9);
-                        }
-                        else if(j.color == Color.BLUE){
-                            j.getHorse1().setPosition(1);
-                        }
-                        else if(j.color == Color.YELLOW){
-                            j.getHorse1().setPosition(13);
-                        }
-                    }
-                    else if(j.getHorse2().getPosition() == position_bis){
-                        if(j.color == Color.RED){
-                            j.getHorse2().setPosition(6);
-                        }
-                        else if(j.color == Color.GREEN){
-                            j.getHorse2().setPosition(10);
-                        }
-                        else if(j.color == Color.BLUE){
-                            j.getHorse2().setPosition(2);
-                        }
-                        else if(j.color == Color.YELLOW){
-                            j.getHorse2().setPosition(14);
-                        }
-                    }
-                    else if(j.getHorse3().getPosition() == position_bis){
-                        if(j.color == Color.RED){
-                            j.getHorse3().setPosition(7);
-                        }
-                        else if(j.color == Color.GREEN){
-                            j.getHorse3().setPosition(11);
-                        }
-                        else if(j.color == Color.BLUE){
-                            j.getHorse3().setPosition(3);
-                        }
-                        else if(j.color == Color.YELLOW){
-                            j.getHorse3().setPosition(15);
-                        }
-                    }
-                    else if(j.getHorse4().getPosition() == position_bis){
-                        if(j.color == Color.RED){
-                            j.getHorse4().setPosition(8);
-                        }
-                        else if(j.color == Color.GREEN){
-                            j.getHorse4().setPosition(12);
-                        }
-                        else if(j.color == Color.BLUE){
-                            j.getHorse4().setPosition(4);
-                        }
-                        else if(j.color == Color.YELLOW){
-                            j.getHorse4().setPosition(16);
-                        }
-                    }
-                }
-            }
-            horse.setPosition(position_bis);
-            x = horse.getXPos(position_bis);
-            y = horse.getYPos(position_bis);
-            horse.getImage().setX(x); // Affichage à la bonne position
-            horse.getImage().setY(y);
-        }
-        // setX et setY de l'image
     }
 
 
@@ -476,12 +498,8 @@ public class Board extends Scene {
                 if (key.equals("SPACE")) {
                     int res = this.dice.throwDice();
                     System.out.println(res);
-                    if (res == 6 && team.get(player).getHorse1().situation == Horse.Etat.STABLE) {
-                        team.get(player).getHorse1().setPosition(team.get(player).getHorse1().getPosition()+17);
-                        team.get(player).getHorse1().getImage().setX(team.get(player).getHorse1().getXPos(team.get(player).getHorse1().getPosition()+17));
-                        team.get(player).getHorse1().getImage().setY(team.get(player).getHorse1().getYPos(team.get(player).getHorse1().getPosition()+17));
-                        team.get(player).getHorse1().situation = Horse.Etat.CIRCUIT;
-                    }
+                    changePosition(res,team.get(player).getHorse1());
+                    update(tour+1,(player+1)%4);
                 }
             });
             //if res = 6
