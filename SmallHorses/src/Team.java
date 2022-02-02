@@ -11,6 +11,22 @@ public class Team {
     Color color;
     private int positionDepart;
 
+    public String getColor(Team team) {
+        if (team.color == Color.BLUE) {
+            return "BLUE";
+        }
+        else if (team.color == Color.RED) {
+            return "RED";
+        }
+        if (team.color == Color.YELLOW) {
+            return "YELLOW";
+        }
+        if (team.color == Color.GREEN) {
+            return "GREEN";
+        }
+        return "I don't care";
+    }
+
     public int getPositionDepart(){return positionDepart;}
 
     public int getNumberOfTeam() {

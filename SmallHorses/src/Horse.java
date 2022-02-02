@@ -176,45 +176,61 @@ public class Horse {
             case 2 :
             case 3 :
             case 4 :
-                if (horse.isFilled(team,17)) {
-                    Horse disturbingHorse = getHorseFilled(team,17);
-                    return (disturbingHorse.color != horse.color);
+                if (res == 6) {
+                    if (horse.isFilled(team, 17)) {
+                        Horse disturbingHorse = getHorseFilled(team, 17);
+                        return (disturbingHorse.color != horse.color);
+                    } else {
+                        return true;
+                    }
                 }
                 else {
-                    return true;
+                    return false;
                 }
             case 5 :
             case 6 :
             case 7 :
             case 8 :
-                if (horse.isFilled(team,27)) {
-                    Horse disturbingHorse = getHorseFilled(team,27);
-                    return (disturbingHorse.color != horse.color);
+                if (res == 6) {
+                    if (horse.isFilled(team, 27)) {
+                        Horse disturbingHorse = getHorseFilled(team, 27);
+                        return (disturbingHorse.color != horse.color);
+                    } else {
+                        return true;
+                    }
                 }
                 else {
-                    return true;
+                    return false;
                 }
             case 9 :
             case 10 :
             case 11 :
             case 12 :
-                if (horse.isFilled(team,37)) {
-                    Horse disturbingHorse = getHorseFilled(team,37);
-                    return (disturbingHorse.color != horse.color);
+                if (res == 6) {
+                    if (horse.isFilled(team, 37)) {
+                        Horse disturbingHorse = getHorseFilled(team, 37);
+                        return (disturbingHorse.color != horse.color);
+                    } else {
+                        return true;
+                    }
                 }
                 else {
-                    return true;
+                    return false;
                 }
             case 13 :
             case 14 :
             case 15 :
             case 16 :
-                if (horse.isFilled(team,47)) {
-                    Horse disturbingHorse = getHorseFilled(team,47);
-                    return (disturbingHorse.color != horse.color);
+                if (res == 6) {
+                    if (horse.isFilled(team, 47)) {
+                        Horse disturbingHorse = getHorseFilled(team, 47);
+                        return (disturbingHorse.color != horse.color);
+                    } else {
+                        return true;
+                    }
                 }
                 else {
-                    return true;
+                    return false;
                 }
             case 17 :
             case 18 :
@@ -449,6 +465,10 @@ public class Horse {
         return true;
     }
 
+    public boolean isOneHorseMovable(ArrayList<Team> team, int player, int res) {
+        return (isHorseMovable(team,team.get(player).getHorse1(),res) || isHorseMovable(team,team.get(player).getHorse2(),res) || isHorseMovable(team,team.get(player).getHorse3(),res) || isHorseMovable(team,team.get(player).getHorse4(),res));
+    }
+
     public void beenEaten(Horse chev){
         if(chev.color == Color.BLUE){
             chev.setPosAndImg(chev, chev.getNumberHorse());
@@ -480,97 +500,19 @@ public class Horse {
     }
 
     public double getXPos(int pos) {
-        double x;
-        switch(pos) {
-            case 1 :
-            case 4 :
-            case 25 :
-            case 26 :
-            case 27 :
-            case 5 :
-            case 8 :
-                x = middleX-squareSize/2-5*squareSize-5*lineSize;
-                break;
-            case 2 :
-            case 3 :
-            case 24 :
-            case 61 :
-            case 28 :
-            case 6 :
-            case 7 :
-                x = middleX-squareSize/2-4*squareSize-4*lineSize;
-                break;
-            case 23 :
-            case 62 :
-            case 29 :
-                x = middleX-squareSize/2-3*squareSize-3*lineSize;
-                break;
-            case 22 :
-            case 63 :
-            case 30 :
-                x = middleX-squareSize/2-2*squareSize-2*lineSize;
-                break;
-            case 17 :
-            case 18 :
-            case 19 :
-            case 20 :
-            case 21 :
-            case 64 :
-            case 31 :
-            case 32 :
-            case 33 :
-            case 34 :
-            case 35 :
-                x = middleX-squareSize/2-squareSize-lineSize;
-                break;
-            case 56 :
-            case 57 :
-            case 58 :
-            case 59 :
-            case 60 :
-            case 68 :
-            case 67 :
-            case 66 :
-            case 65 :
-            case 36 :
-                x = middleX-squareSize/2;
-                break;
-            case 55 :
-            case 54 :
-            case 53 :
-            case 52 :
-            case 51 :
-            case 72 :
-            case 41 :
-            case 40 :
-            case 39 :
-            case 38 :
-            case 37 :
-                x = middleX-squareSize/2+squareSize+lineSize;
-                break;
-            case 50 :
-            case 71 :
-            case 42 :
-                x = middleX-squareSize/2+2*squareSize+2*lineSize;
-                break;
-            case 49 :
-            case 70 :
-            case 43 :
-                x = middleX-squareSize/2+3*squareSize+3*lineSize;
-                break;
-            case 13 :
-            case 16 :
-            case 48 :
-            case 69 :
-            case 44 :
-            case 9 :
-            case 12 :
-                x = middleX-squareSize/2+4*squareSize+4*lineSize;
-                break;
-            default :
-                x = middleX-squareSize/2+5*squareSize+5*lineSize;
-                break;
-        }
+        double x = switch (pos) {
+            case 1, 4, 25, 26, 27, 5, 8 -> middleX - squareSize / 2 - 5 * squareSize - 5 * lineSize;
+            case 2, 3, 24, 61, 28, 6, 7 -> middleX - squareSize / 2 - 4 * squareSize - 4 * lineSize;
+            case 23, 62, 29 -> middleX - squareSize / 2 - 3 * squareSize - 3 * lineSize;
+            case 22, 63, 30 -> middleX - squareSize / 2 - 2 * squareSize - 2 * lineSize;
+            case 17, 18, 19, 20, 21, 64, 31, 32, 33, 34, 35 -> middleX - squareSize / 2 - squareSize - lineSize;
+            case 56, 57, 58, 59, 60, 68, 67, 66, 65, 36 -> middleX - squareSize / 2;
+            case 55, 54, 53, 52, 51, 72, 41, 40, 39, 38, 37 -> middleX - squareSize / 2 + squareSize + lineSize;
+            case 50, 71, 42 -> middleX - squareSize / 2 + 2 * squareSize + 2 * lineSize;
+            case 49, 70, 43 -> middleX - squareSize / 2 + 3 * squareSize + 3 * lineSize;
+            case 13, 16, 48, 69, 44, 9, 12 -> middleX - squareSize / 2 + 4 * squareSize + 4 * lineSize;
+            default -> middleX - squareSize / 2 + 5 * squareSize + 5 * lineSize;
+        };
         return x;
     }
 

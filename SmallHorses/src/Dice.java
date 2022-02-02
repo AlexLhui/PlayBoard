@@ -12,7 +12,7 @@ public class Dice {
     public boolean thrown = false;
     public final int sizeX = 44;
     public final int sizeY = 44;
-    public boolean notSetDice = true;
+    public boolean notSetDice = true; //?
 
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); // getScreenSize() returns the size of the screen in pixels
     //int screenWidth = (int)size.getWidth(); // screenWidth will store the width of the screen

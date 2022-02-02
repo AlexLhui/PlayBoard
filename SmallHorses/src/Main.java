@@ -33,7 +33,7 @@ public class Main extends Application{
         primaryStage.show();
 
         int player = 2; //Random 1-4
-        board.update(tour, player);
+        board.update(tour, player,-1,true);
 
 //        while (!board.isGameFinished()) {
 //            board.update(tour, player);

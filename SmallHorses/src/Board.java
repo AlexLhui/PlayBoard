@@ -22,11 +22,6 @@ public class Board extends Scene {
     ArrayList<Team> team;
     ArrayList<Color> teamList;
     private boolean gameFinished = false;
-    int longueur;
-    int largeur;
-    int largCase;
-    int longCase;
-    int cases;
     Dice dice;
 
     /*
@@ -464,7 +459,7 @@ public class Board extends Scene {
                 case 52 :
                 case 53 :
                 case 54 :
-                case 55 : //??????????
+                case 55 : //General case
                     if (res == 1 && horse.isFilled(team,pos+1)) {
                         Horse disturbingHorse = horse.getHorseFilled(team,pos+1);
                         if (disturbingHorse.color == horse.color) {
@@ -488,31 +483,70 @@ public class Board extends Scene {
         }
     }
 
-    public void update(int tour, int player){
+    private void associateAction(int tour, int player, int prevRes) {
+        this.setOnKeyPressed(keyEvent1 -> { //To check which horse is going to be moved
+            String key1 = keyEvent1.getCode().toString();
+            if (key1.equals("DIGIT1") && team.get(player).getHorse1().isHorseMovable(team, team.get(player).getHorse1(), prevRes)) {
+                changePosition(prevRes, team.get(player).getHorse1());
+                update(tour + 1, (player + 1) % 4, -1, true);
+                System.out.println("Player " + team.get(player).getColor(team.get(player)) + " moved horse 1.");
+            } else if (key1.equals("DIGIT2") && team.get(player).getHorse2().isHorseMovable(team, team.get(player).getHorse2(), prevRes)) {
+                changePosition(prevRes, team.get(player).getHorse2());
+                update(tour + 1, (player + 1) % 4, -1, true);
+                System.out.println("Player " + team.get(player).getColor(team.get(player)) + " moved horse 2.");
+            } else if (key1.equals("DIGIT3") && team.get(player).getHorse3().isHorseMovable(team, team.get(player).getHorse3(), prevRes)) {
+                changePosition(prevRes, team.get(player).getHorse3());
+                update(tour + 1, (player + 1) % 4, -1, true);
+                System.out.println("Player " + team.get(player).getColor(team.get(player)) + " moved horse 3.");
+            } else if (key1.equals("DIGIT4") && team.get(player).getHorse4().isHorseMovable(team, team.get(player).getHorse4(), prevRes)) {
+                changePosition(prevRes, team.get(player).getHorse4());
+                update(tour + 1, (player + 1) % 4, -1, true);
+                System.out.println("Player " + team.get(player).getColor(team.get(player)) + " moved horse 4.");
+            } else {
+                boolean goodKeyPressed = key1.equals("DIGIT1") || key1.equals("DIGIT2") || key1.equals("DIGIT3") || key1.equals("DIGIT4");
+                if (goodKeyPressed && team.get(player).getHorse1().isOneHorseMovable(team,player,prevRes)) {
+                    System.out.println("Player " + team.get(player).getColor(team.get(player)) + " did not move because the move was not possible, but another one is.");
+                    update(tour, player, prevRes, false);
+                }
+                else if (goodKeyPressed && !team.get(player).getHorse1().isOneHorseMovable(team,player,prevRes)) {
+                    System.out.println("Player " + team.get(player).getColor(team.get(player)) + " did not move because the move was not possible, and no other move is.");
+                    update(tour, (player+1) % 4, prevRes, true);
+                }
+                else {
+                    update(tour, player, prevRes, false);
+                }
+            }
+        });
+    }
+
+    public void update(int tour, int player, int prevRes, boolean hasPlayed){
         //Si tour < nombre d'équipes => on utilise la variable playerTurn1 pour décider qui joue
-        int playerTurn1 = (int) (Math.random()*team.get(0).getNumberOfTeam()); // On attribue au hasard le joueur qui commence
-        int playerTurn = tour%team.get(0).getNumberOfTeam(); //To get the number of team
-        if(dice.notSetDice){
-            this.setOnKeyPressed(keyEvent -> { // A mettre dans le update
+        if (hasPlayed) {
+            this.setOnKeyPressed(keyEvent -> {
                 String key = keyEvent.getCode().toString();
-                if (key.equals("SPACE")) {
+                if (key.equals("SPACE")) { //To throw the dice
                     int res = this.dice.throwDice();
                     System.out.println(res);
-                    changePosition(res,team.get(player).getHorse1());
-                    update(tour+1,(player+1)%4);
+                    associateAction(tour, player, res);
+                }
+                else { //If space is not pressed
+                    update(tour, player, prevRes,false);
                 }
             });
-            //if res = 6
-            //if il n'y a pas de cheval sur la case de départ
-            // Je peux choisir de sortir
-            // if il existe un cheval de l'équipe sur le plateau
-            // Je peux appeler changePosition
-            //On attend qu'il rejoue
-            //if res < 6
-            //if il existe un cheval de l'équipe sur le plateau
-            // Je peux appeler changePosition
-            //Sinon : passe son tour
         }
+        else { //if (!hasPlayed)
+            associateAction(tour, player, prevRes);
+        }
+        //if res = 6
+        //if il n'y a pas de cheval sur la case de départ
+        // Je peux choisir de sortir
+        // if il existe un cheval de l'équipe sur le plateau
+        // Je peux appeler changePosition
+        //On attend qu'il rejoue
+        //if res < 6
+        //if il existe un cheval de l'équipe sur le plateau
+        // Je peux appeler changePosition
+        //Sinon : passe son tour
         // On attend l'événement : lance de dé de la part du joueur
         /* 2 possibilités :
                 il fait 6 => il sort un cheval de l'écurie, il joue ou il ne peut pas jouer, après un 6 le joueur rejoue
@@ -528,4 +562,5 @@ public class Board extends Scene {
          */
         // Si un joueur a ses 4 chevaux sur la piste d'arrivé : il gagne (fonction end)
     }
+
 }
