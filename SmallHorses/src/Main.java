@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -32,8 +33,14 @@ public class Main extends Application{
         primaryStage.setFullScreen(true);
         primaryStage.show();
 
+/*        Canvas canvas=new Canvas(pane.getWidth(), pane.getHeight());
+        pane.getChildren().add(canvas);
+        GraphicsContext gc= canvas.getGraphicsContext2D();*/
+
+
         int player = 2; //Random 1-4
         board.update(tour, player,-1,true);
+
 
 //        while (!board.isGameFinished()) {
 //            board.update(tour, player);

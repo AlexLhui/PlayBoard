@@ -1,5 +1,6 @@
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -23,6 +24,7 @@ public class Board extends Scene {
     ArrayList<Color> teamList;
     private boolean gameFinished = false;
     Dice dice;
+    public String affichage;
 
     /*
      * Cases 1 à 4 : Blue stable
@@ -528,9 +530,11 @@ public class Board extends Scene {
                     int res = this.dice.throwDice();
                     System.out.println(res);
                     associateAction(tour, player, res);
+                    affichage = "Player "+player +" has done "+res;
                 }
                 else { //If space is not pressed
                     update(tour, player, prevRes,false);
+                    affichage = "Player "+player +" must play";
                 }
             });
         }
