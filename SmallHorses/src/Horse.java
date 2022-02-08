@@ -469,19 +469,27 @@ public class Horse {
         return (isHorseMovable(team,team.get(player).getHorse1(),res) || isHorseMovable(team,team.get(player).getHorse2(),res) || isHorseMovable(team,team.get(player).getHorse3(),res) || isHorseMovable(team,team.get(player).getHorse4(),res));
     }
 
-    public void beenEaten(Horse chev){
+    public void beenEaten(ArrayList<Team> team, Horse chev){
         if(chev.color == Color.BLUE){
-            chev.setPosAndImg(chev, chev.getNumberHorse());
+            int freePos = freeHomeCase(team,chev,0);
+            chev.setPosAndImg(chev, freePos);
+            chev.situation = Etat.STABLE;
             //Replacer le cheval dans sa case d'origine !!
         }
         else if(chev.color == Color.RED){
-            chev.setPosAndImg(chev, chev.getNumberHorse()+4);
+            int freePos = freeHomeCase(team,chev,4);
+            chev.setPosAndImg(chev, freePos);
+            chev.situation = Etat.STABLE;
         }
         else if(chev.color == Color.GREEN){
-            chev.setPosAndImg(chev, chev.getNumberHorse()+8);
+            int freePos = freeHomeCase(team,chev,8);
+            chev.setPosAndImg(chev, freePos);
+            chev.situation = Etat.STABLE;
         }
         else if(chev.color == Color.YELLOW){
-            chev.setPosAndImg(chev, chev.getNumberHorse()+12);
+            int freePos = freeHomeCase(team,chev,12);
+            chev.setPosAndImg(chev, freePos);
+            chev.situation = Etat.STABLE;
         }
     }
 
@@ -490,6 +498,16 @@ public class Horse {
         this.situation = situation;
         this.image = new ImageView(new Image(filename,4*squareSize,squareSize,true,true));
         this.image.setViewport(new Rectangle2D(N*squareSize, 0,squareSize,squareSize));
+    }
+
+    public int freeHomeCase(ArrayList<Team> team, Horse horse, int offset) {
+        int i;
+        for (i = 0; i < 4; i++) {
+            if (!isFilled(team,offset+i)) {
+                return offset+i;
+            }
+        }
+        return 0;
     }
 
     public void setPosAndImg(Horse horse, int pos) {
