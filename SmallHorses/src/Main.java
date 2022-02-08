@@ -9,6 +9,12 @@ import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.animation.AnimationTimer;
 import javax.swing.*;
+import javafx.scene.*;
+import javafx.scene.paint.*;
+import javafx.scene.canvas.*;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+
 
 import java.awt.*;
 
@@ -33,13 +39,14 @@ public class Main extends Application{
         primaryStage.setFullScreen(true);
         primaryStage.show();
 
-/*        Canvas canvas=new Canvas(pane.getWidth(), pane.getHeight());
+       /* final Canvas canvas = new Canvas(pane.getWidth(), pane.getHeight());
         pane.getChildren().add(canvas);
-        GraphicsContext gc= canvas.getGraphicsContext2D();*/
+        GraphicsContext gc= canvas.getGraphicsContext2D();
+        gc.fillText(board.affichage, 200, 30); */
 
 
         int player = 2; //Random 1-4
-        board.update(tour, player,-1,true);
+        board.update(tour, player,-1,true, pane);
 
 
 //        while (!board.isGameFinished()) {
