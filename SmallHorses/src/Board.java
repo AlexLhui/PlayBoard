@@ -486,39 +486,42 @@ public class Board extends Scene {
     }
 
     private void associateAction(int tour, int player, int prevRes) {
-        this.setOnKeyPressed(keyEvent1 -> { //To check which horse is going to be moved
-            String key1 = keyEvent1.getCode().toString();
-            if (key1.equals("DIGIT1") && team.get(player).getHorse1().isHorseMovable(team, team.get(player).getHorse1(), prevRes)) {
-                changePosition(prevRes, team.get(player).getHorse1());
-                update(tour + 1, (player + 1) % 4, -1, true);
-                System.out.println("Player " + team.get(player).getColor(team.get(player)) + " moved horse 1.");
-            } else if (key1.equals("DIGIT2") && team.get(player).getHorse2().isHorseMovable(team, team.get(player).getHorse2(), prevRes)) {
-                changePosition(prevRes, team.get(player).getHorse2());
-                update(tour + 1, (player + 1) % 4, -1, true);
-                System.out.println("Player " + team.get(player).getColor(team.get(player)) + " moved horse 2.");
-            } else if (key1.equals("DIGIT3") && team.get(player).getHorse3().isHorseMovable(team, team.get(player).getHorse3(), prevRes)) {
-                changePosition(prevRes, team.get(player).getHorse3());
-                update(tour + 1, (player + 1) % 4, -1, true);
-                System.out.println("Player " + team.get(player).getColor(team.get(player)) + " moved horse 3.");
-            } else if (key1.equals("DIGIT4") && team.get(player).getHorse4().isHorseMovable(team, team.get(player).getHorse4(), prevRes)) {
-                changePosition(prevRes, team.get(player).getHorse4());
-                update(tour + 1, (player + 1) % 4, -1, true);
-                System.out.println("Player " + team.get(player).getColor(team.get(player)) + " moved horse 4.");
-            } else {
-                boolean goodKeyPressed = key1.equals("DIGIT1") || key1.equals("DIGIT2") || key1.equals("DIGIT3") || key1.equals("DIGIT4");
-                if (goodKeyPressed && team.get(player).getHorse1().isOneHorseMovable(team,player,prevRes)) {
-                    System.out.println("Player " + team.get(player).getColor(team.get(player)) + " did not move because the move was not possible, but another one is.");
-                    update(tour, player, prevRes, false);
+        if (!team.get(player).getHorse1().isOneHorseMovable(team,player,prevRes)) {
+            update(tour + 1, (player + 1) % 4, -1, true);
+        }
+        else {
+            this.setOnKeyPressed(keyEvent1 -> { //To check which horse is going to be moved
+                String key1 = keyEvent1.getCode().toString();
+                if (key1.equals("DIGIT1") && team.get(player).getHorse1().isHorseMovable(team, team.get(player).getHorse1(), prevRes)) {
+                    changePosition(prevRes, team.get(player).getHorse1());
+                    update(tour + 1, (player + 1) % 4, -1, true);
+                    System.out.println("Player " + team.get(player).getColor(team.get(player)) + " moved horse 1.");
+                } else if (key1.equals("DIGIT2") && team.get(player).getHorse2().isHorseMovable(team, team.get(player).getHorse2(), prevRes)) {
+                    changePosition(prevRes, team.get(player).getHorse2());
+                    update(tour + 1, (player + 1) % 4, -1, true);
+                    System.out.println("Player " + team.get(player).getColor(team.get(player)) + " moved horse 2.");
+                } else if (key1.equals("DIGIT3") && team.get(player).getHorse3().isHorseMovable(team, team.get(player).getHorse3(), prevRes)) {
+                    changePosition(prevRes, team.get(player).getHorse3());
+                    update(tour + 1, (player + 1) % 4, -1, true);
+                    System.out.println("Player " + team.get(player).getColor(team.get(player)) + " moved horse 3.");
+                } else if (key1.equals("DIGIT4") && team.get(player).getHorse4().isHorseMovable(team, team.get(player).getHorse4(), prevRes)) {
+                    changePosition(prevRes, team.get(player).getHorse4());
+                    update(tour + 1, (player + 1) % 4, -1, true);
+                    System.out.println("Player " + team.get(player).getColor(team.get(player)) + " moved horse 4.");
+                } else {
+                    boolean goodKeyPressed = key1.equals("DIGIT1") || key1.equals("DIGIT2") || key1.equals("DIGIT3") || key1.equals("DIGIT4");
+                    if (goodKeyPressed && team.get(player).getHorse1().isOneHorseMovable(team, player, prevRes)) {
+                        System.out.println("Player " + team.get(player).getColor(team.get(player)) + " did not move because the move was not possible, but another one is.");
+                        update(tour, player, prevRes, false);
+                    } else if (goodKeyPressed && !team.get(player).getHorse1().isOneHorseMovable(team, player, prevRes)) {
+                        System.out.println("Player " + team.get(player).getColor(team.get(player)) + " did not move because the move was not possible, and no other move is.");
+                        update(tour, (player + 1) % 4, prevRes, true);
+                    } else {
+                        update(tour, player, prevRes, false);
+                    }
                 }
-                else if (goodKeyPressed && !team.get(player).getHorse1().isOneHorseMovable(team,player,prevRes)) {
-                    System.out.println("Player " + team.get(player).getColor(team.get(player)) + " did not move because the move was not possible, and no other move is.");
-                    update(tour, (player+1) % 4, prevRes, true);
-                }
-                else {
-                    update(tour, player, prevRes, false);
-                }
-            }
-        });
+            });
+        }
     }
 
     public void update(int tour, int player, int prevRes, boolean hasPlayed){
@@ -528,7 +531,7 @@ public class Board extends Scene {
                 String key = keyEvent.getCode().toString();
                 if (key.equals("SPACE")) { //To throw the dice
                     int res = this.dice.throwDice();
-                    System.out.println(res);
+                    System.out.println("Player " + player + " got a " + res + ".");
                     associateAction(tour, player, res);
                     affichage = "Player "+player +" has done "+res;
                 }
