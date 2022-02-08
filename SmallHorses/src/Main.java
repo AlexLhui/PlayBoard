@@ -42,7 +42,7 @@ public class Main extends Application{
        /* final Canvas canvas = new Canvas(pane.getWidth(), pane.getHeight());
         pane.getChildren().add(canvas);
         GraphicsContext gc= canvas.getGraphicsContext2D();
-        gc.fillText(board.affichage, 200, 30); */
+        gc.fillText(board.affichage, 200, 30);*/
 
 
         int player = 2; //Random 1-4
