@@ -84,10 +84,10 @@ public class Board extends Scene {
                     while (teamList.contains(couleur.get(a))) {
                         a = (int) (Math.random()*4);
                     }
-                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
+                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorses1Transparent.png",a);
+                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorses2Transparent.png",a);
+                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorses3Transparent.png",a);
+                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorses4Transparent.png",a);
                     Team teamObj = new Team(couleur.get(a), horse1, horse2, horse3, horse4);
                     team.add(teamObj);
                     teamList.add(couleur.get(a));
@@ -99,10 +99,10 @@ public class Board extends Scene {
                     while (teamList.contains(couleur.get(a))) {
                         a = (int) (Math.random()*4);
                     }
-                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
+                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorses1Transparent.png",a);
+                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorses2Transparent.png",a);
+                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorses3Transparent.png",a);
+                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorses4Transparent.png",a);
                     Team teamObj = new Team(couleur.get(a), horse1, horse2, horse3, horse4);
                     team.add(teamObj);
                     teamList.add(couleur.get(a));
@@ -114,10 +114,10 @@ public class Board extends Scene {
                     while (teamList.contains(couleur.get(a))) {
                         a = (int) (Math.random()*4);
                     }
-                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
+                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorses1Transparent.png",a);
+                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorses2Transparent.png",a);
+                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorses3Transparent.png",a);
+                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorses4Transparent.png",a);
                     Team teamObj = new Team(couleur.get(a), horse1, horse2, horse3, horse4);
                     team.add(teamObj);
                     teamList.add(couleur.get(a));
@@ -126,10 +126,10 @@ public class Board extends Scene {
                 }
             }
             else{ //Player 1
-                Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
-                Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorsesTransparent.png",a);
+                Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorses1Transparent.png",a);
+                Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorses2Transparent.png",a);
+                Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorses3Transparent.png",a);
+                Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorses4Transparent.png",a);
                 Team teamObj = new Team(couleur.get(a),horse1,horse2,horse3,horse4);
                 team.add(teamObj);
                 teamObj.setNumberOfTeam(numberOfTeam);
@@ -313,13 +313,15 @@ public class Board extends Scene {
                                 changePosition(0,horse);
                             }
                             else {
-                                disturbingHorse.beenEaten(disturbingHorse);
+                                disturbingHorse.beenEaten(team, disturbingHorse);
                                 horse.setPosition(17);
+                                horse.situation = Horse.Etat.CIRCUIT;
                                 changePosition(0,horse);
                             }
                         }
                         else {
                             horse.setPosition(17);
+                            horse.situation = Horse.Etat.CIRCUIT;
                             changePosition(0,horse);
                         }
                     }
@@ -335,13 +337,15 @@ public class Board extends Scene {
                                 changePosition(0,horse);
                             }
                             else {
-                                disturbingHorse.beenEaten(disturbingHorse);
+                                disturbingHorse.beenEaten(team, disturbingHorse);
                                 horse.setPosition(27);
+                                horse.situation = Horse.Etat.CIRCUIT;
                                 changePosition(0,horse);
                             }
                         }
                         else {
                             horse.setPosition(27);
+                            horse.situation = Horse.Etat.CIRCUIT;
                             changePosition(0,horse);
                         }
                     }
@@ -357,13 +361,15 @@ public class Board extends Scene {
                                 changePosition(0,horse);
                             }
                             else {
-                                disturbingHorse.beenEaten(disturbingHorse);
+                                disturbingHorse.beenEaten(team, disturbingHorse);
                                 horse.setPosition(37);
+                                horse.situation = Horse.Etat.CIRCUIT;
                                 changePosition(0,horse);
                             }
                         }
                         else {
                             horse.setPosition(37);
+                            horse.situation = Horse.Etat.CIRCUIT;
                             changePosition(0,horse);
                         }
                     }
@@ -379,13 +385,15 @@ public class Board extends Scene {
                                 changePosition(0,horse);
                             }
                             else {
-                                disturbingHorse.beenEaten(disturbingHorse);
+                                disturbingHorse.beenEaten(team, disturbingHorse);
                                 horse.setPosition(47);
+                                horse.situation = Horse.Etat.CIRCUIT;
                                 changePosition(0,horse);
                             }
                         }
                         else {
                             horse.setPosition(47);
+                            horse.situation = Horse.Etat.CIRCUIT;
                             changePosition(0,horse);
                         }
                     }
@@ -468,7 +476,7 @@ public class Board extends Scene {
                             changePosition(0,horse);
                         }
                         else {
-                            disturbingHorse.beenEaten(disturbingHorse);
+                            disturbingHorse.beenEaten(team, disturbingHorse);
                         }
                     }
                     else {
@@ -487,6 +495,7 @@ public class Board extends Scene {
 
     private void associateAction(int tour, int player, int prevRes) {
         if (!team.get(player).getHorse1().isOneHorseMovable(team,player,prevRes)) {
+            System.out.println("Player " + player + " did not move because no move was possible.");
             update(tour + 1, (player + 1) % 4, -1, true);
         }
         else {
@@ -522,6 +531,7 @@ public class Board extends Scene {
                 }
             });
         }
+        System.out.println(" ");
     }
 
     public void update(int tour, int player, int prevRes, boolean hasPlayed){
