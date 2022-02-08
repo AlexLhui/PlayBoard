@@ -544,7 +544,7 @@ public class Board extends Scene {
             this.setOnKeyPressed(keyEvent -> {
                 String key = keyEvent.getCode().toString();
                 gc.setFill(Color.WHITE);
-                gc.fillRect(200, 20, 150, 150);
+                gc.fillRect(200, 20, 150, 10);
                 if (key.equals("SPACE")) { //To throw the dice
                     int res = this.dice.throwDice();
                     System.out.println("Player " + player + " got a " + res + ".");
