@@ -1,3 +1,4 @@
+import TUIO.TuioObject;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -548,5 +549,13 @@ public class Horse {
             case 4, 3, 18, 57, 54, 16, 15 -> middleY - squareSize/2 + 4 * squareSize + 4 * lineSize;
             default -> middleY - squareSize/2 + 5 * squareSize + 5 * lineSize;
         };
+    }
+
+    public int posAfterPut(TuioObject tobj){
+        float x = tobj.getX();
+        float y = tobj.getY();
+        int pos = 0;
+
+        return pos;
     }
 }
