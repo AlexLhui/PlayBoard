@@ -1,4 +1,5 @@
 import TUIO.TuioClient;
+import TUIO.TuioObject;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -18,12 +19,15 @@ import javafx.scene.canvas.GraphicsContext;
 
 
 import java.awt.*;
+import java.util.ArrayList;
 
 import static javafx.application.Application.launch;
 
 public class Main extends Application{
     private int tour = 0;
     private int numberOfPlayers = 4;
+    ArrayList<TuioObject> tuioList= new ArrayList<TuioObject>();
+    ArrayList<int> symbolList = new ArrayList<int>();
 
     public void start(Stage primaryStage){
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); // getScreenSize() returns the size of the screen in pixels
@@ -37,6 +41,11 @@ public class Main extends Application{
 
         client.addTuioListener(dump);
         client.connect();
+
+        for(int i = 0; i<numberOfPlayers; i++){
+            tuioList.add(dump.objList.get(i));
+            symbolList.add(tuioList.get(i).getSymbolID());
+        }
 
         primaryStage.setTitle("Petits chevaux");
         Group root = new Group();
