@@ -25,7 +25,7 @@ import static javafx.application.Application.launch;
 
 public class Main extends Application{
     private int tour = 0;
-    private int numberOfPlayers = 4;
+    private int numberOfPlayers = 2;
     ArrayList<TuioObject> tuioList= new ArrayList<TuioObject>();
     ArrayList<Integer> symbolList = new ArrayList<Integer>();
 
@@ -42,10 +42,10 @@ public class Main extends Application{
         client.addTuioListener(dump);
         client.connect();
 
-        for(int i = 0; i<numberOfPlayers; i++){
-            tuioList.add(dump.objList.get(i));
-            symbolList.add(tuioList.get(i).getSymbolID());
-        }
+//        for(int i = 0; i<numberOfPlayers; i++){
+//            tuioList.add(dump.objList.get(i));
+//            symbolList.add(tuioList.get(i).getSymbolID());
+//        }
 
         primaryStage.setTitle("Petits chevaux");
         Group root = new Group();
@@ -65,8 +65,8 @@ public class Main extends Application{
         pane.getChildren().add(canvas);
         GraphicsContext gc= canvas.getGraphicsContext2D();
 
-        int player = 2; //Random 1-4
-        board.update(tour, player,-1,true, gc);
+        int player = 1; //Random 1-4
+        board.update(tour, player,-1,true, gc, numberOfPlayers);
 
 
 //        while (!board.isGameFinished()) {
