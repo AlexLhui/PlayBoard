@@ -299,7 +299,7 @@ public class Board extends Scene {
         return elements[numberGenerator.nextInt(elements.length)];
     }
 
-    public void changePosition(int res, Horse horse){//Fonction isFilled pour savoir si une case est occupée par un cheval
+    public void changePosition(int res, Horse horse, boolean newMove){//Fonction isFilled pour savoir si une case est occupée par un cheval
         if (res != 0 ){
             int pos = horse.getPosition();
             switch(pos) {
@@ -311,19 +311,19 @@ public class Board extends Scene {
                         if (horse.isFilled(team,17)) {
                             Horse disturbingHorse = horse.getHorseFilled(team,17);
                             if (disturbingHorse.color == horse.color) { //If the player already has a horse on start case, nothing happens
-                                changePosition(0,horse);
+                                changePosition(0,horse,false);
                             }
                             else {
                                 disturbingHorse.beenEaten(team, disturbingHorse);
                                 horse.setPosition(17);
                                 horse.situation = Horse.Etat.CIRCUIT;
-                                changePosition(0,horse);
+                                changePosition(0,horse,false);
                             }
                         }
                         else {
                             horse.setPosition(17);
                             horse.situation = Horse.Etat.CIRCUIT;
-                            changePosition(0,horse);
+                            changePosition(0,horse,false);
                         }
                     }
                     break;
@@ -335,19 +335,19 @@ public class Board extends Scene {
                         if (horse.isFilled(team,27)) {
                             Horse disturbingHorse = horse.getHorseFilled(team,27);
                             if (disturbingHorse.color == horse.color) { //If the player already has a horse on start case, nothing happens
-                                changePosition(0,horse);
+                                changePosition(0,horse,false);
                             }
                             else {
                                 disturbingHorse.beenEaten(team, disturbingHorse);
                                 horse.setPosition(27);
                                 horse.situation = Horse.Etat.CIRCUIT;
-                                changePosition(0,horse);
+                                changePosition(0,horse,false);
                             }
                         }
                         else {
                             horse.setPosition(27);
                             horse.situation = Horse.Etat.CIRCUIT;
-                            changePosition(0,horse);
+                            changePosition(0,horse,false);
                         }
                     }
                     break;
@@ -359,19 +359,19 @@ public class Board extends Scene {
                         if (horse.isFilled(team,37)) {
                             Horse disturbingHorse = horse.getHorseFilled(team,37);
                             if (disturbingHorse.color == horse.color) { //If the player already has a horse on start case, nothing happens
-                                changePosition(0,horse);
+                                changePosition(0,horse,false);
                             }
                             else {
                                 disturbingHorse.beenEaten(team, disturbingHorse);
                                 horse.setPosition(37);
                                 horse.situation = Horse.Etat.CIRCUIT;
-                                changePosition(0,horse);
+                                changePosition(0,horse,false);
                             }
                         }
                         else {
                             horse.setPosition(37);
                             horse.situation = Horse.Etat.CIRCUIT;
-                            changePosition(0,horse);
+                            changePosition(0,horse,false);
                         }
                     }
                     break;
@@ -380,59 +380,79 @@ public class Board extends Scene {
                 case 15 :
                 case 16 :
                     if (res == 6) {
-                        if (horse.isFilled(team,47)) {
+                        if (horse.isFilled(team,47)) { //Returns true if there is any horse on the 47th case
                             Horse disturbingHorse = horse.getHorseFilled(team,47);
                             if (disturbingHorse.color == horse.color) { //If the player already has a horse on start case, nothing happens
-                                changePosition(0,horse);
+                                changePosition(0,horse,false);
                             }
                             else {
                                 disturbingHorse.beenEaten(team, disturbingHorse);
                                 horse.setPosition(47);
                                 horse.situation = Horse.Etat.CIRCUIT;
-                                changePosition(0,horse);
+                                changePosition(0,horse,false);
                             }
                         }
                         else {
                             horse.setPosition(47);
                             horse.situation = Horse.Etat.CIRCUIT;
-                            changePosition(0,horse);
+                            changePosition(0,horse,false);
                         }
                     }
                     break;
-                case 56 : //Check if the blue horse has almost arrived //Need to check if the horse was already here !
-                    if (horse.color == Color.BLUE) {
-                        changePosition(0,horse);
+                case 56 : //LET THE PLAYER CHOOSE HIS MOVE
+                    if (horse.color == Color.BLUE && newMove && !horse.isFilled(team,57) && (res == 1)) { //Check if blue horse can go to case 57
+                        horse.setPosition(57);
+                        changePosition(0, horse,false);
                     }
                     else {
-                        horse.setPosition(17);
-                        changePosition(res-1,horse);
+                        if (horse.color == Color.BLUE) {
+                            changePosition(0, horse,false);
+                        } else {
+                            horse.setPosition(17);
+                            changePosition(res - 1, horse,false);
+                        }
                     }
                     break;
                 case 26 :
-                    if (horse.color == Color.RED) {
-                        changePosition(0,horse);
+                    if (horse.color == Color.RED && newMove && !horse.isFilled(team,61) && res == 1) { //Check if blue horse can go to case 57
+                        horse.setPosition(61);
+                        changePosition(0, horse,false);
                     }
                     else {
-                        horse.setPosition(27);
-                        changePosition(res-1,horse);
+                        if (horse.color == Color.RED) {
+                            changePosition(0, horse,false);
+                        } else {
+                            horse.setPosition(27);
+                            changePosition(res - 1, horse,false);
+                        }
                     }
                     break;
                 case 36 :
-                    if (horse.color == Color.GREEN) {
-                        changePosition(0,horse);
+                    if (horse.color == Color.GREEN && newMove && !horse.isFilled(team,65) && res == 1) { //Check if blue horse can go to case 57
+                        horse.setPosition(65);
+                        changePosition(0, horse,false);
                     }
                     else {
-                        horse.setPosition(37);
-                        changePosition(res-1,horse);
+                        if (horse.color == Color.GREEN) {
+                            changePosition(0, horse,false);
+                        } else {
+                            horse.setPosition(37);
+                            changePosition(res - 1, horse,false);
+                        }
                     }
                     break;
                 case 46 :
-                    if (horse.color == Color.YELLOW) {
-                        changePosition(0,horse);
+                    if (horse.color == Color.YELLOW && newMove && !horse.isFilled(team,69) && res == 1) { //Check if blue horse can go to case 57
+                        horse.setPosition(69);
+                        changePosition(0, horse,false);
                     }
                     else {
-                        horse.setPosition(47);
-                        changePosition(res-1,horse);
+                        if (horse.color == Color.YELLOW) {
+                            changePosition(0, horse,false);
+                        } else {
+                            horse.setPosition(47);
+                            changePosition(res - 1, horse,false);
+                        }
                     }
                     break;
                 case 17 :
@@ -471,18 +491,92 @@ public class Board extends Scene {
                 case 53 :
                 case 54 :
                 case 55 : //General case
-                    if (res == 1 && horse.isFilled(team,pos+1)) {
+                    if (res == 1 && horse.isFilled(team,pos+1)) { //If there is a horse on the final case :
                         Horse disturbingHorse = horse.getHorseFilled(team,pos+1);
                         if (disturbingHorse.color == horse.color) {
-                            changePosition(0,horse);
+                            changePosition(0,horse,false);
                         }
                         else {
                             disturbingHorse.beenEaten(team, disturbingHorse);
+                            horse.setPosition(pos+1);
+                            changePosition(0,horse,false);
                         }
                     }
                     else {
                         horse.setPosition(pos + 1);
-                        changePosition(res - 1, horse);
+                        changePosition(res - 1, horse,false);
+                    }
+                    break;
+                case 57 :
+                    if (res == 2 && newMove && !horse.isFilled(team,58)) {
+                        horse.setPosition(58);
+                        changePosition(0, horse,false);
+                    }
+                    break;
+                case 58 :
+                    if (res == 3 && newMove && !horse.isFilled(team,59)) {
+                        horse.setPosition(59);
+                        changePosition(0, horse,false);
+                    }
+                    break;
+                case 59 :
+                    if (res == 4 && newMove && !horse.isFilled(team,60)) {
+                        horse.setPosition(60);
+                        changePosition(0, horse,false);
+                    }
+                    break;
+                case 61 :
+                    if (res == 2 && newMove && !horse.isFilled(team,62)) {
+                        horse.setPosition(62);
+                        changePosition(0, horse,false);
+                    }
+                    break;
+                case 62 :
+                    if (res == 3 && newMove && !horse.isFilled(team,63)) {
+                        horse.setPosition(63);
+                        changePosition(0, horse,false);
+                    }
+                    break;
+                case 63 :
+                    if (res == 4 && newMove && !horse.isFilled(team,64)) {
+                        horse.setPosition(64);
+                        changePosition(0, horse,false);
+                    }
+                    break;
+                case 65 :
+                    if (res == 2 && newMove && !horse.isFilled(team,66)) {
+                        horse.setPosition(66);
+                        changePosition(0, horse,false);
+                    }
+                    break;
+                case 66 :
+                    if (res == 3 && newMove && !horse.isFilled(team,67)) {
+                        horse.setPosition(67);
+                        changePosition(0, horse,false);
+                    }
+                    break;
+                case 67 :
+                    if (res == 4 && newMove && !horse.isFilled(team,68)) {
+                        horse.setPosition(68);
+                        changePosition(0, horse,false);
+                    }
+                    break;
+                case 69 :
+                    if (res == 2 && newMove && !horse.isFilled(team,70)) {
+                        horse.setPosition(70);
+                        changePosition(0, horse,false);
+                    }
+                    break;
+                case 70 :
+                    if (res == 3 && newMove && !horse.isFilled(team,71)) {
+                        horse.setPosition(71);
+                        changePosition(0, horse,false);
+                    }
+                    break;
+                case 71 :
+                    if (res == 4 && newMove && !horse.isFilled(team,72)) {
+                        horse.setPosition(72);
+                        changePosition(0, horse,false);
                     }
                     break;
                 default : //For case ..
@@ -494,40 +588,60 @@ public class Board extends Scene {
         }
     }
 
-    private void associateAction(int tour, int player, int prevRes, Pane pane) {
-        if (!team.get(player).getHorse1().isOneHorseMovable(team,player,prevRes)) {
-            System.out.println("Player " + player + " did not move because no move was possible.");
-            update(tour + 1, (player + 1) % 4, -1, true, pane);
+    private void associateAction(int tour, int player, int res, GraphicsContext gc) {
+        if (!team.get(player).getHorse1().isOneHorseMovable(team,player,res)) {
+            System.out.println("Player " + team.get(player).toString() + " did not move because no move was possible.");
+            update(tour + 1, (player + 1) % 4, -1, true, gc);
         }
         else {
             this.setOnKeyPressed(keyEvent1 -> { //To check which horse is going to be moved
                 String key1 = keyEvent1.getCode().toString();
-                if (key1.equals("DIGIT1") && team.get(player).getHorse1().isHorseMovable(team, team.get(player).getHorse1(), prevRes)) {
-                    changePosition(prevRes, team.get(player).getHorse1());
-                    update(tour + 1, (player + 1) % 4, -1, true, pane);
-                    System.out.println("Player " + team.get(player).getColor(team.get(player)) + " moved horse 1.");
-                } else if (key1.equals("DIGIT2") && team.get(player).getHorse2().isHorseMovable(team, team.get(player).getHorse2(), prevRes)) {
-                    changePosition(prevRes, team.get(player).getHorse2());
-                    update(tour + 1, (player + 1) % 4, -1, true, pane);
-                    System.out.println("Player " + team.get(player).getColor(team.get(player)) + " moved horse 2.");
-                } else if (key1.equals("DIGIT3") && team.get(player).getHorse3().isHorseMovable(team, team.get(player).getHorse3(), prevRes)) {
-                    changePosition(prevRes, team.get(player).getHorse3());
-                    update(tour + 1, (player + 1) % 4, -1, true, pane);
-                    System.out.println("Player " + team.get(player).getColor(team.get(player)) + " moved horse 3.");
-                } else if (key1.equals("DIGIT4") && team.get(player).getHorse4().isHorseMovable(team, team.get(player).getHorse4(), prevRes)) {
-                    changePosition(prevRes, team.get(player).getHorse4());
-                    update(tour + 1, (player + 1) % 4, -1, true, pane);
-                    System.out.println("Player " + team.get(player).getColor(team.get(player)) + " moved horse 4.");
+                if (key1.equals("DIGIT1") && team.get(player).getHorse1().isHorseMovable(team, team.get(player).getHorse1(), res)) {
+                    changePosition(res, team.get(player).getHorse1(),true);
+                    if (res == 6) {
+                        update(tour + 1, player, -1, true, gc);
+                    }
+                    else {
+                        update(tour + 1, (player + 1) % 4, -1, true, gc);
+                    }
+                    System.out.println("Player " + team.get(player).toString() + " moved horse 1.");
+                } else if (key1.equals("DIGIT2") && team.get(player).getHorse2().isHorseMovable(team, team.get(player).getHorse2(), res)) {
+                    changePosition(res, team.get(player).getHorse2(),true);
+                    if (res == 6) {
+                        update(tour + 1, player, -1, true, gc);
+                    }
+                    else {
+                        update(tour + 1, (player + 1) % 4, -1, true, gc);
+                    }
+                    System.out.println("Player " + team.get(player).toString() + " moved horse 2.");
+                } else if (key1.equals("DIGIT3") && team.get(player).getHorse3().isHorseMovable(team, team.get(player).getHorse3(), res)) {
+                    changePosition(res, team.get(player).getHorse3(),true);
+                    if (res == 6) {
+                        update(tour + 1, player, -1, true, gc);
+                    }
+                    else {
+                        update(tour + 1, (player + 1) % 4, -1, true, gc);
+                    }
+                    System.out.println("Player " + team.get(player).toString() + " moved horse 3.");
+                } else if (key1.equals("DIGIT4") && team.get(player).getHorse4().isHorseMovable(team, team.get(player).getHorse4(), res)) {
+                    changePosition(res, team.get(player).getHorse4(),true);
+                    if (res == 6) {
+                        update(tour + 1, player, -1, true, gc);
+                    }
+                    else {
+                        update(tour + 1, (player + 1) % 4, -1, true, gc);
+                    }
+                    System.out.println("Player " + team.get(player).toString() + " moved horse 4.");
                 } else {
                     boolean goodKeyPressed = key1.equals("DIGIT1") || key1.equals("DIGIT2") || key1.equals("DIGIT3") || key1.equals("DIGIT4");
-                    if (goodKeyPressed && team.get(player).getHorse1().isOneHorseMovable(team, player, prevRes)) {
-                        System.out.println("Player " + team.get(player).getColor(team.get(player)) + " did not move because the move was not possible, but another one is.");
-                        update(tour, player, prevRes, false, pane);
-                    } else if (goodKeyPressed && !team.get(player).getHorse1().isOneHorseMovable(team, player, prevRes)) {
-                        System.out.println("Player " + team.get(player).getColor(team.get(player)) + " did not move because the move was not possible, and no other move is.");
-                        update(tour, (player + 1) % 4, prevRes, true, pane);
+                    if (goodKeyPressed && team.get(player).getHorse1().isOneHorseMovable(team, player, res)) {
+                        System.out.println("Player " + team.get(player).toString() + " did not move because the move was not possible, but another one is.");
+                        update(tour, player, res, false, gc);
+                    } else if (goodKeyPressed && !team.get(player).getHorse1().isOneHorseMovable(team, player, res)) {
+                        System.out.println("Player " + team.get(player).toString() + " did not move because the move was not possible, and no other move is.");
+                        update(tour, (player + 1) % 4, -1, true, gc);
                     } else {
-                        update(tour, player, prevRes, false, pane);
+                        update(tour, player, res, false, gc);
                     }
                 }
             });
@@ -535,32 +649,29 @@ public class Board extends Scene {
         System.out.println(" ");
     }
 
-    public void update(int tour, int player, int prevRes, boolean hasPlayed, Pane pane){
+    public void update(int tour, int player, int prevRes, boolean hasPlayed, GraphicsContext gc){
         //Si tour < nombre d'équipes => on utilise la variable playerTurn1 pour décider qui joue
-        final javafx.scene.canvas.Canvas canvas = new Canvas(pane.getWidth(), pane.getHeight());
-        pane.getChildren().add(canvas);
-        GraphicsContext gc= canvas.getGraphicsContext2D();
         if (hasPlayed) {
             this.setOnKeyPressed(keyEvent -> {
                 String key = keyEvent.getCode().toString();
-                gc.setFill(Color.WHITE);
-                gc.fillRect(200, 20, 150, 10);
+                gc.clearRect(0, 0, 150, 10);
                 if (key.equals("SPACE")) { //To throw the dice
                     int res = this.dice.throwDice();
-                    System.out.println("Player " + player + " got a " + res + ".");
-                    associateAction(tour, player, res, pane);
-                    affichage = "Player "+player +" has done "+res;
+                    System.out.println("Player " + team.get(player).toString() + " got a " + res + ".");
+                    associateAction(tour, player, res, gc);
+                    affichage = "Player "+team.get(player).toString() +" has done "+res;
                 }
                 else { //If space is not pressed
-                    update(tour, player, prevRes,false, pane);
-                    affichage = "Player "+player +" must play";
+                    update(tour, player, prevRes,true, gc); //Player has to throw the dice
+                    affichage = "Player "+team.get(player).toString() +" must play";
                 }
-                gc.setFill(Color.BLACK);
+                //gc.setFill(Color.BLACK);
+                gc.clearRect(0,0,1000,1000);
                 gc.fillText(affichage, 200, 30);
             });
         }
         else { //if (!hasPlayed)
-            associateAction(tour, player, prevRes, pane);
+            associateAction(tour, player, prevRes, gc);
         }
     }
 

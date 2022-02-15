@@ -44,9 +44,12 @@ public class Main extends Application{
         GraphicsContext gc= canvas.getGraphicsContext2D();
         gc.fillText(board.affichage, 200, 30);*/
 
+        final javafx.scene.canvas.Canvas canvas = new Canvas(pane.getWidth(), pane.getHeight());
+        pane.getChildren().add(canvas);
+        GraphicsContext gc= canvas.getGraphicsContext2D();
 
         int player = 2; //Random 1-4
-        board.update(tour, player,-1,true, pane);
+        board.update(tour, player,-1,true, gc);
 
 
 //        while (!board.isGameFinished()) {

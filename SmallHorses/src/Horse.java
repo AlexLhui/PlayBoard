@@ -471,23 +471,22 @@ public class Horse {
 
     public void beenEaten(ArrayList<Team> team, Horse chev){
         if(chev.color == Color.BLUE){
-            int freePos = freeHomeCase(team,chev,0);
+            int freePos = freeHomeCase(team,0);
             chev.setPosAndImg(chev, freePos);
             chev.situation = Etat.STABLE;
-            //Replacer le cheval dans sa case d'origine !!
         }
         else if(chev.color == Color.RED){
-            int freePos = freeHomeCase(team,chev,4);
+            int freePos = freeHomeCase(team,4);
             chev.setPosAndImg(chev, freePos);
             chev.situation = Etat.STABLE;
         }
         else if(chev.color == Color.GREEN){
-            int freePos = freeHomeCase(team,chev,8);
+            int freePos = freeHomeCase(team,8);
             chev.setPosAndImg(chev, freePos);
             chev.situation = Etat.STABLE;
         }
         else if(chev.color == Color.YELLOW){
-            int freePos = freeHomeCase(team,chev,12);
+            int freePos = freeHomeCase(team,12);
             chev.setPosAndImg(chev, freePos);
             chev.situation = Etat.STABLE;
         }
@@ -500,9 +499,9 @@ public class Horse {
         this.image.setViewport(new Rectangle2D(N*squareSize, 0,squareSize,squareSize));
     }
 
-    public int freeHomeCase(ArrayList<Team> team, Horse horse, int offset) {
+    public int freeHomeCase(ArrayList<Team> team, int offset) {
         int i;
-        for (i = 0; i < 4; i++) {
+        for (i = 1; i <= 4; i++) {
             if (!isFilled(team,offset+i)) {
                 return offset+i;
             }
@@ -515,10 +514,11 @@ public class Horse {
         double y = getYPos(pos);
         horse.getImage().setX(x);
         horse.getImage().setY(y);
+        horse.setPosition(pos);
     }
 
     public double getXPos(int pos) {
-        double x = switch (pos) {
+        return switch (pos) {
             case 1, 4, 25, 26, 27, 5, 8 -> middleX - squareSize / 2 - 5 * squareSize - 5 * lineSize;
             case 2, 3, 24, 61, 28, 6, 7 -> middleX - squareSize / 2 - 4 * squareSize - 4 * lineSize;
             case 23, 62, 29 -> middleX - squareSize / 2 - 3 * squareSize - 3 * lineSize;
@@ -531,7 +531,6 @@ public class Horse {
             case 13, 16, 48, 69, 44, 9, 12 -> middleX - squareSize / 2 + 4 * squareSize + 4 * lineSize;
             default -> middleX - squareSize / 2 + 5 * squareSize + 5 * lineSize;
         };
-        return x;
     }
 
     public double getYPos(int pos) {
