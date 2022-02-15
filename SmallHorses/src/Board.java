@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.text.Font;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -544,7 +545,8 @@ public class Board extends Scene {
             this.setOnKeyPressed(keyEvent -> {
                 String key = keyEvent.getCode().toString();
                 gc.setFill(Color.WHITE);
-                gc.fillRect(200, 20, 150, 10);
+//                gc.setFont(Font.font(30));
+                gc.fillRect(200,20,150,10);
                 if (key.equals("SPACE")) { //To throw the dice
                     int res = this.dice.throwDice();
                     System.out.println("Player " + player + " got a " + res + ".");
