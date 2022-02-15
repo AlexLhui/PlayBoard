@@ -1,3 +1,4 @@
+import TUIO.TuioClient;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -29,6 +30,13 @@ public class Main extends Application{
         int screenWidth = (int)size.getWidth(); // screenWidth will store the width of the screen
         int screenHeight = (int)size.getHeight(); // screenHeight will store the height of the screen
         System.out.println("Width : " + screenWidth + "Height : " + screenHeight);
+        int port = 3333;
+
+        TestTuio2 dump = new TestTuio2();
+        TuioClient client = new TuioClient(port);
+
+        client.addTuioListener(dump);
+        client.connect();
 
         primaryStage.setTitle("Petits chevaux");
         Group root = new Group();
