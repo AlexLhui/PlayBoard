@@ -8,7 +8,7 @@ public class Team {
     private Horse horse2;
     private Horse horse3;
     private Horse horse4;
-    Color color;
+    public Color color;
     private int positionDepart;
 
     public String getColor(Team team) {
@@ -67,4 +67,20 @@ public class Team {
         }
     }
 
+    @Override
+    public String toString() {
+        if (color == Color.RED) {
+            return "red";
+        }
+        else if (color == Color.BLUE) {
+            return "blue";
+        }
+        else if (color == Color.YELLOW) {
+            return "yellow";
+        }
+        else if (color == Color.GREEN) {
+            return "green";
+        }
+        return "IDC";
+    }
 }
