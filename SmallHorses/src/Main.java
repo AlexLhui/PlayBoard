@@ -27,7 +27,7 @@ public class Main extends Application{
     private int tour = 0;
     private int numberOfPlayers = 4;
     ArrayList<TuioObject> tuioList= new ArrayList<TuioObject>();
-    ArrayList<Integer> symbolList = new ArrayList<int>();
+    ArrayList<Integer> symbolList = new ArrayList<Integer>();
 
     public void start(Stage primaryStage){
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); // getScreenSize() returns the size of the screen in pixels
