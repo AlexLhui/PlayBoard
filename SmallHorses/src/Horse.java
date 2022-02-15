@@ -501,21 +501,20 @@ public class Horse {
     }
 
     public int freeHomeCase(ArrayList<Team> team, int offset) {
-        int i;
-        for (i = 1; i <= 4; i++) {
+        for (int i = 1; i <= 4; i++) {
             if (!isFilled(team,offset+i)) {
-                return offset+i;
+                return (offset+i);
             }
         }
         return 0;
     }
 
     public void setPosAndImg(Horse horse, int pos) {
+        horse.setPosition(pos);
         double x = getXPos(pos);
         double y = getYPos(pos);
         horse.getImage().setX(x);
         horse.getImage().setY(y);
-        horse.setPosition(pos);
     }
 
     public double getXPos(int pos) {
@@ -535,7 +534,7 @@ public class Horse {
     }
 
     public double getYPos(int pos) {
-        return switch (position) {
+        return switch (pos) {
             case 8, 7, 35, 36, 37, 12, 11 -> middleY - squareSize/2 - 5 * squareSize - 5 * lineSize;
             case 5, 6, 34, 65, 38, 9, 10 -> middleY - squareSize/2 - 4 * squareSize - 4 * lineSize;
             case 33, 66, 39 -> middleY - squareSize/2 - 3 * squareSize - 3 * lineSize;
