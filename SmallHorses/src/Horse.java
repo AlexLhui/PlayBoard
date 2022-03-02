@@ -23,7 +23,7 @@ public class Horse {
     public enum Etat{STABLE, CIRCUIT, ARRIVED}
     public Etat situation;
     private int position;
-    private int numberHorse; //From 1 to 4
+    public int numberHorse; //From 1 to 4
     private final ImageView image;
     public Color color;
 
@@ -546,5 +546,21 @@ public class Horse {
             case 4, 3, 18, 57, 54, 16, 15 -> middleY - squareSize/2 + 4 * squareSize + 4 * lineSize;
             default -> middleY - squareSize/2 + 5 * squareSize + 5 * lineSize;
         };
+    }
+
+    public String getColor() {
+        if (color == Color.RED) {
+            return "red";
+        }
+        else if (color == Color.BLUE) {
+            return "blue";
+        }
+        else if (color == Color.YELLOW) {
+            return "yellow";
+        }
+        else if (color == Color.GREEN) {
+            return "green";
+        }
+        return "IDC";
     }
 }
