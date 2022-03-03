@@ -1,4 +1,3 @@
-import TUIO.TuioObject;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,7 +23,7 @@ public class Horse {
     public enum Etat{STABLE, CIRCUIT, ARRIVED}
     public Etat situation;
     private int position;
-    private int numberHorse; //From 1 to 4
+    public int numberHorse; //From 1 to 4
     private final ImageView image;
     public Color color;
 
@@ -549,11 +548,19 @@ public class Horse {
         };
     }
 
-    public int posAfterPut(TuioObject tobj){
-        float x = tobj.getX();
-        float y = tobj.getY();
-        int pos = 0;
-
-        return pos;
+    public String getColor() {
+        if (color == Color.RED) {
+            return "red";
+        }
+        else if (color == Color.BLUE) {
+            return "blue";
+        }
+        else if (color == Color.YELLOW) {
+            return "yellow";
+        }
+        else if (color == Color.GREEN) {
+            return "green";
+        }
+        return "IDC";
     }
 }

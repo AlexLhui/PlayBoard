@@ -318,6 +318,7 @@ public class Board extends Scene {
                                 horse.setPosition(17);
                                 horse.situation = Horse.Etat.CIRCUIT;
                                 changePosition(0,horse,false);
+                                System.out.println("Horse " + disturbingHorse.numberHorse + disturbingHorse.getColor() + " has been eaten by horse " + horse.numberHorse + horse.getColor() + ".");
                             }
                         }
                         else {
@@ -342,6 +343,7 @@ public class Board extends Scene {
                                 horse.setPosition(27);
                                 horse.situation = Horse.Etat.CIRCUIT;
                                 changePosition(0,horse,false);
+                                System.out.println("Horse " + disturbingHorse.numberHorse + disturbingHorse.getColor() + " has been eaten by horse " + horse.numberHorse + horse.getColor() + ".");
                             }
                         }
                         else {
@@ -366,6 +368,7 @@ public class Board extends Scene {
                                 horse.setPosition(37);
                                 horse.situation = Horse.Etat.CIRCUIT;
                                 changePosition(0,horse,false);
+                                System.out.println("Horse " + disturbingHorse.numberHorse + disturbingHorse.getColor() + " has been eaten by horse " + horse.numberHorse + horse.getColor() + ".");
                             }
                         }
                         else {
@@ -390,6 +393,7 @@ public class Board extends Scene {
                                 horse.setPosition(47);
                                 horse.situation = Horse.Etat.CIRCUIT;
                                 changePosition(0,horse,false);
+                                System.out.println("Horse " + disturbingHorse.numberHorse + disturbingHorse.getColor() + " has been eaten by horse " + horse.numberHorse + horse.getColor() + ".");
                             }
                         }
                         else {
@@ -399,17 +403,33 @@ public class Board extends Scene {
                         }
                     }
                     break;
-                case 56 : //LET THE PLAYER CHOOSE HIS MOVE
+                case 56 :
                     if (horse.color == Color.BLUE && newMove && !horse.isFilled(team,57) && (res == 1)) { //Check if blue horse can go to case 57
                         horse.setPosition(57);
                         changePosition(0, horse,false);
                     }
                     else {
-                        if (horse.color == Color.BLUE) {
-                            changePosition(0, horse,false);
-                        } else {
+                        if (res == 1) {
+                            if (horse.color == Color.BLUE) {
+                                changePosition(0, horse, false);
+                            } else {
+                                if (horse.isFilled(team, 17)) { //Returns true if there is any horse on the 17th case
+                                    Horse disturbingHorse = horse.getHorseFilled(team, 17);
+                                    if (disturbingHorse.color == horse.color) { //If the player already has a horse on start case, nothing happens
+                                        changePosition(0, horse, false);
+                                    } else {
+                                        disturbingHorse.beenEaten(team, disturbingHorse);
+                                        horse.setPosition(17);
+                                        horse.situation = Horse.Etat.CIRCUIT;
+                                        changePosition(0, horse, false);
+                                        System.out.println("Horse " + disturbingHorse.numberHorse + disturbingHorse.getColor() + " has been eaten by horse " + horse.numberHorse + horse.getColor() + ".");
+                                    }
+                                }
+                            }
+                        }
+                        else {
                             horse.setPosition(17);
-                            changePosition(res - 1, horse,false);
+                            changePosition(res-1,horse,false);
                         }
                     }
                     break;
@@ -419,11 +439,27 @@ public class Board extends Scene {
                         changePosition(0, horse,false);
                     }
                     else {
-                        if (horse.color == Color.RED) {
-                            changePosition(0, horse,false);
-                        } else {
+                        if (res == 1) {
+                            if (horse.color == Color.RED) {
+                                changePosition(0, horse, false);
+                            } else {
+                                if (horse.isFilled(team, 27)) { //Returns true if there is any horse on the 17th case
+                                    Horse disturbingHorse = horse.getHorseFilled(team, 27);
+                                    if (disturbingHorse.color == horse.color) { //If the player already has a horse on start case, nothing happens
+                                        changePosition(0, horse, false);
+                                    } else {
+                                        disturbingHorse.beenEaten(team, disturbingHorse);
+                                        horse.setPosition(27);
+                                        horse.situation = Horse.Etat.CIRCUIT;
+                                        changePosition(0, horse, false);
+                                        System.out.println("Horse " + disturbingHorse.numberHorse + disturbingHorse.getColor() + " has been eaten by horse " + horse.numberHorse + horse.getColor() + ".");
+                                    }
+                                }
+                            }
+                        }
+                        else {
                             horse.setPosition(27);
-                            changePosition(res - 1, horse,false);
+                            changePosition(res-1,horse,false);
                         }
                     }
                     break;
@@ -433,11 +469,27 @@ public class Board extends Scene {
                         changePosition(0, horse,false);
                     }
                     else {
-                        if (horse.color == Color.GREEN) {
-                            changePosition(0, horse,false);
-                        } else {
+                        if (res == 1) {
+                            if (horse.color == Color.GREEN) {
+                                changePosition(0, horse, false);
+                            } else {
+                                if (horse.isFilled(team, 37)) { //Returns true if there is any horse on the 17th case
+                                    Horse disturbingHorse = horse.getHorseFilled(team, 37);
+                                    if (disturbingHorse.color == horse.color) { //If the player already has a horse on start case, nothing happens
+                                        changePosition(0, horse, false);
+                                    } else {
+                                        disturbingHorse.beenEaten(team, disturbingHorse);
+                                        horse.setPosition(37);
+                                        horse.situation = Horse.Etat.CIRCUIT;
+                                        changePosition(0, horse, false);
+                                        System.out.println("Horse " + disturbingHorse.numberHorse + disturbingHorse.getColor() + " has been eaten by horse " + horse.numberHorse + horse.getColor() + ".");
+                                    }
+                                }
+                            }
+                        }
+                        else {
                             horse.setPosition(37);
-                            changePosition(res - 1, horse,false);
+                            changePosition(res-1,horse,false);
                         }
                     }
                     break;
@@ -447,11 +499,27 @@ public class Board extends Scene {
                         changePosition(0, horse,false);
                     }
                     else {
-                        if (horse.color == Color.YELLOW) {
-                            changePosition(0, horse,false);
-                        } else {
+                        if (res == 1) {
+                            if (horse.color == Color.YELLOW) {
+                                changePosition(0, horse, false);
+                            } else {
+                                if (horse.isFilled(team, 47)) { //Returns true if there is any horse on the 17th case
+                                    Horse disturbingHorse = horse.getHorseFilled(team, 47);
+                                    if (disturbingHorse.color == horse.color) { //If the player already has a horse on start case, nothing happens
+                                        changePosition(0, horse, false);
+                                    } else {
+                                        disturbingHorse.beenEaten(team, disturbingHorse);
+                                        horse.setPosition(47);
+                                        horse.situation = Horse.Etat.CIRCUIT;
+                                        changePosition(0, horse, false);
+                                        System.out.println("Horse " + disturbingHorse.numberHorse + disturbingHorse.getColor() + " has been eaten by horse " + horse.numberHorse + horse.getColor() + ".");
+                                    }
+                                }
+                            }
+                        }
+                        else {
                             horse.setPosition(47);
-                            changePosition(res - 1, horse,false);
+                            changePosition(res-1,horse,false);
                         }
                     }
                     break;
@@ -491,15 +559,17 @@ public class Board extends Scene {
                 case 53 :
                 case 54 :
                 case 55 : //General case
-                    if (res == 1 && horse.isFilled(team,pos+1)) { //If there is a horse on the final case :
+                    if (res == 1 && horse.isFilled(team,pos+1)) { //If there is a horse on the next case :
+                        System.out.println("Next case is occupied.");
                         Horse disturbingHorse = horse.getHorseFilled(team,pos+1);
                         if (disturbingHorse.color == horse.color) {
                             changePosition(0,horse,false);
                         }
                         else {
-                            horse.setPosition(pos+1);
                             disturbingHorse.beenEaten(team, disturbingHorse);
+                            horse.setPosition(pos+1);
                             changePosition(0,horse,false);
+                            System.out.println("Horse " + disturbingHorse.numberHorse + disturbingHorse.getColor() + " has been eaten by horse " + horse.numberHorse + horse.getColor() + ".");
                         }
                     }
                     else {

@@ -25,7 +25,7 @@ import static javafx.application.Application.launch;
 
 public class Main extends Application{
     private int tour = 0;
-    private int numberOfPlayers = 2;
+    private int numberOfPlayers = 4;
     ArrayList<TuioObject> tuioList= new ArrayList<TuioObject>();
     ArrayList<Integer> symbolList = new ArrayList<Integer>();
 
