@@ -268,7 +268,91 @@ public class Horse {
             case 53 :
             case 54 :
             case 55 :
-                return true;
+                int futurePos = currentPos+res;
+                if (futurePos > 56) {
+                    futurePos = futurePos - 40;
+                }
+                switch (res) {
+                    case 6 :
+                        if (isFilled(team,futurePos)) {
+                            Horse disturbingHorse = getHorseFilled(team,futurePos);
+                            if (disturbingHorse.color == horse.color) {
+                                isHorseMovable(team,horse,5);
+                            }
+                            else {
+                                return true;
+                            }
+                        }
+                        else {
+                            return true;
+                        }
+                        break;
+                    case 5 :
+                        if (isFilled(team,futurePos)) {
+                            Horse disturbingHorse = getHorseFilled(team,futurePos);
+                            if (disturbingHorse.color == horse.color) {
+                                isHorseMovable(team,horse,4);
+                            }
+                            else {
+                                return true;
+                            }
+                        }
+                        else {
+                            return true;
+                        }
+                        break;
+                    case 4 :
+                        if (isFilled(team,futurePos)) {
+                            Horse disturbingHorse = getHorseFilled(team,futurePos);
+                            if (disturbingHorse.color == horse.color) {
+                                isHorseMovable(team,horse,3);
+                            }
+                            else {
+                                return true;
+                            }
+                        }
+                        else {
+                            return true;
+                        }
+                        break;
+                    case 3 :
+                        if (isFilled(team,futurePos)) {
+                            Horse disturbingHorse = getHorseFilled(team,futurePos);
+                            if (disturbingHorse.color == horse.color) {
+                                isHorseMovable(team,horse,2);
+                            }
+                            else {
+                                return true;
+                            }
+                        }
+                        else {
+                            return true;
+                        }
+                        break;
+                    case 2 :
+                        if (isFilled(team,futurePos)) {
+                            Horse disturbingHorse = getHorseFilled(team,futurePos);
+                            if (disturbingHorse.color == horse.color) {
+                                isHorseMovable(team,horse,1);
+                            }
+                            else {
+                                return true;
+                            }
+                        }
+                        else {
+                            return true;
+                        }
+                        break;
+                    case 1 :
+                        if (isFilled(team,futurePos)) {
+                            Horse disturbingHorse = getHorseFilled(team,futurePos);
+                            return disturbingHorse.color != horse.color;
+                        }
+                        else {
+                            return true;
+                        }
+                }
+                break;
             case 56 : //If the blue horse wants to move to the blue cases
                 if (horse.color == Color.BLUE) {
                     if (isFilled(team,57)) {
