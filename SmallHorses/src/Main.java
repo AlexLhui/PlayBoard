@@ -29,10 +29,10 @@ public class Main extends Application{
     ArrayList<TuioObject> tuioList= new ArrayList<TuioObject>();
     ArrayList<Integer> symbolList = new ArrayList<Integer>();
 
-    public void start(Stage primaryStage){
+    public void start(Stage primaryStage) {
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); // getScreenSize() returns the size of the screen in pixels
-        int screenWidth = (int)size.getWidth(); // screenWidth will store the width of the screen
-        int screenHeight = (int)size.getHeight(); // screenHeight will store the height of the screen
+        int screenWidth = (int) size.getWidth(); // screenWidth will store the width of the screen
+        int screenHeight = (int) size.getHeight(); // screenHeight will store the height of the screen
         System.out.println("Width : " + screenWidth + "Height : " + screenHeight);
         int port = 3333;
 
@@ -42,10 +42,12 @@ public class Main extends Application{
         client.addTuioListener(dump);
         client.connect();
 
+//      if(!dump.objList.isEmpty()){
 //        for(int i = 0; i<numberOfPlayers; i++){
 //            tuioList.add(dump.objList.get(i));
 //            symbolList.add(tuioList.get(i).getSymbolID());
 //        }
+//      }
 
         primaryStage.setTitle("Petits chevaux");
         Group root = new Group();
