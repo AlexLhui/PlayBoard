@@ -161,7 +161,7 @@ public class Horse {
             } else if (j.getHorse2().getPosition() == position) {
                 return j.getHorse2();
             } else if (j.getHorse3().getPosition() == position) {
-                return j.getHorse2();
+                return j.getHorse3();
             } else if (j.getHorse4().getPosition() == position) {
                 return j.getHorse4();
             }

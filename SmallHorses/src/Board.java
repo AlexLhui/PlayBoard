@@ -40,6 +40,15 @@ public class Board extends Scene {
      */
 
     public boolean isGameFinished() {
+        int i;
+        for (i = 0; i <= 4; i++) {
+            int offset;
+            offset = 4*i;
+            if ((team.get(i).getHorse1().isFilled(team,57 + offset)) && (team.get(i).getHorse1().isFilled(team,58+offset)) && (team.get(i).getHorse1().isFilled(team,59+offset)) && (team.get(i).getHorse1().isFilled(team,60+offset))) {
+                gameFinished = true;
+                //Add winner color
+            }
+        }
         return gameFinished;
     }
 
@@ -408,6 +417,9 @@ public class Board extends Scene {
                         horse.setPosition(57);
                         changePosition(0, horse,false);
                     }
+                    else if (horse.color == Color.BLUE) {
+                        changePosition(0,horse,false);
+                    }
                     else {
                         if (res == 1) {
                             if (horse.color == Color.BLUE) {
@@ -425,6 +437,10 @@ public class Board extends Scene {
                                         System.out.println("Horse " + disturbingHorse.numberHorse + disturbingHorse.getColor() + " has been eaten by horse " + horse.numberHorse + horse.getColor() + ".");
                                     }
                                 }
+                                else {
+                                    horse.setPosition(17);
+                                    changePosition(0, horse, false);
+                                }
                             }
                         }
                         else {
@@ -437,6 +453,9 @@ public class Board extends Scene {
                     if (horse.color == Color.RED && newMove && !horse.isFilled(team,61) && res == 1) { //Check if blue horse can go to case 57
                         horse.setPosition(61);
                         changePosition(0, horse,false);
+                    }
+                    else if (horse.color == Color.RED) {
+                        changePosition(0,horse,false);
                     }
                     else {
                         if (res == 1) {
@@ -455,6 +474,10 @@ public class Board extends Scene {
                                         System.out.println("Horse " + disturbingHorse.numberHorse + disturbingHorse.getColor() + " has been eaten by horse " + horse.numberHorse + horse.getColor() + ".");
                                     }
                                 }
+                                else {
+                                    horse.setPosition(27);
+                                    changePosition(0, horse, false);
+                                }
                             }
                         }
                         else {
@@ -467,6 +490,9 @@ public class Board extends Scene {
                     if (horse.color == Color.GREEN && newMove && !horse.isFilled(team,65) && res == 1) { //Check if blue horse can go to case 57
                         horse.setPosition(65);
                         changePosition(0, horse,false);
+                    }
+                    else if (horse.color == Color.GREEN) {
+                        changePosition(0,horse,false);
                     }
                     else {
                         if (res == 1) {
@@ -485,6 +511,10 @@ public class Board extends Scene {
                                         System.out.println("Horse " + disturbingHorse.numberHorse + disturbingHorse.getColor() + " has been eaten by horse " + horse.numberHorse + horse.getColor() + ".");
                                     }
                                 }
+                                else {
+                                    horse.setPosition(37);
+                                    changePosition(0, horse, false);
+                                }
                             }
                         }
                         else {
@@ -497,6 +527,9 @@ public class Board extends Scene {
                     if (horse.color == Color.YELLOW && newMove && !horse.isFilled(team,69) && res == 1) { //Check if blue horse can go to case 57
                         horse.setPosition(69);
                         changePosition(0, horse,false);
+                    }
+                    else if (horse.color == Color.YELLOW) {
+                        changePosition(0,horse,false);
                     }
                     else {
                         if (res == 1) {
@@ -514,6 +547,10 @@ public class Board extends Scene {
                                         changePosition(0, horse, false);
                                         System.out.println("Horse " + disturbingHorse.numberHorse + disturbingHorse.getColor() + " has been eaten by horse " + horse.numberHorse + horse.getColor() + ".");
                                     }
+                                }
+                                else {
+                                    horse.setPosition(47);
+                                    changePosition(0, horse, false);
                                 }
                             }
                         }
@@ -721,6 +758,10 @@ public class Board extends Scene {
 
     public void update(int tour, int player, int prevRes, boolean hasPlayed, GraphicsContext gc, int numberOfPlayers){
         //Si tour < nombre d'équipes => on utilise la variable playerTurn1 pour décider qui joue
+        if (isGameFinished()) {
+            //No update
+            //close stage
+        }
         if (hasPlayed) {
             this.setOnKeyPressed(keyEvent -> {
                 String key = keyEvent.getCode().toString();
