@@ -41,7 +41,7 @@ public class Main extends Application{
 
         client.addTuioListener(dump);
         client.connect();
-
+//ok
         //Veuillez poser le tag du dé
         if(dump.objList.size() == 1){
             tuioList.add(dump.objList.get(0));
