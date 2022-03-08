@@ -36,6 +36,8 @@ public class Main extends Application{
         System.out.println("Width : " + screenWidth + "Height : " + screenHeight);
         int port = 3333;
 
+        //Choice of number of players
+
         TestTuio2 dump = new TestTuio2();
         TuioClient client = new TuioClient(port);
 
