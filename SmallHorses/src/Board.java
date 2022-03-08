@@ -41,12 +41,15 @@ public class Board extends Scene {
 
     public boolean isGameFinished(int numberOfPlayers) {
         int i;
-        for (i = 0; i < numberOfPlayers; i++) {
-            int offset;
-            offset = 4*i;
-            if ((team.get(i).getHorse1().isFilled(team,57 + offset)) && (team.get(i).getHorse1().isFilled(team,58+offset)) && (team.get(i).getHorse1().isFilled(team,59+offset)) && (team.get(i).getHorse1().isFilled(team,60+offset))) {
-                gameFinished = true;
-                //Add winner color
+        for (i = 0; i < numberOfPlayers; i++) { //pas obligatoirement 1 et 2 !!
+            int j;
+            for (j = 0; j < 4; j++) {
+                int offset;
+                offset = 4*j;
+                if ((team.get(i).getHorse1().isFilled(team,57 + offset)) && (team.get(i).getHorse1().isFilled(team,58+offset)) && (team.get(i).getHorse1().isFilled(team,59+offset)) && (team.get(i).getHorse1().isFilled(team,60+offset))) {
+                    gameFinished = true;
+                    //Add winner color
+                }
             }
         }
         return gameFinished;
