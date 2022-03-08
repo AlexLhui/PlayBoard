@@ -47,14 +47,17 @@ public class Main extends Application{
             tuioList.add(dump.objList.get(0));
             symbolList.add(tuioList.get(0).getSymbolID());
         }
-
-
-        // Veuillez ajouter le tag du joueur n
-        if(symbolList.size() != numberOfPlayers){
-          if(dump.objList.size() == 2){
-              tuioList.add(dump.objList.get(1));
-              symbolList.add(tuioList.get(1).getSymbolID());
-          } // Veuillez retirer le tag du joueur n (sauf si c'est le dernier joueur)
+        int i = 0;
+        while(i != numberOfPlayers){
+            // Veuillez ajouter le tag du joueur n
+            if (symbolList.size() != numberOfPlayers) {
+                if (dump.objList.size() == 2) {
+                    tuioList.add(dump.objList.get(1));
+                    symbolList.add(tuioList.get(1).getSymbolID());
+                    System.out.println(dump.objList.get(1).getSymbolID());
+                    i+= 1;
+                } // Veuillez retirer le tag du joueur n (sauf si c'est le dernier joueur)
+            }
         }
 
         primaryStage.setTitle("Petits chevaux");
