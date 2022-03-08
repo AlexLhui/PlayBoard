@@ -545,6 +545,11 @@ public class Horse {
                 else {
                     return true;
                 }
+            case 60 :
+            case 64 :
+            case 68 :
+            case 72 :
+                return false;
         }
         return true;
     }

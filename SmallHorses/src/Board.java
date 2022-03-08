@@ -758,10 +758,7 @@ public class Board extends Scene {
 
     public void update(int tour, int player, int prevRes, boolean hasPlayed, GraphicsContext gc, int numberOfPlayers){
         //Si tour < nombre d'équipes => on utilise la variable playerTurn1 pour décider qui joue
-        if (isGameFinished()) {
-            //No update
-            //close stage
-        }
+        //If isGameFinished ???
         if (hasPlayed) {
             this.setOnKeyPressed(keyEvent -> {
                 String key = keyEvent.getCode().toString();
