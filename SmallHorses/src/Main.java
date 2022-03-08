@@ -42,12 +42,20 @@ public class Main extends Application{
         client.addTuioListener(dump);
         client.connect();
 
-      if(!dump.objList.isEmpty()){
-        for(int i = 0; i<numberOfPlayers; i++){
-            tuioList.add(dump.objList.get(i));
-            symbolList.add(tuioList.get(i).getSymbolID());
+        //Veuillez poser le tag du dé
+        if(dump.objList.size() == 1){
+            tuioList.add(dump.objList.get(0));
+            symbolList.add(tuioList.get(0).getSymbolID());
         }
-      }
+
+
+        // Veuillez ajouter le tag du joueur n
+        if(symbolList.size() != numberOfPlayers){
+          if(dump.objList.size() == 2){
+              tuioList.add(dump.objList.get(1));
+              symbolList.add(tuioList.get(1).getSymbolID());
+          } // Veuillez retirer le tag du joueur n (sauf si c'est le dernier joueur)
+        }
 
         primaryStage.setTitle("Petits chevaux");
         Group root = new Group();
