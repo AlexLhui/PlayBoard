@@ -272,85 +272,127 @@ public class Horse {
                 if (futurePos > 56) {
                     futurePos = futurePos - 40;
                 }
-                switch (res) {
-                    case 6 :
-                        if (isFilled(team,futurePos)) {
-                            Horse disturbingHorse = getHorseFilled(team,futurePos);
-                            if (disturbingHorse.color == horse.color) {
-                                isHorseMovable(team,horse,5);
+//                switch(horse.color) {
+//                    case Color.BLUE :
+//                        if (horse.getPosition() <= 56 && futurePos >= 17) {
+//                            res = futurePos + 40 - 17;
+//                            futurePos =
+//                        }
+//                }
+                if (Color.BLUE.equals(horse.color) && horse.getPosition() == 55) {
+                    if (isFilled(team,56)) {
+                        Horse disturbingHorse = getHorseFilled(team,futurePos);
+                        return disturbingHorse.color != horse.color;
+                    }
+                    else {
+                        return true;
+                    }
+                } else if (Color.RED.equals(horse.color) && horse.getPosition() == 25) {
+                    if (isFilled(team,26)) {
+                        Horse disturbingHorse = getHorseFilled(team,futurePos);
+                        return disturbingHorse.color != horse.color;
+                    }
+                    else {
+                        return true;
+                    }
+                } else if (Color.GREEN.equals(horse.color) && horse.getPosition() == 35) {
+                    if (isFilled(team,36)) {
+                        Horse disturbingHorse = getHorseFilled(team,futurePos);
+                        return disturbingHorse.color != horse.color;
+                    }
+                    else {
+                        return true;
+                    }
+                } else if (Color.YELLOW.equals(horse.color) && horse.getPosition() == 45) {
+                    if (isFilled(team,46)) {
+                        Horse disturbingHorse = getHorseFilled(team,futurePos);
+                        return disturbingHorse.color != horse.color;
+                    }
+                    else {
+                        return true;
+                    }
+                }
+                else {
+                    switch (res) {
+                        case 6 :
+                            if (isFilled(team,futurePos)) {
+                                Horse disturbingHorse = getHorseFilled(team,futurePos);
+                                if (disturbingHorse.color == horse.color) {
+                                    isHorseMovable(team,horse,5);
+                                }
+                                else {
+                                    return true;
+                                }
                             }
                             else {
                                 return true;
                             }
-                        }
-                        else {
-                            return true;
-                        }
-                        break;
-                    case 5 :
-                        if (isFilled(team,futurePos)) {
-                            Horse disturbingHorse = getHorseFilled(team,futurePos);
-                            if (disturbingHorse.color == horse.color) {
-                                isHorseMovable(team,horse,4);
+                            break;
+                        case 5 :
+                            if (isFilled(team,futurePos)) {
+                                Horse disturbingHorse = getHorseFilled(team,futurePos);
+                                if (disturbingHorse.color == horse.color) {
+                                    isHorseMovable(team,horse,4);
+                                }
+                                else {
+                                    return true;
+                                }
                             }
                             else {
                                 return true;
                             }
-                        }
-                        else {
-                            return true;
-                        }
-                        break;
-                    case 4 :
-                        if (isFilled(team,futurePos)) {
-                            Horse disturbingHorse = getHorseFilled(team,futurePos);
-                            if (disturbingHorse.color == horse.color) {
-                                isHorseMovable(team,horse,3);
+                            break;
+                        case 4 :
+                            if (isFilled(team,futurePos)) {
+                                Horse disturbingHorse = getHorseFilled(team,futurePos);
+                                if (disturbingHorse.color == horse.color) {
+                                    isHorseMovable(team,horse,3);
+                                }
+                                else {
+                                    return true;
+                                }
                             }
                             else {
                                 return true;
                             }
-                        }
-                        else {
-                            return true;
-                        }
-                        break;
-                    case 3 :
-                        if (isFilled(team,futurePos)) {
-                            Horse disturbingHorse = getHorseFilled(team,futurePos);
-                            if (disturbingHorse.color == horse.color) {
-                                isHorseMovable(team,horse,2);
+                            break;
+                        case 3 :
+                            if (isFilled(team,futurePos)) {
+                                Horse disturbingHorse = getHorseFilled(team,futurePos);
+                                if (disturbingHorse.color == horse.color) {
+                                    isHorseMovable(team,horse,2);
+                                }
+                                else {
+                                    return true;
+                                }
                             }
                             else {
                                 return true;
                             }
-                        }
-                        else {
-                            return true;
-                        }
-                        break;
-                    case 2 :
-                        if (isFilled(team,futurePos)) {
-                            Horse disturbingHorse = getHorseFilled(team,futurePos);
-                            if (disturbingHorse.color == horse.color) {
-                                isHorseMovable(team,horse,1);
+                            break;
+                        case 2 :
+                            if (isFilled(team,futurePos)) {
+                                Horse disturbingHorse = getHorseFilled(team,futurePos);
+                                if (disturbingHorse.color == horse.color) {
+                                    isHorseMovable(team,horse,1);
+                                }
+                                else {
+                                    return true;
+                                }
                             }
                             else {
                                 return true;
                             }
-                        }
-                        else {
-                            return true;
-                        }
-                        break;
-                    case 1 :
-                        if (isFilled(team,futurePos)) {
-                            Horse disturbingHorse = getHorseFilled(team,futurePos);
-                            return disturbingHorse.color != horse.color;
-                        }
-                        else {
-                            return true;
-                        }
+                            break;
+                        case 1 :
+                            if (isFilled(team,futurePos)) {
+                                Horse disturbingHorse = getHorseFilled(team,futurePos);
+                                return disturbingHorse.color != horse.color;
+                            }
+                            else {
+                                return true;
+                            }
+                    }
                 }
                 break;
             case 56 : //If the blue horse wants to move to the blue cases
@@ -552,6 +594,19 @@ public class Horse {
                 return false;
         }
         return true;
+    }
+
+    public boolean isHorseGoingTooFar(Horse horse, int res) {
+        if (Color.BLUE.equals(horse.color)) {
+            return horse.getPosition() + res > 56;
+        } else if (Color.RED.equals(horse.color)) {
+            return horse.getPosition() + res > 26;
+        } else if (Color.GREEN.equals(horse.color)) {
+            return horse.getPosition() + res > 36;
+        } else if (Color.YELLOW.equals(horse.color)) {
+            return horse.getPosition() + res > 46;
+        }
+        return true; //We should never go here
     }
 
     public boolean isOneHorseMovable(ArrayList<Team> team, int player, int res) {
