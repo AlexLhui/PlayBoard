@@ -58,10 +58,7 @@ public class Main extends Application{
                 j += 1;
             }
         }
-        System.out.println("J'ai "+symbolList.size()+" tags");
-        for(int k = 0; k< symbolList.size(); k++){
-            System.out.println(symbolList.get(k));
-        }
+
 
         primaryStage.setTitle("Petits chevaux");
         Group root = new Group();
