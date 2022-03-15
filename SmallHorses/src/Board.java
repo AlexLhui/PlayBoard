@@ -700,7 +700,7 @@ public class Board extends Scene {
         }
     }
 
-    private void associateAction(int tour, int player, int res, GraphicsContext gc, int numberOfPlayers, Stage primaryStage, TestTuio2 dump, ArrayList symbolList) {
+    private void associateAction(int tour, int player, int res, GraphicsContext gc, int numberOfPlayers, Stage primaryStage, TestTuio2 dump, ArrayList<Integer> symbolList) {
         if (!team.get(player).getHorse1().isOneHorseMovable(team,player,res)) {
             System.out.println("Player " + team.get(player).toString() + " did not move because no move was possible.");
             update(tour + 1, (player + 1) % numberOfPlayers, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList);
@@ -761,7 +761,7 @@ public class Board extends Scene {
         System.out.println(" ");
     }
 
-    public void update(int tour, int player, int prevRes, boolean hasPlayed, GraphicsContext gc, int numberOfPlayers, Stage primaryStage, TestTuio2 dump, ArrayList symbolList){
+    public void update(int tour, int player, int prevRes, boolean hasPlayed, GraphicsContext gc, int numberOfPlayers, Stage primaryStage, TestTuio2 dump, ArrayList<Integer> symbolList){
         //Si tour < nombre d'équipes => on utilise la variable playerTurn1 pour décider qui joue
 //        if(symbolList.size() != numberOfPlayers+1){
 //            //Poser le dé

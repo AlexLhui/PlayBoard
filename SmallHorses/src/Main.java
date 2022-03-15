@@ -78,7 +78,7 @@ public class Main extends Application{
         GraphicsContext gc= canvas.getGraphicsContext2D();
 
         int player = 1; //Random 1-4
-        board.update(tour, player,-1,true, gc, numberOfPlayers, primaryStage, dump);
+        board.update(tour, player,-1,true, gc, numberOfPlayers, primaryStage, dump, symbolList);
 
 
 //        while (!board.isGameFinished()) {
