@@ -45,22 +45,19 @@ public class Main extends Application{
         client.connect();
 
         //Veuillez poser le tag du dé
-        if(dump.objList.size() == 1){
-            tuioList.add(dump.objList.get(0));
-            symbolList.add(tuioList.get(0).getSymbolID());
-        }
-        int i = 0;
-//        while(i != numberOfPlayers){
-//            // Veuillez ajouter le tag du joueur n
-//            if (symbolList.size() != numberOfPlayers) {
-//                if (dump.objList.size() == 2) {
-//                    tuioList.add(dump.objList.get(1));
-//                    symbolList.add(tuioList.get(1).getSymbolID());
-//                    System.out.println(dump.objList.get(1).getSymbolID());
-//                    i+= 1;
-//                } // Veuillez retirer le tag du joueur n (sauf si c'est le dernier joueur)
-//            }
+//        if(dump.objList.size() == 1){
+//            tuioList.add(dump.objList.get(0));
+//            symbolList.add(tuioList.get(0).getSymbolID());
 //        }
+
+        while(dump.objList.size() != numberOfPlayers+1){
+            System.out.println("Poser les tags");
+        }
+        System.out.println("J'ai "+dump.objList.size()+" tags");
+
+        for(int i = 0; i<numberOfPlayers+1; i++){
+            symbolList.add(dump.objList.get(i).getSymbolID());
+        }
 
         primaryStage.setTitle("Petits chevaux");
         Group root = new Group();

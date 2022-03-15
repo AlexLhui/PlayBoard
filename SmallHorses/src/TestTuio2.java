@@ -40,7 +40,7 @@ public class TestTuio2 extends JComponent implements TuioListener {
         if (!(objectList.contains(tobj.getSymbolID()))) {
             objectList.put(tobj.getSessionID(), tobj);
             keyObjects.add(tobj.getSessionID());
-            objList.add(tobj);
+           // objList.add(tobj);
         }
         if (debug||debugObj)
         { System.out.println("set obj " + tobj.getSymbolID() + " (" + tobj.getSessionID() + ") " + tobj.getX() + " " + tobj.getY() + " " + tobj.getAngle() + " " + tobj.getMotionSpeed() + " " + tobj.getRotationSpeed() + " " + tobj.getMotionAccel() + " " + tobj.getRotationAccel()); }
@@ -48,6 +48,7 @@ public class TestTuio2 extends JComponent implements TuioListener {
 
     public void removeTuioObject(TuioObject tobj) {
         objectList.remove(tobj.getSessionID());
+        objList.remove(tobj);
 
         if (debug||debugObj)
         { System.out.println("del obj " + tobj.getSymbolID() + " (" + tobj.getSessionID() + ")"); }
