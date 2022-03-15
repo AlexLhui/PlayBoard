@@ -50,13 +50,17 @@ public class Main extends Application{
 //            symbolList.add(tuioList.get(0).getSymbolID());
 //        }
 
+        int j = 0;
         while(dump.objList.size() != numberOfPlayers+1){
-            System.out.println("Poser les tags");
+            System.out.println("Poser les tags"); // Ajouter un texte demandant de poser le dé, jouer 1 2 3 4
+            for(int i = j; i<dump.objList.size(); i++){
+                symbolList.add(dump.objList.get(i).getSymbolID());
+                j += 1;
+            }
         }
-        System.out.println("J'ai "+dump.objList.size()+" tags");
-
-        for(int i = 0; i<numberOfPlayers+1; i++){
-            symbolList.add(dump.objList.get(i).getSymbolID());
+        System.out.println("J'ai "+symbolList.size()+" tags");
+        for(int k = 0; k< symbolList.size(); k++){
+            System.out.println(symbolList.get(k));
         }
 
         primaryStage.setTitle("Petits chevaux");
