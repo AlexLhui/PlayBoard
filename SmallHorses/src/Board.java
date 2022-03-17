@@ -601,24 +601,153 @@ public class Board extends Scene {
                 case 53 :
                 case 54 :
                 case 55 : //General case
-                    if (res == 1 && horse.isFilled(team,pos+1)) { //If there is a horse on the next case :
-                        System.out.println("Next case is occupied.");
-                        Horse disturbingHorse = horse.getHorseFilled(team,pos+1);
-                        if (disturbingHorse.color == horse.color) {
-                            changePosition(0,horse,false);
-                        }
-                        else {
-                            disturbingHorse.beenEaten(team, disturbingHorse);
-                            horse.setPosition(pos+1);
-                            changePosition(0,horse,false);
-                            System.out.println("Horse " + disturbingHorse.numberHorse + disturbingHorse.getColor() + " has been eaten by horse " + horse.numberHorse + horse.getColor() + ".");
-                        }
+                    int futurePos = horse.getPosition()+res;
+                    if (futurePos > 56) {
+                        futurePos = futurePos - 40;
                     }
-                    else {
-                        horse.setPosition(pos + 1);
-                        changePosition(res - 1, horse,false);
+                    switch (res) {
+                        case 6 :
+                            if (horse.isHorseGoingTooFar(horse,6)) {
+                                changePosition(5,horse,false);
+                            }
+                            else {
+                                if (horse.isFilled(team, futurePos)) {
+                                    Horse disturbingHorse = horse.getHorseFilled(team, futurePos);
+                                    if (disturbingHorse.color == horse.color) {
+                                        changePosition(5, horse,false);
+                                    } else {
+                                        disturbingHorse.beenEaten(team, disturbingHorse);
+                                        horse.setPosition(pos+1);
+                                        changePosition(res-1,horse,false);
+                                        System.out.println("Horse " + disturbingHorse.numberHorse + disturbingHorse.getColor() + " has been eaten by horse " + horse.numberHorse + horse.getColor() + ".");
+                                    }
+                                } else {
+                                    horse.setPosition(pos+1);
+                                    changePosition(res-1,horse,false);
+                                }
+                            }
+                            break;
+                        case 5 :
+                            if (horse.isHorseGoingTooFar(horse,5)) {
+                                changePosition(4,horse,false);
+                            }
+                            else {
+                                if (horse.isFilled(team, futurePos)) {
+                                    Horse disturbingHorse = horse.getHorseFilled(team, futurePos);
+                                    if (disturbingHorse.color == horse.color) {
+                                        changePosition(4, horse,false);
+                                    } else {
+                                        disturbingHorse.beenEaten(team, disturbingHorse);
+                                        horse.setPosition(pos+1);
+                                        changePosition(res-1,horse,false);
+                                        System.out.println("Horse " + disturbingHorse.numberHorse + disturbingHorse.getColor() + " has been eaten by horse " + horse.numberHorse + horse.getColor() + ".");
+                                    }
+                                } else {
+                                    horse.setPosition(pos+1);
+                                    changePosition(res-1,horse,false);
+                                }
+                            }
+                            break;
+                        case 4 :
+                            if (horse.isHorseGoingTooFar(horse,4)) {
+                                changePosition(3,horse,false);
+                            }
+                            else {
+                                if (horse.isFilled(team, futurePos)) {
+                                    Horse disturbingHorse = horse.getHorseFilled(team, futurePos);
+                                    if (disturbingHorse.color == horse.color) {
+                                        changePosition(3, horse,false);
+                                    } else {
+                                        disturbingHorse.beenEaten(team, disturbingHorse);
+                                        horse.setPosition(pos+1);
+                                        changePosition(res-1,horse,false);
+                                        System.out.println("Horse " + disturbingHorse.numberHorse + disturbingHorse.getColor() + " has been eaten by horse " + horse.numberHorse + horse.getColor() + ".");
+                                    }
+                                } else {
+                                    horse.setPosition(pos+1);
+                                    changePosition(res-1,horse,false);
+                                }
+                            }
+                            break;
+                        case 3 :
+                            if (horse.isHorseGoingTooFar(horse,3)) {
+                                changePosition(2,horse,false);
+                            }
+                            else {
+                                if (horse.isFilled(team, futurePos)) {
+                                    Horse disturbingHorse = horse.getHorseFilled(team, futurePos);
+                                    if (disturbingHorse.color == horse.color) {
+                                        changePosition(2, horse,false);
+                                    } else {
+                                        disturbingHorse.beenEaten(team, disturbingHorse);
+                                        horse.setPosition(pos+1);
+                                        changePosition(res-1,horse,false);
+                                        System.out.println("Horse " + disturbingHorse.numberHorse + disturbingHorse.getColor() + " has been eaten by horse " + horse.numberHorse + horse.getColor() + ".");
+                                    }
+                                } else {
+                                    horse.setPosition(pos+1);
+                                    changePosition(res-1,horse,false);
+                                }
+                            }
+                            break;
+                        case 2 :
+                            if (horse.isHorseGoingTooFar(horse,2)) {
+                                changePosition(1,horse,false);
+                            }
+                            else {
+                                if (horse.isFilled(team, futurePos)) {
+                                    Horse disturbingHorse = horse.getHorseFilled(team, futurePos);
+                                    if (disturbingHorse.color == horse.color) {
+                                        changePosition(1, horse,false);
+                                    } else {
+                                        disturbingHorse.beenEaten(team, disturbingHorse);
+                                        horse.setPosition(pos+1);
+                                        changePosition(res-1,horse,false);
+                                        System.out.println("Horse " + disturbingHorse.numberHorse + disturbingHorse.getColor() + " has been eaten by horse " + horse.numberHorse + horse.getColor() + ".");
+                                    }
+                                } else {
+                                    horse.setPosition(pos+1);
+                                    changePosition(res-1,horse,false);
+                                }
+                            }
+                            break;
+                        case 1 :
+                            if (horse.isFilled(team,futurePos)) {
+                                Horse disturbingHorse = horse.getHorseFilled(team,futurePos);
+                                if (disturbingHorse.color == horse.color) {
+                                    changePosition(0,horse,false);
+                                }
+                                else {
+                                    disturbingHorse.beenEaten(team,disturbingHorse);
+                                    horse.setPosition(pos+1);
+                                    changePosition(0,horse,false);
+                                    System.out.println("Horse " + disturbingHorse.numberHorse + disturbingHorse.getColor() + " has been eaten by horse " + horse.numberHorse + horse.getColor() + ".");
+                                }
+                            }
+                            else {
+                                horse.setPosition(pos+1);
+                                changePosition(0,horse,false);
+                            }
                     }
                     break;
+//                    if (res == 1 && horse.isFilled(team,pos+1)) { //If there is a horse on the next case :
+//                        System.out.println("Next case is occupied.");
+//                        Horse disturbingHorse = horse.getHorseFilled(team,pos+1);
+//                        if (disturbingHorse.color == horse.color) {
+//                            changePosition(0,horse,false);
+//                        }
+//                        else {
+//                            disturbingHorse.beenEaten(team, disturbingHorse);
+//                            horse.setPosition(pos+1);
+//                            changePosition(0,horse,false);
+//                            System.out.println("Horse " + disturbingHorse.numberHorse + disturbingHorse.getColor() + " has been eaten by horse " + horse.numberHorse + horse.getColor() + ".");
+//                        }
+//                    }
+//                    else {
+//                        horse.setPosition(pos + 1);
+//                        changePosition(res - 1, horse,false);
+//                    }
+//                    break;
                 case 57 :
                     if (res == 2 && newMove && !horse.isFilled(team,58)) {
                         horse.setPosition(58);
