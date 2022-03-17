@@ -19,21 +19,22 @@ import javafx.scene.canvas.GraphicsContext;
 
 
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import static javafx.application.Application.launch;
 
-public class Main extends Application{
+public class Main extends Application {
     private int tour = 0;
     private int numberOfPlayers = 2;
-    ArrayList<TuioObject> tuioList= new ArrayList<TuioObject>();
+//    ArrayList<TuioObject> tuioList= new ArrayList<TuioObject>();
     ArrayList<Integer> symbolList = new ArrayList<Integer>();
 
     public void start(Stage primaryStage) {
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); // getScreenSize() returns the size of the screen in pixels
         int screenWidth = (int) size.getWidth(); // screenWidth will store the width of the screen
         int screenHeight = (int) size.getHeight(); // screenHeight will store the height of the screen
-        System.out.println("Width : " + screenWidth + "Height : " + screenHeight);
+        System.out.println("Width : " + screenWidth + ". Height : " + screenHeight);
         int port = 3333;
 
         //Choice of number of players
@@ -44,20 +45,23 @@ public class Main extends Application{
         client.addTuioListener(dump);
         client.connect();
 
+        Tuio tuio = new Tuio();
+        symbolList = tuio.getTags(dump,client,symbolList, numberOfPlayers);
+
         //Veuillez poser le tag du dé
 //        if(dump.objList.size() == 1){
 //            tuioList.add(dump.objList.get(0));
 //            symbolList.add(tuioList.get(0).getSymbolID());
 //        }
 
-        int j = 0;
-        while(dump.objList.size() != numberOfPlayers+1){
-            System.out.println("Poser les tags"); // Ajouter un texte demandant de poser le dé, jouer 1 2 3 4
-            for(int i = j; i<dump.objList.size(); i++){
-                symbolList.add(dump.objList.get(i).getSymbolID());
-                j += 1;
-            }
-        }
+//        int j = 0;
+//        while(dump.objList.size() != numberOfPlayers+1){
+//            System.out.println("Poser les tags"); // Ajouter un texte demandant de poser le dé, jouer 1 2 3 4
+//            for(int i = j; i<dump.objList.size(); i++){
+//                symbolList.add(dump.objList.get(i).getSymbolID());
+//                j += 1;
+//            }
+//        }
 
 
         primaryStage.setTitle("Petits chevaux");
