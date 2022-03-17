@@ -51,13 +51,13 @@ public class Main extends Application{
 //        }
 
         int j = 0;
-//        while(dump.objList.size() != numberOfPlayers+1){
-//            System.out.println("Poser les tags"); // Ajouter un texte demandant de poser le dé, jouer 1 2 3 4
-//            for(int i = j; i<dump.objList.size(); i++){
-//                symbolList.add(dump.objList.get(i).getSymbolID());
-//                j += 1;
-//            }
-//        }
+        while(dump.objList.size() != numberOfPlayers+1){
+            System.out.println("Poser les tags"); // Ajouter un texte demandant de poser le dé, jouer 1 2 3 4
+            for(int i = j; i<dump.objList.size(); i++){
+                symbolList.add(dump.objList.get(i).getSymbolID());
+                j += 1;
+            }
+        }
 
 
         primaryStage.setTitle("Petits chevaux");
