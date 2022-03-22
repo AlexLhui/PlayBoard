@@ -67,7 +67,7 @@ public class Board extends Scene {
 //        return longCase;
 //    }
 
-    public Board(Pane pane, double width, double height, boolean b, String filename, int numberOfTeam){
+    public Board(Pane pane, double width, double height, boolean b, String filename, int numberOfTeam, TestTuio2 dump){
         super(pane, width, height, b);
         Image boardSheet = new Image(filename,height,height,true,true);
         ImageView board = new ImageView(boardSheet);
@@ -99,11 +99,12 @@ public class Board extends Scene {
                     while (teamList.contains(couleur.get(a))) {
                         a = (int) (Math.random()*4);
                     }
+                    int id2 = dump.objList.get(2).getSymbolID();
                     Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorses1Transparent.png",a);
                     Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorses2Transparent.png",a);
                     Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorses3Transparent.png",a);
                     Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorses4Transparent.png",a);
-                    Team teamObj = new Team(couleur.get(a), horse1, horse2, horse3, horse4);
+                    Team teamObj = new Team(couleur.get(a), horse1, horse2, horse3, horse4, id2);
                     team.add(teamObj);
                     teamList.add(couleur.get(a));
                     teamObj.setNumberOfTeam(numberOfTeam);
@@ -114,11 +115,12 @@ public class Board extends Scene {
                     while (teamList.contains(couleur.get(a))) {
                         a = (int) (Math.random()*4);
                     }
+                    int id3 = dump.objList.get(3).getSymbolID();
                     Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorses1Transparent.png",a);
                     Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorses2Transparent.png",a);
                     Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorses3Transparent.png",a);
                     Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorses4Transparent.png",a);
-                    Team teamObj = new Team(couleur.get(a), horse1, horse2, horse3, horse4);
+                    Team teamObj = new Team(couleur.get(a), horse1, horse2, horse3, horse4, id3);
                     team.add(teamObj);
                     teamList.add(couleur.get(a));
                     teamObj.setNumberOfTeam(numberOfTeam);
@@ -129,11 +131,12 @@ public class Board extends Scene {
                     while (teamList.contains(couleur.get(a))) {
                         a = (int) (Math.random()*4);
                     }
+                    int id4 = dump.objList.get(4).getSymbolID();
                     Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorses1Transparent.png",a);
                     Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorses2Transparent.png",a);
                     Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorses3Transparent.png",a);
                     Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorses4Transparent.png",a);
-                    Team teamObj = new Team(couleur.get(a), horse1, horse2, horse3, horse4);
+                    Team teamObj = new Team(couleur.get(a), horse1, horse2, horse3, horse4, id4);
                     team.add(teamObj);
                     teamList.add(couleur.get(a));
                     teamObj.setNumberOfTeam(numberOfTeam);
@@ -141,11 +144,12 @@ public class Board extends Scene {
                 }
             }
             else{ //Player 1
+                int id1 = dump.objList.get(1).getSymbolID();
                 Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorses1Transparent.png",a);
                 Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorses2Transparent.png",a);
                 Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorses3Transparent.png",a);
                 Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorses4Transparent.png",a);
-                Team teamObj = new Team(couleur.get(a),horse1,horse2,horse3,horse4);
+                Team teamObj = new Team(couleur.get(a),horse1,horse2,horse3,horse4, id1);
                 team.add(teamObj);
                 teamObj.setNumberOfTeam(numberOfTeam);
                 teamList.add(couleur.get(a));
@@ -830,6 +834,12 @@ public class Board extends Scene {
     }
 
     private void associateAction(int tour, int player, int res, GraphicsContext gc, int numberOfPlayers, Stage primaryStage, TestTuio2 dump, ArrayList<Integer> symbolList) {
+        TuioObject obj;
+        for(int k=0; k<dump.objList.size(); k++){
+            if(dump.objList.get(k).getSymbolID() == team.get(player).playerToId(player)){
+                obj = dump.objList.get(k);
+            }
+        }
         if (!team.get(player).getHorse1().isOneHorseMovable(team,player,res)) {
             System.out.println("Player " + team.get(player).toString() + " did not move because no move was possible.");
             update(tour + 1, (player + 1) % numberOfPlayers, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList);
