@@ -979,4 +979,22 @@ public class Horse {
         }
         return "IDC";
     }
+
+    public double coordToPos(double x, double y){
+        int a = 1;
+        double x_0 = getXPos(a)+squareSize/2;
+        double y_0 = getYPos(a)+squareSize/2;
+        double d = Math.sqrt((x*x-x_0*x_0)*(x*x-x_0*x_0) + (y*y-y_0*y_0)*(y*y-y_0*y_0));
+        int pos = 0;
+        for(int i = 0; i<71; i++){
+            double x_1 = getXPos(i)+squareSize/2;
+            double y_1 = getYPos(i)+squareSize/2;
+            double disti = Math.sqrt((x*x-x_1*x_1)*(x*x-x_1*x_1) + (y*y-y_1*y_1)*(y*y-y_1*y_1));
+            if(disti<d){
+                d = disti;
+                pos = i;
+            }
+        }
+        return pos;
+    }
 }
