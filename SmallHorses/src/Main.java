@@ -26,7 +26,7 @@ import static javafx.application.Application.launch;
 
 public class Main extends Application {
     private int tour = 0;
-    private int numberOfPlayers = 2;
+    public int numberOfPlayers;
 //    ArrayList<TuioObject> tuioList= new ArrayList<TuioObject>();
     ArrayList<Integer> symbolList = new ArrayList<Integer>();
 
@@ -37,8 +37,6 @@ public class Main extends Application {
         System.out.println("Width : " + screenWidth + ". Height : " + screenHeight);
         int port = 3333;
 
-        //Choice of number of players
-
         TestTuio2 dump = new TestTuio2();
         TuioClient client = new TuioClient(port);
 
@@ -46,7 +44,10 @@ public class Main extends Application {
         client.connect();
 
         Tuio tuio = new Tuio();
+        numberOfPlayers = tuio.getNumberOfPlayers();
+//        System.out.println("Number of players : " + numberOfPlayers);
         symbolList = tuio.getTags(dump,client,symbolList, numberOfPlayers);
+//        System.out.println("Symbol list : " + symbolList);
 
         //Veuillez poser le tag du dé
 //        if(dump.objList.size() == 1){
