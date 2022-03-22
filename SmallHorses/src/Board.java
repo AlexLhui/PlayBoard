@@ -839,7 +839,7 @@ public class Board extends Scene {
             if(dump.objList.get(k).getSymbolID() == team.get(player).playerToId(player)){
                 obj = dump.objList.get(k);
             }
-        }
+        } // Utiliser les coordonnées de cet objet pour ajouter une condition dans chaque if
         if (!team.get(player).getHorse1().isOneHorseMovable(team,player,res)) {
             System.out.println("Player " + team.get(player).toString() + " did not move because no move was possible.");
             update(tour + 1, (player + 1) % numberOfPlayers, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList);
