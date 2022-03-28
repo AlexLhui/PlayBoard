@@ -52,11 +52,14 @@ public class Tuio implements ActionListener {
         }
         else {
             int j = 0;
-            if (TuioDump.objList.size() < TuioNumberOfPlayers + 1) {
+            if (TuioSymbolList.size() < TuioNumberOfPlayers + 1) {
                 System.out.println("Poser les tags"); // Ajouter un texte demandant de poser le dé, jouer 1 2 3 4
                 for (int i = j; i < TuioDump.objList.size(); i++) {
-                    TuioSymbolList.add(TuioDump.objList.get(i).getSymbolID());
-                    j += 1;
+                    if (!TuioSymbolList.contains((int) TuioDump.objList.get(i).getSessionID())) {
+                        TuioSymbolList.add((int) TuioDump.objList.get(i).getSessionID());
+                        System.out.println((int) TuioDump.objList.get(i).getSessionID());
+                        j += 1;
+                    }
                 }
             } else {
                 timer.stop();

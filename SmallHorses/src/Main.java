@@ -4,8 +4,10 @@ import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.Group;
@@ -20,6 +22,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.beans.EventHandler;
 import java.util.ArrayList;
 
 import static javafx.application.Application.launch;
@@ -47,27 +50,25 @@ public class Main extends Application {
         numberOfPlayers = tuio.getNumberOfPlayers();
 //        System.out.println("Number of players : " + numberOfPlayers);
         symbolList = tuio.getTags(dump,client,symbolList, numberOfPlayers);
-//        System.out.println("Symbol list : " + symbolList);
-
-        //Veuillez poser le tag du dé
-//        if(dump.objList.size() == 1){
-//            tuioList.add(dump.objList.get(0));
-//            symbolList.add(tuioList.get(0).getSymbolID());
-//        }
-
-//        int j = 0;
-//        while(dump.objList.size() != numberOfPlayers+1){
-//            System.out.println("Poser les tags"); // Ajouter un texte demandant de poser le dé, jouer 1 2 3 4
-//            for(int i = j; i<dump.objList.size(); i++){
-//                symbolList.add(dump.objList.get(i).getSymbolID());
-//                j += 1;
-//            }
-//        }
+        System.out.println("Symbol list : " + symbolList);
 
 
         primaryStage.setTitle("Petits chevaux");
         Group root = new Group();
-        Pane pane = new Pane(root);
+        BorderPane pane = new BorderPane(root);
+
+//        Button exitButton = new Button(" ",new ImageView(new Image("Little_red_horse_sized.png",100,100,false,false)));
+//        exitButton.setOnAction(actionEvent -> System.exit(0));
+//        exitButton.setOnTouchPressed(EventHandler.create(new CloseListener(),exitButton,System.exit(0)));
+//        pane.getChildren().add(exitButton);
+
+        Button exitButton=new Button(" ",new ImageView(new Image("StopButton.png",100,100,false,false)));
+        exitButton.getOnTouchPressed();
+        exitButton.setOnAction(actionEvent -> {
+            System.exit(0);
+        });
+        pane.setRight(exitButton);
+
         //Scene theScene = new Scene(pane, 600, 600,true);
         Board board = new Board(pane,screenWidth,screenHeight,true,"SmallHorsesBoardJavaFx.png",numberOfPlayers, dump); //We will have to change number of teams
         primaryStage.setScene(board);

@@ -3,14 +3,14 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
-import TUIO.TuioClient;
+
 import TUIO.TuioObject;
 public class Board extends Scene {
 
@@ -67,7 +67,7 @@ public class Board extends Scene {
 //        return longCase;
 //    }
 
-    public Board(Pane pane, double width, double height, boolean b, String filename, int numberOfTeam, TestTuio2 dump){
+    public Board(BorderPane pane, double width, double height, boolean b, String filename, int numberOfTeam, TestTuio2 dump){
         super(pane, width, height, b);
         Image boardSheet = new Image(filename,height,height,true,true);
         ImageView board = new ImageView(boardSheet);
@@ -923,7 +923,7 @@ public class Board extends Scene {
                 this.setOnKeyPressed(keyEvent -> {
                     String key = keyEvent.getCode().toString();
                     gc.clearRect(0, 0, 150, 10);
-                    if (key.equals("SPACE")) { //To throw the dice
+                    if (key.equals("B")) { //To throw the dice
                         int res = this.dice.throwDice();
                         System.out.println("Player " + team.get(player).toString() + " got a " + res + ".");
                         associateAction(tour, player, res, gc, numberOfPlayers, primaryStage, dump, symbolList);
