@@ -67,7 +67,7 @@ public class Board extends Scene {
 //        return longCase;
 //    }
 
-    public Board(BorderPane pane, double width, double height, boolean b, String filename, int numberOfTeam, TestTuio2 dump){
+    public Board(BorderPane pane, double width, double height, boolean b, String filename, int numberOfTeam, TestTuio2 dump, ArrayList<Integer> symbolList){
         super(pane, width, height, b);
         Image boardSheet = new Image(filename,height,height,true,true);
         ImageView board = new ImageView(boardSheet);
@@ -85,7 +85,7 @@ public class Board extends Scene {
         team = new ArrayList<>();
         teamList = new ArrayList<>();
 
-        this.dice = new Dice();
+        this.dice = new Dice(dump,symbolList.get(0));
         pane.getChildren().add(this.dice.getImage());
         int squareSize = 44 * screenHeight / 600;
         this.dice.getImage().setX((int)(width/2- squareSize/2));
@@ -923,19 +923,21 @@ public class Board extends Scene {
                 this.setOnKeyPressed(keyEvent -> {
                     String key = keyEvent.getCode().toString();
                     gc.clearRect(0, 0, 150, 10);
-                    if (key.equals("B")) { //To throw the dice
-                        int res = this.dice.throwDice();
+//                    if (key.equals("B")) { //To throw the dice
+                        int res = dice.getDiceResult();
                         System.out.println("Player " + team.get(player).toString() + " got a " + res + ".");
                         associateAction(tour, player, res, gc, numberOfPlayers, primaryStage, dump, symbolList);
                         affichage = "Player "+team.get(player).toString() +" has done "+res;
-                        if(dump.objList.size() != 0){
-                            System.out.println(dump.objList.get(1).getSymbolID());
-                        }
-                    }
-                    else { //If space is not pressed
-                        update(tour, player, prevRes,true, gc, numberOfPlayers, primaryStage, dump, symbolList); //Player has to throw the dice
-                        affichage = "Player "+team.get(player).toString() +" must play";
-                    }
+                        System.out.println("X : " + screenWidth*dump.objList.get(1).getX() + ", Y : " + screenHeight*dump.objList.get(1).getY());
+                        System.out.println("Position of tag 1 : " + team.get(player).getHorse1().coordToPos(screenWidth*dump.objList.get(1).getX(),screenHeight*dump.objList.get(1).getY()));
+//                        if(dump.objList.size() != 0){
+//                            System.out.println(dump.objList.get(1).getSessionID());
+//                        }
+//                    }
+//                    else { //If space is not pressed
+//                        update(tour, player, prevRes,true, gc, numberOfPlayers, primaryStage, dump, symbolList); //Player has to throw the dice
+//                        affichage = "Player "+team.get(player).toString() +" must play";
+//                    }
                     //gc.setFill(Color.BLACK);
                     gc.clearRect(0,0,1000,1000);
                     gc.fillText(affichage, 200, 30);
