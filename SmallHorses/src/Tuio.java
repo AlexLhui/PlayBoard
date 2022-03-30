@@ -16,7 +16,7 @@ public class Tuio implements ActionListener {
 
     JFrame frame = new JFrame("Choose the number of players");
 
-    Timer timer = new Timer(250, this); //250 ms
+    Timer timer = new Timer(400, this); //250 ms
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -80,7 +80,6 @@ public class Tuio implements ActionListener {
     }
 
     public int getNumberOfPlayers() {
-//        frame = new JFrame("Choose the number of players");
         frame.setVisible(true);
         frame.setSize(500,200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -89,14 +88,17 @@ public class Tuio implements ActionListener {
         frame.add(panel);
 
         JButton button2 = new JButton("2 players");
+        System.out.println("2 players");
         panel.add(button2);
         button2.addActionListener(this);
 
         JButton button3 = new JButton("3 players");
+        System.out.println("3 players");
         panel.add(button3);
         button3.addActionListener (this);
 
         JButton button4 = new JButton("4 players");
+        System.out.println("4 players");
         panel.add(button4);
         button4.addActionListener(this);
 

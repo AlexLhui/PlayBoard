@@ -1,8 +1,14 @@
 import TUIO.*;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.stage.Stage;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.Timer;
 
-public class TestTuio2 extends JComponent implements TuioListener {
+public class TestTuio2 extends JComponent implements TuioListener, ActionListener {
 
     public Hashtable<Long, TuioObject> objectList = new Hashtable<Long, TuioObject>();
     public ArrayList<Long> keyObjects = new ArrayList<Long>();
@@ -19,6 +25,20 @@ public class TestTuio2 extends JComponent implements TuioListener {
     private float scale = 1.0f;
     public boolean debug = false;
     public boolean debugObj = false;
+
+    public boolean boardInitialised = false;
+    public Board board;
+    public int tour;
+    public int player;
+    public int prevRes;
+    public boolean hasPlayed;
+    public GraphicsContext gc;
+    public int numberOfPlayers;
+    public Stage primaryStage;
+    public TestTuio2 dump;
+    public ArrayList<Integer> symbolList;
+
+    Timer timer = new Timer(200,this);
 
     public void setSize(int w, int h) {
         super.setSize(w, h);
@@ -97,10 +117,28 @@ public class TestTuio2 extends JComponent implements TuioListener {
         {System.out.println("del blb " + tblb.getBlobID() + " (" + tblb.getSessionID() + ")");}
     }
 
+    public void setVariables(Board board, int tour, int player, int prevRes, boolean hasPlayed, GraphicsContext gc, int numberOfPlayers, Stage primaryStage, TestTuio2 dump, ArrayList<Integer> symbolList) {
+        this.boardInitialised = true;
+        this.board = board;
+        this.tour = tour;
+        this.player = player;
+        this.prevRes = prevRes;
+        this.hasPlayed = hasPlayed;
+        this.gc = gc;
+        this.numberOfPlayers = numberOfPlayers;
+        this.primaryStage = primaryStage;
+        this.dump = dump;
+        this.symbolList = symbolList;
+    }
 
     public void refresh(TuioTime frameTime) {
         repaint();
     }
 
-
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (boardInitialised) {
+            board.update(tour, player, prevRes, hasPlayed, gc, numberOfPlayers, primaryStage, dump, symbolList);
+        }
+    }
 }

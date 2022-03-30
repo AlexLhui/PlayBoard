@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.beans.EventHandler;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -26,7 +27,8 @@ public class Board extends Scene {
     private boolean gameFinished = false;
     Dice dice;
     public String affichage;
-    ArrayList<Integer> symbolList = new ArrayList<Integer>();
+    ArrayList<Integer> symbolList;
+    TestTuio2 dump;
 
 
     /*
@@ -845,9 +847,10 @@ public class Board extends Scene {
             update(tour + 1, (player + 1) % numberOfPlayers, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList);
         }
         else {
-            this.setOnKeyPressed(keyEvent1 -> { //To check which horse is going to be moved
-                String key1 = keyEvent1.getCode().toString();
-                if (key1.equals("DIGIT1") && team.get(player).getHorse1().isHorseMovable(team, team.get(player).getHorse1(), res)) {
+                int test = team.get(player).getHorse1().coordToPos(screenWidth*dump.objList.get(1).getX(),screenHeight*dump.objList.get(1).getY());
+                System.out.println(test);
+//                key1.equals("DIGIT1")
+                if (test == team.get(player).getHorse1().getPosition() && team.get(player).getHorse1().isHorseMovable(team, team.get(player).getHorse1(), res)) {
                     changePosition(res, team.get(player).getHorse1(),true);
                     if (res == 6) {
                         update(tour + 1, player, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList);
@@ -856,8 +859,11 @@ public class Board extends Scene {
                         update(tour + 1, (player + 1) % numberOfPlayers, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList);
                     }
                     System.out.println("Player " + team.get(player).toString() + " moved horse 1.");
-                } else if (key1.equals("DIGIT2") && team.get(player).getHorse2().isHorseMovable(team, team.get(player).getHorse2(), res)) {
+                }
+//                key1.equals("DIGIT2")
+                else if (test == team.get(player).getHorse2().getPosition() && team.get(player).getHorse2().isHorseMovable(team, team.get(player).getHorse2(), res)) {
                     changePosition(res, team.get(player).getHorse2(),true);
+
                     if (res == 6) {
                         update(tour + 1, player, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList);
                     }
@@ -865,7 +871,9 @@ public class Board extends Scene {
                         update(tour + 1, (player + 1) % numberOfPlayers, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList);
                     }
                     System.out.println("Player " + team.get(player).toString() + " moved horse 2.");
-                } else if (key1.equals("DIGIT3") && team.get(player).getHorse3().isHorseMovable(team, team.get(player).getHorse3(), res)) {
+                }
+//                key1.equals("DIGIT3")
+                else if (test == team.get(player).getHorse3().getPosition() && team.get(player).getHorse3().isHorseMovable(team, team.get(player).getHorse3(), res)) {
                     changePosition(res, team.get(player).getHorse3(),true);
                     if (res == 6) {
                         update(tour + 1, player, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList);
@@ -874,7 +882,9 @@ public class Board extends Scene {
                         update(tour + 1, (player + 1) % numberOfPlayers, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList);
                     }
                     System.out.println("Player " + team.get(player).toString() + " moved horse 3.");
-                } else if (key1.equals("DIGIT4") && team.get(player).getHorse4().isHorseMovable(team, team.get(player).getHorse4(), res)) {
+                }
+//                key1.equals("DIGIT4")
+                else if (test == team.get(player).getHorse4().getPosition() && team.get(player).getHorse4().isHorseMovable(team, team.get(player).getHorse4(), res)) {
                     changePosition(res, team.get(player).getHorse4(),true);
                     if (res == 6) {
                         update(tour + 1, player, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList);
@@ -884,7 +894,8 @@ public class Board extends Scene {
                     }
                     System.out.println("Player " + team.get(player).toString() + " moved horse 4.");
                 } else {
-                    boolean goodKeyPressed = key1.equals("DIGIT1") || key1.equals("DIGIT2") || key1.equals("DIGIT3") || key1.equals("DIGIT4");
+//                    key1.equals("DIGIT1") || key1.equals("DIGIT2") || key1.equals("DIGIT3") || key1.equals("DIGIT4")
+                    boolean goodKeyPressed = test == team.get(player).getHorse1().getPosition() ||  test == team.get(player).getHorse2().getPosition() || test == team.get(player).getHorse3().getPosition() || test == team.get(player).getHorse4().getPosition();
                     if (goodKeyPressed && team.get(player).getHorse1().isOneHorseMovable(team, player, res)) {
                         System.out.println("Player " + team.get(player).toString() + " did not move because the move was not possible, but another one is.");
                         update(tour, player, res, false, gc, numberOfPlayers, primaryStage, dump, symbolList);
@@ -895,7 +906,6 @@ public class Board extends Scene {
                         update(tour, player, res, false, gc, numberOfPlayers, primaryStage, dump, symbolList);
                     }
                 }
-            });
         }
         System.out.println(" ");
     }
@@ -915,38 +925,36 @@ public class Board extends Scene {
 //                }
 //            }
 //        }
+        dump.setVariables(this, tour, player, prevRes, hasPlayed, gc, numberOfPlayers, primaryStage, dump, symbolList);
+        if (tour == 0) {
+            this.dump = dump;
+            this.symbolList = symbolList;
+            dump.timer.start();
+        }
         if (isGameFinished(numberOfPlayers)) {
             primaryStage.close();
         }
         else {
             if (hasPlayed) {
-                this.setOnKeyPressed(keyEvent -> {
-                    String key = keyEvent.getCode().toString();
+                if (!dice.newResult) {
+                    dice.timer.start();
+                }
+                else {
+                    dice.newResult = false; //Set for next round
                     gc.clearRect(0, 0, 150, 10);
-//                    if (key.equals("B")) { //To throw the dice
-                        int res = dice.getDiceResult();
-                        System.out.println("Player " + team.get(player).toString() + " got a " + res + ".");
-                        associateAction(tour, player, res, gc, numberOfPlayers, primaryStage, dump, symbolList);
-                        affichage = "Player "+team.get(player).toString() +" has done "+res;
-                        System.out.println("X : " + screenWidth*dump.objList.get(1).getX() + ", Y : " + screenHeight*dump.objList.get(1).getY());
-                        System.out.println("Position of tag 1 : " + team.get(player).getHorse1().coordToPos(screenWidth*dump.objList.get(1).getX(),screenHeight*dump.objList.get(1).getY()));
-//                        if(dump.objList.size() != 0){
-//                            System.out.println(dump.objList.get(1).getSessionID());
-//                        }
-//                    }
-//                    else { //If space is not pressed
-//                        update(tour, player, prevRes,true, gc, numberOfPlayers, primaryStage, dump, symbolList); //Player has to throw the dice
-//                        affichage = "Player "+team.get(player).toString() +" must play";
-//                    }
-                    //gc.setFill(Color.BLACK);
-                    gc.clearRect(0,0,1000,1000);
+                    int res = dice.getLastResult();
+                    System.out.println("Player " + team.get(player).toString() + " got a " + res + ".");
+                    associateAction(tour, player, res, gc, numberOfPlayers, primaryStage, dump, symbolList);
+                    affichage = "Player " + team.get(player).toString() + " has done " + res;
+                    System.out.println("X : " + screenWidth * dump.objList.get(1).getX() + ", Y : " + screenHeight * dump.objList.get(1).getY());
+                    System.out.println("Position of tag 1 : " + team.get(player).getHorse1().coordToPos(screenWidth * dump.objList.get(1).getX(), screenHeight * dump.objList.get(1).getY()));
+                    gc.clearRect(0, 0, 1000, 1000);
                     gc.fillText(affichage, 200, 30);
-                });
+                }
             }
             else { //if (!hasPlayed)
                 associateAction(tour, player, prevRes, gc, numberOfPlayers, primaryStage, dump, symbolList);
             }
         }
     }
-
 }

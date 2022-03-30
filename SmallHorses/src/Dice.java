@@ -6,6 +6,9 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javafx.scene.Scene;
+
+import java.awt.event.KeyEvent;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Dice implements ActionListener{
@@ -17,6 +20,7 @@ public class Dice implements ActionListener{
     public int diceID;
     public TestTuio2 dump;
 
+    public boolean newResult = false;
     public boolean thrown = false;
     public boolean moving = false;
 
@@ -24,7 +28,7 @@ public class Dice implements ActionListener{
     //int screenWidth = (int)size.getWidth(); // screenWidth will store the width of the screen
     double screenHeight = size.getHeight(); // screenHeight will store the height of the screen
 
-    Timer timer = new Timer(1000,this);
+    Timer timer = new Timer(200,this);
 
     public int getLastResult() {
         return lastResult;
@@ -41,15 +45,7 @@ public class Dice implements ActionListener{
             return res;
     }
 
-    public int getDiceResult() {
-        timer.start();
-        while (timer.isRunning()) {
-
-        }
-        return lastResult;
-    }
-
-    public Dice (TestTuio2 dump,int diceID) {
+    public Dice (TestTuio2 dump, int diceID) {
         this.dump = dump;
         this.diceID = diceID;
         int res = getLastResult();
@@ -64,21 +60,23 @@ public class Dice implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (!thrown) {
+        if (!newResult && !thrown) {
             if (!moving) {
                 if (dump.objList.get(0).getMotionAccel() != 0) {
                     moving = true;
                 }
             }
             else { //dice moving
-                if (dump.objList.get(0).getMotionAccel() == 0) {
+                if (dump.objList.get(0).getMotionAccel() == 0) { //stopped moving
                     thrown = true;
                 }
             }
         }
         else {
-            thrown = false; //for next iteration
-            moving = false; //for next iteration
+            timer.stop();
+            moving = false;
+            thrown = false;
+            System.out.println("Thrown set to false");
             double angle = dump.objList.get(0).getAngle(); //Between 0 and -2Pi
             angle = Math.abs(angle) * 360 / (2 * Math.PI); //In degrees between 0 and 360
             //        System.out.println("Angle in degrees : " + angle);
@@ -92,7 +90,7 @@ public class Dice implements ActionListener{
             setLastResult(res);
             this.image.setViewport(new Rectangle2D((res - 1) * (sizeX * screenHeight / 600), 0, sizeY * screenHeight / 600, (int) (sizeY * screenHeight / 600)));
             lastResult = res; //Return integer between 1 and 6
-            timer.stop();
+            newResult = true;
         }
     }
 }
