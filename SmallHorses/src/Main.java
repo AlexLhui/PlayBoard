@@ -12,6 +12,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.animation.AnimationTimer;
+
+import javax.management.timer.Timer;
 import javax.swing.*;
 import javafx.scene.*;
 import javafx.scene.paint.*;
@@ -30,7 +32,7 @@ import static javafx.application.Application.launch;
 public class Main extends Application {
     private int tour = 0;
     public int numberOfPlayers;
-//    ArrayList<TuioObject> tuioList= new ArrayList<TuioObject>();
+
     ArrayList<Integer> symbolList = new ArrayList<Integer>();
 
     public void start(Stage primaryStage) {
@@ -62,12 +64,12 @@ public class Main extends Application {
 //        exitButton.setOnTouchPressed(EventHandler.create(new CloseListener(),exitButton,System.exit(0)));
 //        pane.getChildren().add(exitButton);
 
-        Button exitButton=new Button(" ",new ImageView(new Image("StopButton.png",100,100,false,false)));
-        exitButton.getOnTouchPressed();
-        exitButton.setOnAction(actionEvent -> {
-            System.exit(0);
-        });
-        pane.setRight(exitButton);
+//        Button exitButton=new Button(" ",new ImageView(new Image("StopButton.png",100,100,false,false)));
+//        exitButton.getOnTouchPressed();
+//        exitButton.setOnAction(actionEvent -> {
+//            System.exit(0);
+//        });
+//        pane.setRight(exitButton);
 
         //Scene theScene = new Scene(pane, 600, 600,true);
         Board board = new Board(pane,screenWidth,screenHeight,true,"SmallHorsesBoardJavaFx.png",numberOfPlayers, dump, symbolList); //We will have to change number of teams

@@ -28,7 +28,7 @@ public class Dice implements ActionListener{
     //int screenWidth = (int)size.getWidth(); // screenWidth will store the width of the screen
     double screenHeight = size.getHeight(); // screenHeight will store the height of the screen
 
-    Timer timer = new Timer(200,this);
+    Timer timer = new Timer(500,this);
 
     public int getLastResult() {
         return lastResult;
@@ -76,7 +76,6 @@ public class Dice implements ActionListener{
             timer.stop();
             moving = false;
             thrown = false;
-            System.out.println("Thrown set to false");
             double angle = dump.objList.get(0).getAngle(); //Between 0 and -2Pi
             angle = Math.abs(angle) * 360 / (2 * Math.PI); //In degrees between 0 and 360
             //        System.out.println("Angle in degrees : " + angle);

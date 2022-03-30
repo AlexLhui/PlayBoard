@@ -31,14 +31,15 @@ public class TestTuio2 extends JComponent implements TuioListener, ActionListene
     public int tour;
     public int player;
     public int prevRes;
-    public boolean hasPlayed;
+    public boolean previousHasPlayed;
     public GraphicsContext gc;
     public int numberOfPlayers;
     public Stage primaryStage;
     public TestTuio2 dump;
     public ArrayList<Integer> symbolList;
+    public Dice dice;
 
-    Timer timer = new Timer(200,this);
+    Timer timer = new Timer(500,this);
 
     public void setSize(int w, int h) {
         super.setSize(w, h);
@@ -117,13 +118,14 @@ public class TestTuio2 extends JComponent implements TuioListener, ActionListene
         {System.out.println("del blb " + tblb.getBlobID() + " (" + tblb.getSessionID() + ")");}
     }
 
-    public void setVariables(Board board, int tour, int player, int prevRes, boolean hasPlayed, GraphicsContext gc, int numberOfPlayers, Stage primaryStage, TestTuio2 dump, ArrayList<Integer> symbolList) {
+    public void setVariables(Board board, int tour, int player, int prevRes, boolean previousHasPlayed, GraphicsContext gc, int numberOfPlayers, Stage primaryStage, TestTuio2 dump, ArrayList<Integer> symbolList, Dice dice) {
         this.boardInitialised = true;
+        this.dice = dice;
         this.board = board;
         this.tour = tour;
         this.player = player;
         this.prevRes = prevRes;
-        this.hasPlayed = hasPlayed;
+        this.previousHasPlayed = previousHasPlayed;
         this.gc = gc;
         this.numberOfPlayers = numberOfPlayers;
         this.primaryStage = primaryStage;
@@ -138,7 +140,7 @@ public class TestTuio2 extends JComponent implements TuioListener, ActionListene
     @Override
     public void actionPerformed(ActionEvent e) {
         if (boardInitialised) {
-            board.update(tour, player, prevRes, hasPlayed, gc, numberOfPlayers, primaryStage, dump, symbolList);
+            board.update(tour, player, prevRes, previousHasPlayed, gc, numberOfPlayers, primaryStage, dump, symbolList);
         }
     }
 }
