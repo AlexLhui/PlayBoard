@@ -836,12 +836,12 @@ public class Board extends Scene {
     }
 
     private void associateAction(int tour, int player, int res, GraphicsContext gc, int numberOfPlayers, Stage primaryStage, TestTuio2 dump, ArrayList<Integer> symbolList) {
-        TuioObject obj;
-        for(int k=0; k<dump.objList.size(); k++){
-            if(dump.objList.get(k).getSymbolID() == team.get(player).playerToId(player)){
-                obj = dump.objList.get(k);
-            }
-        } // Utiliser les coordonnées de cet objet pour ajouter une condition dans chaque if
+//        TuioObject obj;
+//        for(int k=0; k<dump.objList.size(); k++){
+//            if(dump.objList.get(k).getSymbolID() == team.get(player).playerToId(player)){
+//                obj = dump.objList.get(k);
+//            }
+//        } // Utiliser les coordonnées de cet objet pour ajouter une condition dans chaque if
         if (!team.get(player).getHorse1().isOneHorseMovable(team,player,res)) {
             System.out.println("Player " + team.get(player).toString() + " did not move because no move was possible.");
             dump.setVariables(this, tour+1, (player+1)%numberOfPlayers, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList, dice);

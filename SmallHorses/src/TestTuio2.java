@@ -49,10 +49,24 @@ public class TestTuio2 extends JComponent implements TuioListener, ActionListene
     }
 
     public void addTuioObject(TuioObject tobj) {
-        objectList.put(tobj.getSessionID(), tobj);
-        keyObjects.add(tobj.getSessionID());
-        objList.add(tobj);
-
+        int objListSize;
+        try {objListSize = dump.objList.size();}
+        catch (Exception ignored) {objListSize = 0;}
+        int symbListSize;
+        try {symbListSize = symbolList.size();}
+        catch (Exception ignored) {symbListSize = 0;}
+        if (objListSize < numberOfPlayers + 1 && symbListSize < numberOfPlayers + 1) { //If not all tags have been placed once
+            objectList.put(tobj.getSessionID(), tobj);
+            keyObjects.add(tobj.getSessionID());
+            objList.add(tobj);
+        }
+        else if (objListSize < numberOfPlayers + 1 && symbListSize == numberOfPlayers + 1) { //If a tag has been removed
+            int symb = tobj.getSymbolID();
+            if (symbolList.contains(symb)) { // Be sure the tag was here before
+                int index = symbolList.indexOf(symb);
+                dump.objList.add(index,tobj);
+            }
+        }
         if (debug||debugObj)
         { System.out.println("add obj " + tobj.getSymbolID() + " (" + tobj.getSessionID() + ") " + tobj.getX() + " " + tobj.getY() + " " + tobj.getAngle()); }
     }
@@ -61,7 +75,6 @@ public class TestTuio2 extends JComponent implements TuioListener, ActionListene
         if (!(objectList.contains(tobj.getSymbolID()))) {
             objectList.put(tobj.getSessionID(), tobj);
             keyObjects.add(tobj.getSessionID());
-           // objList.add(tobj);
         }
         if (debug||debugObj)
         { System.out.println("set obj " + tobj.getSymbolID() + " (" + tobj.getSessionID() + ") " + tobj.getX() + " " + tobj.getY() + " " + tobj.getAngle() + " " + tobj.getMotionSpeed() + " " + tobj.getRotationSpeed() + " " + tobj.getMotionAccel() + " " + tobj.getRotationAccel()); }
