@@ -19,6 +19,7 @@ public class Dice implements ActionListener{
     public final int sizeY = 44;
     public int diceID;
     public TestTuio2 dump;
+    public int oldHashCode;
 
     public boolean newResult = false;
     public boolean thrown = false;
@@ -60,40 +61,45 @@ public class Dice implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Dump object list : " + dump.objList);
-        System.out.println("Dump symbol list : " + dump.symbolList);
-        if (!newResult && !thrown) {
-            if (!moving) {
-                if (dump.objList.get(0).getMotionAccel() != 0) {
-                    moving = true;
-                }
-            }
-            else { //dice moving
-                if (dump.objList.get(0).getMotionAccel() == 0) { //stopped moving
-                    thrown = true;
+        try {
+            int newHashCode = dump.objList.get(0).hashCode();
+            //        System.out.println("Old hash code : " + oldHashCode + ", new hash code : " + newHashCode);
+            if (!(oldHashCode == newHashCode) && dump.isTagPlaced(dump.symbolList.get(0))) {
+                if (!newResult && !thrown) {
+                    if (!moving) {
+                        if (dump.objList.get(0).getMotionAccel() != 0) {
+                            moving = true;
+                        }
+                    } else { //dice moving
+                        if (dump.objList.get(0).getMotionAccel() == 0) { //stopped moving
+                            thrown = true;
+                        }
+                    }
+                } else {
+                    timer.stop();
+                    moving = false;
+                    thrown = false;
+                    double angle = dump.objList.get(0).getAngle(); //Between 0 and -2Pi
+                    System.out.println("Angle : " + angle);
+                    angle = Math.abs(angle) * 360 / (2 * Math.PI); //In degrees between 0 and 360
+                    //        System.out.println("Angle in degrees : " + angle);
+                    if (angle == 0 || angle == 360) {
+                        this.image.setViewport(new Rectangle2D((0) * (sizeX * screenHeight / 600), 0, sizeY * screenHeight / 600, (int) (sizeY * screenHeight / 600)));
+                        lastResult = 1;
+                        newResult = true;
+                    } else {//Else return result
+                        int res = (int) Math.ceil(angle / 60);
+                        setLastResult(res);
+                        this.image.setViewport(new Rectangle2D((res - 1) * (sizeX * screenHeight / 600), 0, sizeY * screenHeight / 600, (int) (sizeY * screenHeight / 600)));
+                        lastResult = res; //Return integer between 1 and 6
+                        oldHashCode = newHashCode;
+                        newResult = true;
+                    }
                 }
             }
         }
-        else {
-            timer.stop();
-            moving = false;
-            thrown = false;
-            double angle = dump.objList.get(0).getAngle(); //Between 0 and -2Pi
-            System.out.println("Angle : " +angle);
-            angle = Math.abs(angle) * 360 / (2 * Math.PI); //In degrees between 0 and 360
-            //        System.out.println("Angle in degrees : " + angle);
-            if (angle == 0 || angle == 360) {
-                this.image.setViewport(new Rectangle2D((0) * (sizeX * screenHeight / 600), 0, sizeY * screenHeight / 600, (int) (sizeY * screenHeight / 600)));
-                lastResult = 1;
-                newResult = true;
-            }
-            else {//Else return result
-                int res = (int) Math.ceil(angle / 60);
-                setLastResult(res);
-                this.image.setViewport(new Rectangle2D((res - 1) * (sizeX * screenHeight / 600), 0, sizeY * screenHeight / 600, (int) (sizeY * screenHeight / 600)));
-                lastResult = res; //Return integer between 1 and 6
-                newResult = true;
-            }
+        catch (Exception ignored) {
+//            System.out.println("Dice tag removed");
         }
     }
 }

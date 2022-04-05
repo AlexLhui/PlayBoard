@@ -1,7 +1,9 @@
 import TUIO.TuioClient;
 import TUIO.TuioObject;
+import javafx.scene.canvas.GraphicsContext;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +22,10 @@ public class Tuio implements ActionListener {
     public int screenWidth = (int) size.getWidth(); // screenWidth will store the width of the screen
     public int screenHeight = (int) size.getHeight(); // screenHeight will store the height of the screen
 
-    public JFrame frame = new JFrame("Choose the number of players");
+    public JFrame framePlayers = new JFrame("Choose the number of players");
+    public JFrame frameTags = new JFrame("Place the tags");
+
+    JLabel jLabelTag = new JLabel("Place the dice");
 
     public Timer timer = new Timer(100, this); //250 ms
 
@@ -32,19 +37,19 @@ public class Tuio implements ActionListener {
                 switch (cmd) {
                     case "2 players" -> {
                         TuioNumberOfPlayers = 2;
-                        frame.dispose();
+                        framePlayers.dispose();
                         numberOfPlayersChosen = true;
                         timer.stop();
                     }
                     case "3 players" -> {
                         TuioNumberOfPlayers = 3;
-                        frame.dispose();
+                        framePlayers.dispose();
                         numberOfPlayersChosen = true;
                         timer.stop();
                     }
                     case "4 players" -> {
                         TuioNumberOfPlayers = 4;
-                        frame.dispose();
+                        framePlayers.dispose();
                         numberOfPlayersChosen = true;
                         timer.stop();
                     }
@@ -59,17 +64,24 @@ public class Tuio implements ActionListener {
         else {
             int j = 0;
             if (TuioSymbolList.size() < TuioNumberOfPlayers + 1) {
-                System.out.println("Poser les tags"); // Ajouter un texte demandant de poser le dé, jouer 1 2 3 4
+//                System.out.println("Poser les tags"); // Ajouter un texte demandant de poser le dé, jouer 1 2 3 4
                 for (int i = j; i < TuioDump.objList.size(); i++) {
-                    if (!TuioSymbolList.contains((int) TuioDump.objList.get(i).getSymbolID())) {
+                    if (!TuioSymbolList.contains((int) TuioDump.objList.get(i).getSymbolID())) { //If object is not in the list
                         TuioSymbolList.add((int) TuioDump.objList.get(i).getSymbolID());
                         System.out.println((int) TuioDump.objList.get(i).getSymbolID());
                         j += 1;
                     }
                 }
+                switch (TuioSymbolList.size()) {
+                    case 1 -> jLabelTag.setText("Place tag of player 1");
+                    case 2 -> jLabelTag.setText("Place tag of player 2");
+                    case 3 -> jLabelTag.setText("Place tag of player 3");
+                    case 4 -> jLabelTag.setText("Place tag of player 4");
+                }
             } else {
                 timer.stop();
                 tagsAdded = true;
+                frameTags.dispose();
             }
         }
     }
@@ -83,6 +95,32 @@ public class Tuio implements ActionListener {
             timer.start();
             //Nice interaction to get players to lay tags ?
         }
+        else {
+            if (!frameTags.isVisible()) {
+                JPanel panel = new JPanel(new GridLayout(2,1)); // Add close button !!
+
+//                ImageIcon image = new ImageIcon("cheval.png");
+//                JLabel imageLabel = new JLabel();
+//                imageLabel.setIcon(image);
+//                panel.add(imageLabel);
+
+                frameTags.setLayout(new GridBagLayout());
+                JLabel jlabel = new JLabel("Place the tags");
+                jlabel.setFont(new Font("Verdana",1,30));
+                jlabel.setVerticalAlignment(SwingConstants.CENTER);
+                panel.add(jlabel);
+                jLabelTag.setText("Place the dice first");
+                jLabelTag.setFont(new Font("Verdana",1,20));
+                jlabel.setVerticalAlignment(SwingConstants.CENTER);
+                panel.add(jLabelTag);
+
+                frameTags.add(panel);
+                frameTags.setSize(screenWidth, screenHeight);
+                frameTags.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                frameTags.setUndecorated(true);
+                frameTags.setVisible(true);
+            }
+        }
     }
 
     public void getNumberOfPlayers() {
@@ -90,27 +128,34 @@ public class Tuio implements ActionListener {
             timer.start();
         }
         else {
-            if (!frame.isVisible()) {
-                frame.setVisible(true);
-                frame.setSize(200, 200);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            if (!framePlayers.isVisible()) {
+                framePlayers.setSize(screenWidth, screenHeight);
+                framePlayers.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                framePlayers.setUndecorated(true);
+                framePlayers.setVisible(true);
+                framePlayers.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-                JPanel panel = new JPanel();
-                frame.add(panel);
+                JPanel panelPlayers = new JPanel(new GridLayout(1,3)); // Add close button !!
+
+//                JPanel panelInfo = new JPanel();
+//                JLabel jlabel = new JLabel("Please remove all the tags before choosing the number of players");
+//                jlabel.setFont(new Font("Verdana",1,20));
+//                jlabel.setVerticalAlignment(SwingConstants.CENTER);
+//                panelInfo.add(jlabel);
+
+                framePlayers.add(panelPlayers);
+//                framePlayers.add(panelInfo);
 
                 JButton button2 = new JButton("2 players");
-                System.out.println("2 players");
-                panel.add(button2);
+                panelPlayers.add(button2);
                 button2.addActionListener(this);
 
                 JButton button3 = new JButton("3 players");
-                System.out.println("3 players");
-                panel.add(button3);
+                panelPlayers.add(button3);
                 button3.addActionListener(this);
 
                 JButton button4 = new JButton("4 players");
-                System.out.println("4 players");
-                panel.add(button4);
+                panelPlayers.add(button4);
                 button4.addActionListener(this);
             }
         }

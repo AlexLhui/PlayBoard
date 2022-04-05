@@ -64,7 +64,8 @@ public class TestTuio2 extends JComponent implements TuioListener, ActionListene
             int symb = tobj.getSymbolID();
             if (symbolList.contains(symb)) { // Be sure the tag was here before
                 int index = symbolList.indexOf(symb);
-                dump.objList.add(index,tobj);
+                try {dump.objList.add(index,tobj);}
+                catch (Exception ignored) {dump.objList.add(tobj);}
             }
         }
         if (debug||debugObj)
@@ -81,6 +82,9 @@ public class TestTuio2 extends JComponent implements TuioListener, ActionListene
     }
 
     public void removeTuioObject(TuioObject tobj) {
+        if (tobj.getSymbolID() == 0) {
+            dice.oldHashCode = tobj.hashCode();
+        }
         objectList.remove(tobj.getSessionID());
         objList.remove(tobj);
 
@@ -144,6 +148,7 @@ public class TestTuio2 extends JComponent implements TuioListener, ActionListene
         this.primaryStage = primaryStage;
         this.dump = dump;
         this.symbolList = symbolList;
+        dice.dump = dump;
     }
 
     public void refresh(TuioTime frameTime) {
@@ -153,7 +158,33 @@ public class TestTuio2 extends JComponent implements TuioListener, ActionListene
     @Override
     public void actionPerformed(ActionEvent e) {
         if (boardInitialised) {
-            board.update(tour, player, prevRes, previousHasPlayed, gc, numberOfPlayers, primaryStage, dump, symbolList);
+            try {
+                board.update(tour, player, prevRes, previousHasPlayed, gc, numberOfPlayers, primaryStage, dump, symbolList);
+            }
+            catch (Exception ignored) {
+                System.out.println("Tag issue : replace the tags or at least the one currently in use.");
+            }
         }
+    }
+
+    public boolean isTagPlaced(int symbol) {
+        for (TuioObject obj : dump.objList) {
+            if (obj.getSymbolID() == symbol) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean areAllTagsPlaced() {
+        return dump.objList.size() == symbolList.size();
+    }
+
+    public ArrayList<Integer> getTagsOnTable() {
+        ArrayList<Integer> tags = new ArrayList<Integer>();
+        for (TuioObject obj : objList) {
+            tags.add(obj.getSymbolID());
+        }
+        return tags;
     }
 }
