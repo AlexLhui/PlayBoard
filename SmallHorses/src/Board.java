@@ -95,67 +95,67 @@ public class Board extends Scene {
         this.dice.getImage().setY((int)(height/2- squareSize/2));
 
         for(int i = 0; i<numberOfTeam; i++){
-            int a = (int) (Math.random()*4);
+            //int a = (int) (Math.random()*4);
             if(i!=0) {
                 if(i == 1) { //Player 2
-                    a = (int) (Math.random()*4);
-                    while (teamList.contains(couleur.get(a))) {
-                        a = (int) (Math.random()*4);
-                    }
+                    //a = (int) (Math.random()*4);
+                    //while (teamList.contains(couleur.get(a))) {
+                    //    a = (int) (Math.random()*4);
+                  //  }
                     int id2 = dump.objList.get(2).getSymbolID();
-                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorses1Transparent.png",a);
-                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorses2Transparent.png",a);
-                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorses3Transparent.png",a);
-                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorses4Transparent.png",a);
-                    Team teamObj = new Team(couleur.get(a), horse1, horse2, horse3, horse4, id2);
+                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorses1Transparent.png",i);
+                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorses2Transparent.png",i);
+                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorses3Transparent.png",i);
+                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorses4Transparent.png",i);
+                    Team teamObj = new Team(couleur.get(i), horse1, horse2, horse3, horse4, id2);
                     team.add(teamObj);
-                    teamList.add(couleur.get(a));
+                    teamList.add(couleur.get(i));
                     teamObj.setNumberOfTeam(numberOfTeam);
                     System.out.println("Player 2 initialized");
                 }
                 if(i == 2){ //Player 3
-                    a = (int) (Math.random()*4);
-                    while (teamList.contains(couleur.get(a))) {
-                        a = (int) (Math.random()*4);
-                    }
+                //    a = (int) (Math.random()*4);
+                  //  while (teamList.contains(couleur.get(a))) {
+                    //    a = (int) (Math.random()*4);
+                    //}
                     int id3 = dump.objList.get(3).getSymbolID();
-                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorses1Transparent.png",a);
-                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorses2Transparent.png",a);
-                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorses3Transparent.png",a);
-                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorses4Transparent.png",a);
-                    Team teamObj = new Team(couleur.get(a), horse1, horse2, horse3, horse4, id3);
+                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorses1Transparent.png",i);
+                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorses2Transparent.png",i);
+                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorses3Transparent.png",i);
+                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorses4Transparent.png",i);
+                    Team teamObj = new Team(couleur.get(i), horse1, horse2, horse3, horse4, id3);
                     team.add(teamObj);
-                    teamList.add(couleur.get(a));
+                    teamList.add(couleur.get(i));
                     teamObj.setNumberOfTeam(numberOfTeam);
                     System.out.println("Player 3 initialized");
                 }
                 if(i == 3){ //Player 4
-                    a = (int) (Math.random()*4);
-                    while (teamList.contains(couleur.get(a))) {
-                        a = (int) (Math.random()*4);
-                    }
+                   // a = (int) (Math.random()*4);
+                  //  while (teamList.contains(couleur.get(i))) {
+                    //    a = (int) (Math.random()*4);
+                    //}
                     int id4 = dump.objList.get(4).getSymbolID();
-                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorses1Transparent.png",a);
-                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorses2Transparent.png",a);
-                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorses3Transparent.png",a);
-                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorses4Transparent.png",a);
-                    Team teamObj = new Team(couleur.get(a), horse1, horse2, horse3, horse4, id4);
+                    Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorses1Transparent.png",i);
+                    Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorses2Transparent.png",i);
+                    Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorses3Transparent.png",i);
+                    Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorses4Transparent.png",i);
+                    Team teamObj = new Team(couleur.get(i), horse1, horse2, horse3, horse4, id4);
                     team.add(teamObj);
-                    teamList.add(couleur.get(a));
+                    teamList.add(couleur.get(i));
                     teamObj.setNumberOfTeam(numberOfTeam);
                     System.out.println("Player 4 initialized");
                 }
             }
             else{ //Player 1
                 int id1 = dump.objList.get(1).getSymbolID();
-                Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorses1Transparent.png",a);
-                Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorses2Transparent.png",a);
-                Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorses3Transparent.png",a);
-                Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorses4Transparent.png",a);
-                Team teamObj = new Team(couleur.get(a),horse1,horse2,horse3,horse4, id1);
+                Horse horse1 = new Horse(1, Horse.Etat.STABLE, "SmallHorses1Transparent.png",i);
+                Horse horse2 = new Horse(1, Horse.Etat.STABLE, "SmallHorses2Transparent.png",i);
+                Horse horse3 = new Horse(1, Horse.Etat.STABLE, "SmallHorses3Transparent.png",i);
+                Horse horse4 = new Horse(1, Horse.Etat.STABLE, "SmallHorses4Transparent.png",i);
+                Team teamObj = new Team(couleur.get(i),horse1,horse2,horse3,horse4, id1);
                 team.add(teamObj);
                 teamObj.setNumberOfTeam(numberOfTeam);
-                teamList.add(couleur.get(a));
+                teamList.add(couleur.get(i));
                 System.out.println("Player 1 initialized");
             }
         } // Code du dessus attribue des couleurs au hasard aux joueurs
