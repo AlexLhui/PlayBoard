@@ -8,7 +8,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.awt.*;
-import java.beans.EventHandler;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -966,7 +965,8 @@ public class Board extends Scene {
                     gc.clearRect(0, 0, 150, 10);
                     int res = dice.getLastResult();
                     System.out.println("Player " + team.get(player).toString() + " got a " + res + ".");
-                    affichage = "Player " + team.get(player).toString() + " has done " + res;
+//                    affichage = "Player " + team.get(player).toString() + " has done " + res;
+                    affichage = "Tag of player " + team.get(player).getHorse1().getColor() + " is on case " + team.get(player).getHorse1().coordToPos(screenWidth * dump.objList.get(player+1).getX(), screenHeight * dump.objList.get(player+1).getY());
                     ArrayList<Integer> tagsOnTable = dump.getTagsOnTable();
                     if (tagsOnTable.contains(player+1)) {
                         associateAction(tour, player, res, gc, numberOfPlayers, primaryStage, dump, symbolList);
@@ -979,6 +979,9 @@ public class Board extends Scene {
             }
             else { //if (!previousHasPlayed)
                 System.out.println("Trying to associate action again");
+                affichage = "Tag of player " + team.get(player).getHorse1().getColor() + " is on case " + team.get(player).getHorse1().coordToPos(screenWidth * dump.objList.get(player+1).getX(), screenHeight * dump.objList.get(player+1).getY());
+                gc.clearRect(0, 0, 1000, 1000);
+                gc.fillText(affichage, 200, 30);
                 associateAction(tour, player, prevRes, gc, numberOfPlayers, primaryStage, dump, symbolList);
             }
         }

@@ -29,7 +29,7 @@ public class Dice implements ActionListener{
     //int screenWidth = (int)size.getWidth(); // screenWidth will store the width of the screen
     double screenHeight = size.getHeight(); // screenHeight will store the height of the screen
 
-    Timer timer = new Timer(500,this);
+    Timer timer = new Timer(20,this);
 
     public int getLastResult() {
         return lastResult;
@@ -42,7 +42,7 @@ public class Dice implements ActionListener{
     public int throwDice() {
             int res = ThreadLocalRandom.current().nextInt(1, 6 + 1);
             setLastResult(res);
-            this.image.setViewport(new Rectangle2D((res - 1) * (sizeX*screenHeight/600), 0, sizeY*screenHeight/600, (int)(sizeY*screenHeight/600)));
+//            this.image.setViewport(new Rectangle2D((res - 1) * (sizeX*screenHeight/600), 0, sizeY*screenHeight/600, (int)(sizeY*screenHeight/600)));
             return res;
     }
 

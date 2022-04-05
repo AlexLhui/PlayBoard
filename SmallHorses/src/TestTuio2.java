@@ -39,7 +39,7 @@ public class TestTuio2 extends JComponent implements TuioListener, ActionListene
     public ArrayList<Integer> symbolList;
     public Dice dice;
 
-    Timer timer = new Timer(500,this);
+    Timer timer = new Timer(20,this);
 
     public void setSize(int w, int h) {
         super.setSize(w, h);

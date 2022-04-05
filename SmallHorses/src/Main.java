@@ -149,7 +149,7 @@ public class Main extends Application implements ActionListener{
                 final javafx.scene.canvas.Canvas canvas = new Canvas(pane.getWidth(), pane.getHeight());
                 pane.getChildren().add(canvas);
                 GraphicsContext gc= canvas.getGraphicsContext2D();
-                int player = 1; //Random 1-4
+                int player = 0; //Random 1-4
                 board.update(tour, player,-1,true, gc, numberOfPlayers, primaryStage, dump, symbolList);
             }
         }
