@@ -9,17 +9,17 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Random;
+//import java.util.Random;
 
-import TUIO.TuioObject;
+//import TUIO.TuioObject;
 public class Board extends Scene {
 
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); // getScreenSize() returns the size of the screen in pixels
     int screenWidth = (int)size.getWidth(); // screenWidth will store the width of the screen
     int screenHeight = (int)size.getHeight(); // screenHeight will store the height of the screen
 
-    public final int nbCase = 72;
-    private ImageView image;
+//    public final int nbCase = 72;
+//    private ImageView image;
     public ArrayList<Color> couleur;
     public ArrayList<Team> team;
     public ArrayList<Color> teamList;
@@ -313,11 +313,11 @@ public class Board extends Scene {
 //        });
     }
 
-    private static Random numberGenerator = new Random();
+//    private static Random numberGenerator = new Random();
 
-    public <T> T randomElement(T[] elements){ // Permet d'obtenir un élément au hasard dans un enum ou tableau
-        return elements[numberGenerator.nextInt(elements.length)];
-    }
+//    public <T> T randomElement(T[] elements){ // Permet d'obtenir un élément au hasard dans un enum ou tableau
+//        return elements[numberGenerator.nextInt(elements.length)];
+//    }
 
     public void changePosition(int res, Horse horse, boolean newMove) {//Fonction isFilled pour savoir si une case est occupée par un cheval
         if (res != 0 ){
@@ -849,11 +849,15 @@ public class Board extends Scene {
         }
         else {
             //PROBLEM HERE : CHECK THE TAGS
-            if (dump.isTagPlaced(player + 1)) {
+            if (dump.isTagPlaced(symbolList.get(player + 1))) {
                 int test = team.get(player).getHorse1().coordToPos(screenWidth * dump.objList.get(player + 1).getX(), screenHeight * dump.objList.get(player + 1).getY());
                 System.out.println(test);
 //                key1.equals("DIGIT1")
                 if (test == team.get(player).getHorse1().getPosition() && team.get(player).getHorse1().isHorseMovable(team, team.get(player).getHorse1(), res)) {
+                    dump.timer.stop();
+                    affichage = "YESSSS";
+                    gc.clearRect(0, 0, 1000, 1000);
+                    gc.fillText(affichage, 200, 30);
                     changePosition(res, team.get(player).getHorse1(), true);
                     if (res == 6) {
                         dump.setVariables(this, tour + 1, player, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList, dice);
@@ -862,10 +866,12 @@ public class Board extends Scene {
                         dump.setVariables(this, tour + 1, (player + 1) % numberOfPlayers, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList, dice);
 //                        update(tour + 1, (player + 1) % numberOfPlayers, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList);
                     }
+                    dump.timer.start();
                     System.out.println("Player " + team.get(player).toString() + " moved horse 1.");
                 }
 //                key1.equals("DIGIT2")
                 else if (test == team.get(player).getHorse2().getPosition() && team.get(player).getHorse2().isHorseMovable(team, team.get(player).getHorse2(), res)) {
+                    dump.timer.stop();
                     changePosition(res, team.get(player).getHorse2(), true);
                     if (res == 6) {
                         dump.setVariables(this, tour + 1, player, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList, dice);
@@ -874,10 +880,12 @@ public class Board extends Scene {
                         dump.setVariables(this, tour + 1, (player + 1) % numberOfPlayers, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList, dice);
 //                        update(tour + 1, (player + 1) % numberOfPlayers, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList);
                     }
+                    dump.timer.start();
                     System.out.println("Player " + team.get(player).toString() + " moved horse 2.");
                 }
 //                key1.equals("DIGIT3")
                 else if (test == team.get(player).getHorse3().getPosition() && team.get(player).getHorse3().isHorseMovable(team, team.get(player).getHorse3(), res)) {
+                    dump.timer.stop();
                     changePosition(res, team.get(player).getHorse3(), true);
                     if (res == 6) {
                         dump.setVariables(this, tour + 1, player, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList, dice);
@@ -886,10 +894,12 @@ public class Board extends Scene {
                         dump.setVariables(this, tour + 1, (player + 1) % numberOfPlayers, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList, dice);
 //                        update(tour + 1, (player + 1) % numberOfPlayers, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList);
                     }
+                    dump.timer.start();
                     System.out.println("Player " + team.get(player).toString() + " moved horse 3.");
                 }
 //                key1.equals("DIGIT4")
                 else if (test == team.get(player).getHorse4().getPosition() && team.get(player).getHorse4().isHorseMovable(team, team.get(player).getHorse4(), res)) {
+                    dump.timer.stop();
                     changePosition(res, team.get(player).getHorse4(), true);
                     if (res == 6) {
                         dump.setVariables(this, tour + 1, player, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList, dice);
@@ -898,6 +908,7 @@ public class Board extends Scene {
                         dump.setVariables(this, tour + 1, (player + 1) % numberOfPlayers, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList, dice);
 //                        update(tour + 1, (player + 1) % numberOfPlayers, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList);
                     }
+                    dump.timer.start();
                     System.out.println("Player " + team.get(player).toString() + " moved horse 4.");
                 } else {
 //                    key1.equals("DIGIT1") || key1.equals("DIGIT2") || key1.equals("DIGIT3") || key1.equals("DIGIT4")
@@ -966,10 +977,13 @@ public class Board extends Scene {
                     int res = dice.getLastResult();
                     System.out.println("Player " + team.get(player).toString() + " got a " + res + ".");
 //                    affichage = "Player " + team.get(player).toString() + " has done " + res;
-                    affichage = "Tag of player " + team.get(player).getHorse1().getColor() + " is on case " + team.get(player).getHorse1().coordToPos(screenWidth * dump.objList.get(player+1).getX(), screenHeight * dump.objList.get(player+1).getY());
+                    affichage = "(1) Tag of player " + team.get(player).toString() + " is on case " + team.get(player).getHorse1().coordToPos(screenWidth * dump.objList.get(player+1).getX(), screenHeight * dump.objList.get(player+1).getY());
                     ArrayList<Integer> tagsOnTable = dump.getTagsOnTable();
-                    if (tagsOnTable.contains(player+1)) {
+                    if (dump.isTagPlaced(symbolList.get(player+1))) { //If the tag of the player is placed
                         associateAction(tour, player, res, gc, numberOfPlayers, primaryStage, dump, symbolList);
+                    }
+                    else {
+                        dump.setVariables(this,tour,player,res,false,gc,numberOfPlayers,primaryStage,dump,symbolList,dice);
                     }
 //                    System.out.println("X : " + screenWidth * dump.objList.get(1).getX() + ", Y : " + screenHeight * dump.objList.get(1).getY());
 //                    System.out.println("Position of tag 1 : " + team.get(player).getHorse1().coordToPos(screenWidth * dump.objList.get(1).getX(), screenHeight * dump.objList.get(1).getY()));
@@ -979,7 +993,7 @@ public class Board extends Scene {
             }
             else { //if (!previousHasPlayed)
                 System.out.println("Trying to associate action again");
-                affichage = "Tag of player " + team.get(player).getHorse1().getColor() + " is on case " + team.get(player).getHorse1().coordToPos(screenWidth * dump.objList.get(player+1).getX(), screenHeight * dump.objList.get(player+1).getY());
+                affichage = "(2) Tag of player " + team.get(player).toString() + " is on case " + team.get(player).getHorse1().coordToPos(screenWidth * dump.objList.get(player+1).getX(), screenHeight * dump.objList.get(player+1).getY());
                 gc.clearRect(0, 0, 1000, 1000);
                 gc.fillText(affichage, 200, 30);
                 associateAction(tour, player, prevRes, gc, numberOfPlayers, primaryStage, dump, symbolList);

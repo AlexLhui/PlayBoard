@@ -27,7 +27,7 @@ public class Tuio implements ActionListener {
 
     JLabel jLabelTag = new JLabel("Place the dice");
 
-    public Timer timer = new Timer(20, this); //250 ms
+    public Timer timer = new Timer(100, this); //250 ms
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -77,6 +77,7 @@ public class Tuio implements ActionListener {
                     case 2 -> jLabelTag.setText("Place tag of player 2");
                     case 3 -> jLabelTag.setText("Place tag of player 3");
                     case 4 -> jLabelTag.setText("Place tag of player 4");
+                    case 5 -> {}
                 }
             } else {
                 timer.stop();

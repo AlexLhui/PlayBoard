@@ -29,7 +29,7 @@ public class Dice implements ActionListener{
     //int screenWidth = (int)size.getWidth(); // screenWidth will store the width of the screen
     double screenHeight = size.getHeight(); // screenHeight will store the height of the screen
 
-    Timer timer = new Timer(20,this);
+    Timer timer = new Timer(100,this);
 
     public int getLastResult() {
         return lastResult;
@@ -61,45 +61,46 @@ public class Dice implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        try {
-            int newHashCode = dump.objList.get(0).hashCode();
-            //        System.out.println("Old hash code : " + oldHashCode + ", new hash code : " + newHashCode);
-            if (!(oldHashCode == newHashCode) && dump.isTagPlaced(dump.symbolList.get(0))) {
-                if (!newResult && !thrown) {
-                    if (!moving) {
-                        if (dump.objList.get(0).getMotionAccel() != 0) {
-                            moving = true;
+        if (dump.isTagPlaced(dump.symbolList.get(0))) {
+            try {
+                int newHashCode = dump.objList.get(0).hashCode();
+//                System.out.println("Old hash code : " + oldHashCode + ", new hash code : " + newHashCode);
+                if (!(oldHashCode == newHashCode) && dump.isTagPlaced(dump.symbolList.get(0))) {
+                    if (!newResult && !thrown) {
+                        if (!moving) {
+                            if (dump.objList.get(0).getMotionAccel() != 0) {
+                                moving = true;
+                            }
+                        } else { //dice moving
+                            if (dump.objList.get(0).getMotionAccel() == 0) { //stopped moving
+                                thrown = true;
+                            }
                         }
-                    } else { //dice moving
-                        if (dump.objList.get(0).getMotionAccel() == 0) { //stopped moving
-                            thrown = true;
+                    } else if (moving && thrown && dump.isTagPlaced(dump.symbolList.get(0))) {
+                        timer.stop();
+                        this.oldHashCode = newHashCode;
+                        moving = false;
+                        thrown = false;
+                        double angle = dump.objList.get(0).getAngle(); //Between 0 and -2Pi
+                        System.out.println("Angle : " + angle);
+                        angle = Math.abs(angle) * 360 / (2 * Math.PI); //In degrees between 0 and 360
+                        //        System.out.println("Angle in degrees : " + angle);
+                        if (angle == 0 || angle == 360) {
+                            this.image.setViewport(new Rectangle2D((0) * (sizeX * screenHeight / 600), 0, sizeY * screenHeight / 600, (int) (sizeY * screenHeight / 600)));
+                            lastResult = 1;
+                            newResult = true;
+                        } else {//Else return result
+                            int res = (int) Math.ceil(angle / 60);
+                            setLastResult(res);
+                            this.image.setViewport(new Rectangle2D((res - 1) * (sizeX * screenHeight / 600), 0, sizeY * screenHeight / 600, (int) (sizeY * screenHeight / 600)));
+                            lastResult = res; //Return integer between 1 and 6
+                            newResult = true;
                         }
-                    }
-                } else {
-                    timer.stop();
-                    moving = false;
-                    thrown = false;
-                    double angle = dump.objList.get(0).getAngle(); //Between 0 and -2Pi
-                    System.out.println("Angle : " + angle);
-                    angle = Math.abs(angle) * 360 / (2 * Math.PI); //In degrees between 0 and 360
-                    //        System.out.println("Angle in degrees : " + angle);
-                    if (angle == 0 || angle == 360) {
-                        this.image.setViewport(new Rectangle2D((0) * (sizeX * screenHeight / 600), 0, sizeY * screenHeight / 600, (int) (sizeY * screenHeight / 600)));
-                        lastResult = 1;
-                        newResult = true;
-                    } else {//Else return result
-                        int res = (int) Math.ceil(angle / 60);
-                        setLastResult(res);
-                        this.image.setViewport(new Rectangle2D((res - 1) * (sizeX * screenHeight / 600), 0, sizeY * screenHeight / 600, (int) (sizeY * screenHeight / 600)));
-                        lastResult = res; //Return integer between 1 and 6
-                        oldHashCode = newHashCode;
-                        newResult = true;
                     }
                 }
+            } catch (Exception ignored) {
+                //            System.out.println("Dice tag removed");
             }
-        }
-        catch (Exception ignored) {
-//            System.out.println("Dice tag removed");
         }
     }
 }

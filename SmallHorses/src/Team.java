@@ -1,10 +1,10 @@
-import TUIO.TuioObject;
+//import TUIO.TuioObject;
 import javafx.scene.paint.Color;
 
 public class Team {
 
     private int numberOfTeam = 0;
-    public int player;
+//    public int player;
     private Horse horse1;
     private Horse horse2;
     private Horse horse3;
