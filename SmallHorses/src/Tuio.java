@@ -2,12 +2,14 @@ import TUIO.TuioClient;
 import TUIO.TuioObject;
 import javafx.scene.canvas.GraphicsContext;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Tuio implements ActionListener {
 
@@ -61,7 +63,7 @@ public class Tuio implements ActionListener {
 //                System.out.println("Error");
             }
         }
-        else {
+        else { //Add the tags
             int j = 0;
             if (TuioSymbolList.size() < TuioNumberOfPlayers + 1) {
 //                System.out.println("Poser les tags"); // Ajouter un texte demandant de poser le dé, jouer 1 2 3 4
@@ -77,7 +79,7 @@ public class Tuio implements ActionListener {
                     case 2 -> jLabelTag.setText("Place tag of player 2");
                     case 3 -> jLabelTag.setText("Place tag of player 3");
                     case 4 -> jLabelTag.setText("Place tag of player 4");
-                    case 5 -> {}
+                    case 5 -> jLabelTag.setText("Let's go !");
                 }
             } else {
                 timer.stop();
@@ -100,16 +102,12 @@ public class Tuio implements ActionListener {
             if (!frameTags.isVisible()) {
                 JPanel panel = new JPanel(new GridLayout(2,1)); // Add close button !!
 
-//                ImageIcon image = new ImageIcon("cheval.png");
-//                JLabel imageLabel = new JLabel();
-//                imageLabel.setIcon(image);
-//                panel.add(imageLabel);
-
                 frameTags.setLayout(new GridBagLayout());
                 JLabel jlabel = new JLabel("Place the tags");
                 jlabel.setFont(new Font("Verdana",1,30));
                 jlabel.setVerticalAlignment(SwingConstants.CENTER);
                 panel.add(jlabel);
+
                 jLabelTag.setText("Place the dice first");
                 jLabelTag.setFont(new Font("Verdana",1,20));
                 jlabel.setVerticalAlignment(SwingConstants.CENTER);
@@ -130,12 +128,6 @@ public class Tuio implements ActionListener {
         }
         else {
             if (!framePlayers.isVisible()) {
-                framePlayers.setSize(screenWidth, screenHeight);
-                framePlayers.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                framePlayers.setUndecorated(true);
-                framePlayers.setVisible(true);
-                framePlayers.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
                 JPanel panelPlayers = new JPanel(new GridLayout(1,3)); // Add close button !!
 
 //                JPanel panelInfo = new JPanel();
@@ -147,17 +139,50 @@ public class Tuio implements ActionListener {
                 framePlayers.add(panelPlayers);
 //                framePlayers.add(panelInfo);
 
-                JButton button2 = new JButton("2 players");
+                JButton button2 = new JButton();
+                button2.setActionCommand("2 players");
+                try {
+                    Image img2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("2players.png")));
+                    button2.setBackground(Color.WHITE);
+                    button2.setIcon(new ImageIcon(img2));
+                }
+                catch (Exception ignored) {
+//                    System.out.println("Error");
+                }
                 panelPlayers.add(button2);
                 button2.addActionListener(this);
 
-                JButton button3 = new JButton("3 players");
+                JButton button3 = new JButton();
+                button3.setActionCommand("3 players");
+                try {
+                    Image img3 = ImageIO.read(Objects.requireNonNull(getClass().getResource("3players.png")));
+                    button3.setBackground(Color.WHITE);
+                    button3.setIcon(new ImageIcon(img3));
+                }
+                catch (Exception ignored) {
+//                    System.out.println("Error");
+                }
                 panelPlayers.add(button3);
                 button3.addActionListener(this);
 
-                JButton button4 = new JButton("4 players");
+                JButton button4 = new JButton();
+                button4.setActionCommand("4 players");
+                try {
+                    Image img4 = ImageIO.read(Objects.requireNonNull(getClass().getResource("4players.png")));
+                    button4.setBackground(Color.WHITE);
+                    button4.setIcon(new ImageIcon(img4));
+                }
+                catch (Exception ignored) {
+//                    System.out.println("Error");
+                }
                 panelPlayers.add(button4);
                 button4.addActionListener(this);
+
+                framePlayers.setSize(screenWidth, screenHeight);
+                framePlayers.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                framePlayers.setUndecorated(true);
+                framePlayers.setVisible(true);
+                framePlayers.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             }
         }
     }

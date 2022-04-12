@@ -61,6 +61,7 @@ public class Dice implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        dump.checkStopGame();
         if (dump.isTagPlaced(dump.symbolList.get(0))) {
             try {
                 int newHashCode = dump.objList.get(0).hashCode();

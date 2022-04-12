@@ -2,6 +2,7 @@ import TUIO.*;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
@@ -20,6 +21,12 @@ public class TestTuio2 extends JComponent implements TuioListener, ActionListene
     //public static final int finger_size = 18;
     //public static final int object_size = 60;
     public static final int table_size = 760; //il faut chagner cette valeur
+
+    public Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); // getScreenSize() returns the size of the screen in pixels
+    public double screenWidth = size.getWidth(); // screenWidth will store the width of the screen
+    public double screenHeight = size.getHeight(); // screenHeight will store the height of the screen
+
+    public ArrayList<TuioObject> otherObjects = new ArrayList<TuioObject>();
 
     public static int width, height;
     private float scale = 1.0f;
@@ -68,6 +75,9 @@ public class TestTuio2 extends JComponent implements TuioListener, ActionListene
                 catch (Exception ignored) {dump.objList.add(tobj);}
             }
         }
+        else {
+            otherObjects.add(tobj);
+        }
         if (debug||debugObj)
         { System.out.println("add obj " + tobj.getSymbolID() + " (" + tobj.getSessionID() + ") " + tobj.getX() + " " + tobj.getY() + " " + tobj.getAngle()); }
     }
@@ -87,6 +97,10 @@ public class TestTuio2 extends JComponent implements TuioListener, ActionListene
         }
         objectList.remove(tobj.getSessionID());
         objList.remove(tobj);
+
+        if (otherObjects.contains(tobj)) {
+            otherObjects.remove(tobj);
+        }
 
         if (debug||debugObj)
         { System.out.println("del obj " + tobj.getSymbolID() + " (" + tobj.getSessionID() + ")"); }
@@ -159,12 +173,28 @@ public class TestTuio2 extends JComponent implements TuioListener, ActionListene
     public void actionPerformed(ActionEvent e) {
         if (boardInitialised) {
             try {
+                checkStopGame();
                 board.update(tour, player, prevRes, previousHasPlayed, gc, numberOfPlayers, primaryStage, dump, symbolList);
             }
             catch (Exception ignored) {
                 System.out.println("Tag issue : replace the tags or at least the one currently in use.");
             }
         }
+    }
+
+    public void checkStopGame() {
+        boolean gameStop = false;
+        try {
+            for (TuioObject obj : otherObjects) {
+                if ((screenWidth/2 - 50) <= screenWidth*obj.getX() && screenWidth*obj.getX() <= (screenWidth/2 + 50) && (screenHeight/2 - 50) <= screenHeight*obj.getY() && screenHeight*obj.getY() <= (screenHeight/2 + 50)) {
+                    gameStop = true;
+                }
+            }
+            if (gameStop) {
+                System.exit(0);
+            }
+        }
+        catch (Exception ignored) {}
     }
 
     public boolean isTagPlaced(int symbol) {
