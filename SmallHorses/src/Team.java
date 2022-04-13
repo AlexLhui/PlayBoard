@@ -1,5 +1,9 @@
 //import TUIO.TuioObject;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+
+import java.awt.*;
 
 public class Team {
 
@@ -12,6 +16,18 @@ public class Team {
     public Color color;
     private int positionDepart;
     private int id;
+
+    Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); // getScreenSize() returns the size of the screen in pixels
+    double screenWidth = size.getWidth(); // screenWidth will store the width of the screen
+    double screenHeight = size.getHeight(); // screenHeight will store the height of the screen
+    private final ImageView image;
+
+    public final int sizeX = 44;
+    public final int sizeY = 44;
+    public final double middleX = screenWidth/2;
+    public final double middleY = screenHeight/2;
+    public final double squareSize = sizeX*screenHeight/600;
+    public final double lineSize = 5*screenHeight/600;
 
     public String getColor(Team team) {
         if (team.color == Color.BLUE) {
@@ -63,6 +79,8 @@ public class Team {
         this.horse3 = horse3;
         this.horse4 = horse4;
         this.id = id;
+        this.image = new ImageView(new Image("colored_circles.png",4*squareSize,squareSize,true,true));
+        this.image.setViewport(new javafx.geometry.Rectangle2D(0*squareSize, 0,squareSize,squareSize));
         if(color == Color.BLUE){
             this.positionDepart = 17;
         }
@@ -75,6 +93,14 @@ public class Team {
         else if(color == Color.YELLOW){
             this.positionDepart = 47;
         }
+    }
+
+    public ImageView getImage() {
+        return this.image;
+    }
+
+    public void setCircleColor(int player) {
+        this.image.setViewport(new javafx.geometry.Rectangle2D(player*squareSize, 0,squareSize,squareSize));
     }
 
     @Override

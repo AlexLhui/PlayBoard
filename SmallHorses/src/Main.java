@@ -35,6 +35,7 @@ public class Main extends Application implements ActionListener{
     public int numberOfPlayers;
 
     public boolean numberOfPlayersChosen = false;
+    public boolean rulesOk = false;
     public boolean tagsAdded = false;
 
     public Timer timer = new Timer(100,this);
@@ -129,28 +130,36 @@ public class Main extends Application implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (numberOfPlayersChosen) {
-            if (!tagsAdded) {
-                if (tuio.tagsAdded) {
-                    this.symbolList = tuio.TuioSymbolList;
-                    this.tagsAdded = true;
-                }
-                else {
-                    tuio.getTags(dump, client, symbolList, numberOfPlayers);
+            if (rulesOk) {
+                if (!tagsAdded) {
+                    if (tuio.tagsAdded) {
+                        this.symbolList = tuio.TuioSymbolList;
+                        this.tagsAdded = true;
+                    } else {
+                        tuio.getTags(dump, client, symbolList, numberOfPlayers);
+                    }
+                } else { //Start game
+                    timer.stop();
+                    Board board = new Board(pane, screenWidth, screenHeight, true, "SmallHorsesBoardJavaFx.png", numberOfPlayers, dump, symbolList); //We will have to change number of teams
+                    Platform.runLater(() -> {
+                        primaryStage.setFullScreen(true);
+                        primaryStage.setScene(board);
+                        primaryStage.show();
+                    });
+                    final javafx.scene.canvas.Canvas canvas = new Canvas(pane.getWidth(), pane.getHeight());
+                    pane.getChildren().add(canvas);
+                    GraphicsContext gc = canvas.getGraphicsContext2D();
+                    int player = 0; //Random 1-4
+                    board.update(tour, player, -1, true, gc, numberOfPlayers, primaryStage, dump, symbolList);
                 }
             }
-            else { //Start game
-                timer.stop();
-                Board board = new Board(pane,screenWidth,screenHeight,true,"SmallHorsesBoardJavaFx.png",numberOfPlayers, dump, symbolList); //We will have to change number of teams
-                Platform.runLater(() -> {
-                    primaryStage.setFullScreen(true);
-                    primaryStage.setScene(board);
-                    primaryStage.show();
-                });
-                final javafx.scene.canvas.Canvas canvas = new Canvas(pane.getWidth(), pane.getHeight());
-                pane.getChildren().add(canvas);
-                GraphicsContext gc= canvas.getGraphicsContext2D();
-                int player = 0; //Random 1-4
-                board.update(tour, player,-1,true, gc, numberOfPlayers, primaryStage, dump, symbolList);
+            else {
+                if (tuio.rulesOk) {
+                    this.rulesOk = true;
+                }
+                else {
+                    tuio.showRules();
+                }
             }
         }
         else { //If number of players not chosen

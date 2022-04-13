@@ -1,9 +1,9 @@
-import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 
@@ -912,8 +912,9 @@ public class Horse {
         this.position = position;
         this.situation = situation;
         this.image = new ImageView(new Image(filename,4*squareSize,squareSize,true,true));
-        this.image.setViewport(new Rectangle2D(N*squareSize, 0,squareSize,squareSize));
+        this.image.setViewport(new javafx.geometry.Rectangle2D(N*squareSize, 0,squareSize,squareSize));
     }
+
 
     public int freeHomeCase(ArrayList<Team> team, int offset) {
         for (int i = 1; i <= 4; i++) {
@@ -996,6 +997,11 @@ public class Horse {
                 pos = i;
             }
         }
+//        if (d > 50000) { //Arbitrary distance
+//            return 0;
+//        }
+//        else {
         return pos;
+//        }
     }
 }

@@ -5,6 +5,8 @@ import javafx.stage.Stage;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.Timer;
@@ -46,7 +48,11 @@ public class TestTuio2 extends JComponent implements TuioListener, ActionListene
     public ArrayList<Integer> symbolList;
     public Dice dice;
 
+    public boolean gameStop = false;
+
     Timer timer = new Timer(100,this);
+    Timer timerStop = new Timer(1000, this);
+    public int endTime = 0;
 
     public void setSize(int w, int h) {
         super.setSize(w, h);
@@ -180,18 +186,36 @@ public class TestTuio2 extends JComponent implements TuioListener, ActionListene
                 System.out.println("Tag issue : replace the tags or at least the one currently in use.");
             }
         }
+        if (gameStop) {
+            if (!timerStop.isRunning()) {
+                timer.stop(); //Stop main timer
+                timerStop.start(); //Start new timer
+                JFrame endFrame = new JFrame("End game");
+                JPanel endPanel = new JPanel();
+                JLabel endLabel = new JLabel("Thanks for playing !");
+                endLabel.setFont(new Font("Verdana",1,50));
+                endPanel.add(endLabel);
+                endFrame.add(endPanel);
+                endFrame.setSize((int) screenWidth, (int) screenHeight);
+                endFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                endFrame.setUndecorated(true);
+                endFrame.setVisible(true);
+            }
+            else {
+                endTime +=1;
+                if (endTime == 5) { //After 5 seconds of end time
+                    System.exit(0);
+                }
+            }
+        }
     }
 
     public void checkStopGame() {
-        boolean gameStop = false;
         try {
             for (TuioObject obj : otherObjects) {
-                if ((screenWidth/2 - 50) <= screenWidth*obj.getX() && screenWidth*obj.getX() <= (screenWidth/2 + 50) && (screenHeight/2 - 50) <= screenHeight*obj.getY() && screenHeight*obj.getY() <= (screenHeight/2 + 50)) {
+                if ((screenWidth / 2 - 50) <= screenWidth * obj.getX() && screenWidth * obj.getX() <= (screenWidth / 2 + 50) && (screenHeight / 2 - 50) <= screenHeight * obj.getY() && screenHeight * obj.getY() <= (screenHeight / 2 + 50)) {
                     gameStop = true;
                 }
-            }
-            if (gameStop) {
-                System.exit(0);
             }
         }
         catch (Exception ignored) {}

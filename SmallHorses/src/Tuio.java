@@ -18,6 +18,7 @@ public class Tuio implements ActionListener {
     public ArrayList<Integer> TuioSymbolList;
     public int TuioNumberOfPlayers;
     public boolean numberOfPlayersChosen = false;
+    public boolean rulesOk = false;
     public boolean tagsAdded = false;
 
     public Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); // getScreenSize() returns the size of the screen in pixels
@@ -25,7 +26,12 @@ public class Tuio implements ActionListener {
     public int screenHeight = (int) size.getHeight(); // screenHeight will store the height of the screen
 
     public JFrame framePlayers = new JFrame("Choose the number of players");
+    public JFrame frameRules = new JFrame("Rules");
     public JFrame frameTags = new JFrame("Place the tags");
+
+    JLabel textRules = new JLabel("<html><div style='text-align: center;'> Welcome on the Small Horses. <br/><br/> First, please remove all the tags of the table. <br/><br/> Click next if you want the read the rules, or skip if you already know them.</div></html>", SwingConstants.CENTER);
+    public int textNb = 0;
+    public int rulesNb = 2; //To change with the number of slides
 
     JLabel jLabelTag = new JLabel("Place the dice");
 
@@ -63,28 +69,91 @@ public class Tuio implements ActionListener {
 //                System.out.println("Error");
             }
         }
+        if (!rulesOk) {
+            try {
+                String cmd = e.getActionCommand();
+                switch (cmd) {
+                    case "Next" :
+                        if (textNb == 0) {
+                            textRules.setText("<html><div style='text-align: center;'> Continue the rules ... </div></html>");
+                            textNb +=1;
+                        }
+                        else if (textNb == 1) {
+                            textRules.setText("<html><div style='text-align: center;'> Continue the rules again ... </div></html>");
+                            textNb +=1;
+                        }
+                        else if (textNb == rulesNb) {
+                            frameRules.dispose();
+                            rulesOk = true;
+                            timer.stop();
+                        }
+                        break;
+                    case "Skip" :
+                        frameRules.dispose();
+                        rulesOk = true;
+                        timer.stop();
+                        break;
+                }
+            }
+            catch (Exception ignored) {
+
+            }
+        }
         else { //Add the tags
             int j = 0;
-            if (TuioSymbolList.size() < TuioNumberOfPlayers + 1) {
-//                System.out.println("Poser les tags"); // Ajouter un texte demandant de poser le dé, jouer 1 2 3 4
-                for (int i = j; i < TuioDump.objList.size(); i++) {
-                    if (!TuioSymbolList.contains((int) TuioDump.objList.get(i).getSymbolID())) { //If object is not in the list
-                        TuioSymbolList.add((int) TuioDump.objList.get(i).getSymbolID());
-                        System.out.println((int) TuioDump.objList.get(i).getSymbolID());
-                        j += 1;
+            try {
+                if (TuioSymbolList.size() < TuioNumberOfPlayers + 1) {
+                    //                System.out.println("Poser les tags"); // Ajouter un texte demandant de poser le dé, jouer 1 2 3 4
+                    for (int i = j; i < TuioDump.objList.size(); i++) {
+                        if (!TuioSymbolList.contains((int) TuioDump.objList.get(i).getSymbolID())) { //If object is not in the list
+                            TuioSymbolList.add((int) TuioDump.objList.get(i).getSymbolID());
+                            System.out.println((int) TuioDump.objList.get(i).getSymbolID());
+                            j += 1;
+                        }
                     }
+                    switch (TuioSymbolList.size()) {
+                        case 1 -> jLabelTag.setText("Place tag of player 1");
+                        case 2 -> jLabelTag.setText("Place tag of player 2");
+                        case 3 -> jLabelTag.setText("Place tag of player 3");
+                        case 4 -> jLabelTag.setText("Place tag of player 4");
+                        case 5 -> jLabelTag.setText("Let's go !");
+                    }
+                } else {
+                    timer.stop();
+                    tagsAdded = true;
+                    frameTags.dispose();
                 }
-                switch (TuioSymbolList.size()) {
-                    case 1 -> jLabelTag.setText("Place tag of player 1");
-                    case 2 -> jLabelTag.setText("Place tag of player 2");
-                    case 3 -> jLabelTag.setText("Place tag of player 3");
-                    case 4 -> jLabelTag.setText("Place tag of player 4");
-                    case 5 -> jLabelTag.setText("Let's go !");
-                }
-            } else {
-                timer.stop();
-                tagsAdded = true;
-                frameTags.dispose();
+            }
+            catch (Exception ignored) {}
+        }
+    }
+
+    public void showRules() {
+        if (!timer.isRunning()) {
+            timer.start();
+        }
+        else {
+            if (!frameRules.isVisible()) {
+                JPanel panelText = new JPanel();
+                JPanel panelButtons = new JPanel(new GridLayout(1,2));
+                textRules.setFont(new Font("Verdana",1,30));
+
+                JButton nextButton = new JButton("Next");
+                nextButton.addActionListener(this);
+                JButton skipButton = new JButton("Skip");
+                skipButton.addActionListener(this);
+                panelText.add(textRules);
+                panelButtons.add(nextButton);
+                panelButtons.add(skipButton);
+
+                frameRules.add(panelText, BorderLayout.CENTER);
+                frameRules.add(panelButtons, BorderLayout.SOUTH);
+
+                frameRules.setSize(screenWidth, screenHeight);
+                frameRules.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                frameRules.setUndecorated(true);
+                frameRules.setVisible(true);
+                frameRules.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             }
         }
     }
