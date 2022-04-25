@@ -61,6 +61,7 @@ public class Dice implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+//        System.out.println(dump.objList.get(0).getMotionAccel());
         dump.checkStopGame();
         if (dump.isTagPlaced(dump.symbolList.get(0))) {
             try {
@@ -73,7 +74,7 @@ public class Dice implements ActionListener{
                                 moving = true;
                             }
                         } else { //dice moving
-                            if (dump.objList.get(0).getMotionAccel() == 0) { //stopped moving
+                            if (dump.objList.get(0).getMotionAccel() <= 0.3) { //stopped moving
                                 thrown = true;
                             }
                         }

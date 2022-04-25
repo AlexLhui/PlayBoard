@@ -31,7 +31,7 @@ public class Tuio implements ActionListener {
 
     JLabel textRules = new JLabel("<html><div style='text-align: center;'> Welcome on the Small Horses. <br/><br/> First, please remove all the tags of the table. <br/><br/> Click next if you want the read the rules, or skip if you already know them.</div></html>", SwingConstants.CENTER);
     public int textNb = 0;
-    public int rulesNb = 2; //To change with the number of slides
+    public int rulesNb = 3; //To change with the number of slides
 
     JLabel jLabelTag = new JLabel("Place the dice");
 
@@ -75,11 +75,36 @@ public class Tuio implements ActionListener {
                 switch (cmd) {
                     case "Next" :
                         if (textNb == 0) {
-                            textRules.setText("<html><div style='text-align: center;'> Continue the rules ... </div></html>");
+                            textRules.setText("<html><div style='text-align: center;'> The goal is to place your 4 horses on the 4 colored spots <br/> in the middle of the game board. <br/><br/>" +
+                                    "To do that, you will have to throw the dice when it's your turn. <br/>" +
+                                    "A colored circle on the side will indicate whose turn it is.<br/><br/>" +
+                                    "To get a horse out of your home, you must get a 6. <br/> Once one or more horses are out, you can throw the dice <br/> and place your Tag on the horse you want to move. <br/><br/>" +
+                                    "Note that if you obtain a 6, you will be able to play again.<br/>" +
+                                    "</div></html>");
                             textNb +=1;
                         }
                         else if (textNb == 1) {
-                            textRules.setText("<html><div style='text-align: center;'> Continue the rules again ... </div></html>");
+                            textRules.setText("<html><div style='text-align: center;'> You can not make more than once the tour of the board. <br/>" +
+                                    "If you end up on a spot where there is an opponent's horse,<br/>" +
+                                    "you will automatically take his spot<br/>" +
+                                    "and he will return home.<br/><br/>" +
+                                    "If you end up on a spot where there is one of your horses,<br/>" +
+                                    "you will be moved on the previous possible spot.<br/><br/>" +
+                                    "To place your horses on the 4 final spots, you will have to score <br/>" +
+                                    "exact digits. <br/>" +
+                                    "A 1 to go on the first spot, a 2 for the second, ...<br/>" +
+                                    "That's where you can block yourself and be eaten by your opponents !<br/><br/>" +
+                                    "If you want to quit the game, please place all the tags on the table <br/>" +
+                                    "and place an used one in the middle of the board.<br/><br/>" +
+                                    "Be careful not to remove the tags from the table, except the dice." +
+                                    "</div></html>");
+                            textNb += 1;
+                        }
+                        else if (textNb == 2) {
+                            textRules.setText("<html><div style='text-align: center;'> Now it's time to play the game ! <br/><br/>" +
+                                    "Please remove all tags from the table, and follow the instructions. <br/><br/><br/><br/><br/><br/>" +
+                                    "ENJOY !" +
+                                    " </div></html>");
                             textNb +=1;
                         }
                         else if (textNb == rulesNb) {
